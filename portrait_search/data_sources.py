@@ -9,7 +9,7 @@ import py7zr
 from pydantic import BaseModel, Field, TypeAdapter
 import tqdm
 
-from portrait_search.config import Config
+from portrait_search.plt.config import Config
 from portrait_search.entities.portrait import Portrait
 import yaml
 

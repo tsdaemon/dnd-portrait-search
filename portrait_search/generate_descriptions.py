@@ -1,5 +1,5 @@
 import asyncio
-from portrait_search.config import Config
+from portrait_search.plt.config import Config
 from portrait_search.data_sources import sources_from_yaml
 
 
