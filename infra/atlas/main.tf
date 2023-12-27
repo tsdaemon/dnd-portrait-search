@@ -33,7 +33,7 @@ provider "mongodbatlas" {
 #
 resource "mongodbatlas_project" "project" {
   name   = "portrait-search"
-  org_id = var.org_id
+  org_id = var.mongodb_atlas_org_id
 }
 #
 # Create a Shared Tier Cluster
@@ -53,14 +53,24 @@ resource "mongodbatlas_cluster" "cluster" {
 # Create an Atlas Admin Database User
 #
 resource "mongodbatlas_database_user" "root_user" {
-  username           = var.root_username
-  password           = var.root_password
+  username           = var.mongodb_atlas_root_username
+  password           = var.mongodb_atlas_root_password
   project_id         = mongodbatlas_project.project.id
   auth_database_name = "admin"
 
   roles {
-    role_name     = "atlasAdmin"
+    role_name     = "readWrite"
+    database_name = var.mongodb_atlas_database_name
+  }
+
+  roles {
+    role_name     = "readAnyDatabase"
     database_name = "admin"
+  }
+
+  scopes {
+    name = mongodbatlas_cluster.cluster.name
+    type = "CLUSTER"
   }
 }
 
@@ -69,12 +79,12 @@ resource "mongodbatlas_database_user" "root_user" {
 #
 resource "mongodbatlas_project_ip_access_list" "local" {
   project_id = mongodbatlas_project.project.id
-  cidr_block = var.ip_access_cidr_block_local
+  cidr_block = var.mongodb_atlas_ip_access_cidr_block_local
   comment    = "Local IP Addresses"
 }
 
 resource "mongodbatlas_project_ip_access_list" "azure" {
   project_id = mongodbatlas_project.project.id
-  cidr_block = var.ip_access_cidr_block_azure
+  cidr_block = var.mongodb_atlas_ip_access_cidr_block_azure
   comment    = "Azure IP Addresses"
 }

@@ -1,44 +1,25 @@
-import abc
-from enum import Enum
 import os
 from pathlib import Path
-from typing import Annotated, Literal
 import aiohttp
 import aiofiles
 import py7zr
-from pydantic import BaseModel, Field, TypeAdapter
 import tqdm
 
-from portrait_search.plt.config import Config
-from portrait_search.entities.portrait import Portrait
-import yaml
+from portrait_search.core import Config
+from portrait_search.data_source.base import BaseDataSource, DataSourceError
+from portrait_search.portrait.entity import Portrait
 
 
-class SourceKind(Enum):
-    NexusMods = "nexusmods"
-
-
-class Source(BaseModel):
-    kind: str
-
-    @abc.abstractmethod
-    async def retrieve(self, folder: Path) -> list[Portrait]:
-        raise NotImplementedError()
-
-
-class SourceError(Exception):
-    pass
-
-
-class NexusSource(Source):
-    kind: Literal["nexusmods"]
-    game: str
-    mod: int
-    file: int
+class NexusDataSource(BaseDataSource):
+    def __init__(self, config: Config, game: str, mod: int, file: int) -> None:
+        super().__init__(config)
+        self.game = game
+        self.mod = mod
+        self.file = file
 
     async def retrieve(self, portraits_data_folder: Path) -> list[Portrait]:
         # Get mod if not already downloaded
-        nexus_key = Config().nexusmods_api_key
+        nexus_key = self.config.nexusmods_api_key
         download_url = await self._get_download_url(nexus_key)
         archive_file = portraits_data_folder / f"{self._get_folder_name()}.7z"
         if not archive_file.exists():
@@ -53,7 +34,7 @@ class NexusSource(Source):
         return self._parse_result(extraction_folder)
 
     def _get_folder_name(self) -> str:
-        return f"{self.kind}-{self.game}-{self.mod}-{self.file}"
+        return f"nexusmods-{self.game}-{self.mod}-{self.file}"
 
     async def _get_download_url(self, nexus_key: str) -> str:
         url = f"https://api.nexusmods.com/v1/games/{self.game}/mods/{self.mod}/files/{self.file}/download_link.json"
@@ -64,7 +45,7 @@ class NexusSource(Source):
                 result: list = await response.json()
 
         if len(result) == 0:
-            raise SourceError("NexusMods download link response is empty")
+            raise DataSourceError("NexusMods download link response is empty")
 
         return result[0]["URI"]
 
@@ -98,30 +79,11 @@ class NexusSource(Source):
             internal_path = root_path.relative_to(extract_path)
             result.append(
                 Portrait(
-                    fulllength_path=root_path / "fulllength.png",
-                    medium_path=root_path / "medium.png",
-                    small_path=root_path / "small.png",
+                    fulllength_path=root_path / "Fulllength.png",
+                    medium_path=root_path / "Medium.png",
+                    small_path=root_path / "Small.png",
                     tags=list(internal_path.parts),
                 )
             )
 
         return result
-
-
-SourceType = Annotated[NexusSource, Field(discriminator="kind")]
-
-
-def sources_from_yaml() -> list[Source]:
-    # get path of sources.yaml
-    sources_config = Path(__file__).parent / "sources.yaml"
-
-    with open(sources_config, "r") as file:
-        sources_data = yaml.safe_load(file)
-
-    sources: list[Source] = []
-    for source_data in sources_data["sources"]:
-        adapter = TypeAdapter(SourceType)
-        source = adapter.validate_python(source_data)
-        sources.append(source)  # type: ignore
-
-    return sources
