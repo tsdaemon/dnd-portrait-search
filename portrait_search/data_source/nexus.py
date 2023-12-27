@@ -72,7 +72,8 @@ class NexusDataSource(BaseDataSource):
     def _parse_result(self, extract_path: Path) -> list[Portrait]:
         result = []
         for root, _, files in os.walk(extract_path):
-            if set(files) != {"Fulllength.png", "Medium.png", "Small.png"}:
+            # Check if all three portrait files exist
+            if not set(files).issuperset({"Fulllength.png", "Medium.png", "Small.png"}):
                 continue
             root_path = Path(root)
             # get relative path from extract_path to root
@@ -82,6 +83,7 @@ class NexusDataSource(BaseDataSource):
                     fulllength_path=root_path / "Fulllength.png",
                     medium_path=root_path / "Medium.png",
                     small_path=root_path / "Small.png",
+                    base_path=extract_path.parent,
                     tags=list(internal_path.parts),
                 )
             )

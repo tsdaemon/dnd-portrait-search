@@ -1,15 +1,18 @@
 from pathlib import Path
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 import imagehash  # type: ignore
 from PIL import Image
 
+from portrait_search.core.mongodb import PyObjectId
+
 
 class Portrait(BaseModel):
-    """Represents an on-disk portrait representation."""
+    """Represents an on-disk local portrait."""
 
     fulllength_path: Path
     medium_path: Path
     small_path: Path
+    base_path: Path
     tags: list[str]
 
     def get_fulllength_hash(self):
@@ -22,9 +25,22 @@ class Portrait(BaseModel):
 
         return hash_path.read_text()
 
+    def to_record(self):
+        return PortraitRecord(
+            fulllength_path=str(self.fulllength_path.relative_to(self.base_path)),
+            medium_path=str(self.medium_path.relative_to(self.base_path)),
+            small_path=str(self.small_path.relative_to(self.base_path)),
+            tags=self.tags,
+            hash=self.get_fulllength_hash(),
+            query="",
+            description="",
+        )
+
 
 class PortraitRecord(BaseModel):
     """Represents a portrait database record."""
+
+    id: PyObjectId | None = Field(alias="_id", default=None)
 
     fulllength_path: str
     medium_path: str
@@ -33,14 +49,3 @@ class PortraitRecord(BaseModel):
     hash: str
     query: str
     description: str
-
-    def from_portrait(self, portrait: Portrait):
-        return PortraitRecord(
-            fulllength_path=str(portrait.fulllength_path),
-            medium_path=str(portrait.medium_path),
-            small_path=str(portrait.small_path),
-            tags=portrait.tags,
-            hash=portrait.get_fulllength_hash(),
-            query="",
-            description="",
-        )

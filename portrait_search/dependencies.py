@@ -1,10 +1,10 @@
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from dependency_injector import containers, providers
+from portrait_search.core.config import Config
 
 from portrait_search.data_source import data_sources_from_yaml
-from portrait_search.portrait import PortraitService
-
-from .core.config import Config
+from portrait_search.open_ai import OpenAIClient
+from portrait_search.portrait import PortraitRepository
 
 
 def get_db(url: str, database_name: str) -> AsyncIOMotorDatabase:
@@ -25,7 +25,12 @@ class Container(containers.DeclarativeContainer):
         database_name=config.mongodb_database_name,
     )
 
-    portrait_service = providers.Factory(
-        PortraitService,
+    portrait_repository = providers.Factory(
+        PortraitRepository,
         db=db,
+    )
+
+    openai_client = providers.Factory(
+        OpenAIClient,
+        api_key=config.openai_api_key,
     )

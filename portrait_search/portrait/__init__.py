@@ -1,4 +1,4 @@
-from .service import PortraitService
-from .entity import Portrait
+from .repository import PortraitRepository
+from .entity import Portrait, PortraitRecord
 
-__all__ = ["PortraitService", "Portrait"]
+__all__ = ["PortraitRepository", "Portrait", "PortraitRecord"]

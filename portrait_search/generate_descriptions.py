@@ -2,18 +2,44 @@ import asyncio
 from pathlib import Path
 
 from tqdm import tqdm
+from tqdm.asyncio import tqdm_asyncio
 from dependency_injector.wiring import Provide, inject
 
 from portrait_search.data_source import BaseDataSource
 from portrait_search.dependencies import Container
-from portrait_search.portrait import PortraitService
+from portrait_search.open_ai import OpenAIClient
+from portrait_search.open_ai import PORTRAIT_DESCRIPTION_QUERY_V1
+from portrait_search.portrait import PortraitRepository
+from portrait_search.portrait import Portrait
+
+N_JOBS = 1
+sem = asyncio.Semaphore(N_JOBS)
+
+
+async def _generate_portraint_description_and_store(
+    portrait: Portrait,
+    openai_client: OpenAIClient,
+    portrait_repository: PortraitRepository,
+):
+    async with sem:
+        description = await openai_client.make_image_query(
+            query=PORTRAIT_DESCRIPTION_QUERY_V1,
+            image_path=portrait.fulllength_path,
+        )
+
+    portrait_record = portrait.to_record()
+    portrait_record.description = description
+    portrait_record.query = PORTRAIT_DESCRIPTION_QUERY_V1
+
+    await portrait_repository.create(portrait_record)
 
 
 @inject
 async def generate_descriptions(
     local_data_folder: Path = Provide[Container.config.local_data_folder],
     data_sources: list[BaseDataSource] = Provide[Container.data_sources],
-    portrait_service: PortraitService = Provide[Container.portrait_service],
+    portrait_repository: PortraitRepository = Provide[Container.portrait_repository],
+    openai_client: OpenAIClient = Provide[Container.openai_client],
 ):
     if isinstance(local_data_folder, Provide):
         local_data_folder = local_data_folder.provider  # type: ignore
@@ -33,9 +59,25 @@ async def generate_descriptions(
 
     print(f"Found {len(local_hashes_to_portraits)} unique portraits.")
     local_hashes = set(local_hashes_to_portraits.keys())
-    existing_hashes = await portrait_service.get_distinct_hashes()
+    existing_hashes = await portrait_repository.get_distinct_hashes()
     new_hashes = local_hashes - existing_hashes
-    print(f"Found {len(new_hashes)} new portraits.")
+    new_portraits = [local_hashes_to_portraits[hash_] for hash_ in new_hashes]
+    print(f"Found {len(new_portraits)} new portraits.")
+
+    # generate descriptions for new portraits in parallel
+    tasks = [
+        asyncio.create_task(
+            _generate_portraint_description_and_store(
+                portrait,
+                openai_client,
+                portrait_repository,
+            )
+        )
+        for portrait in new_portraits
+    ]
+    await tqdm_asyncio.gather(*tasks, desc="Generating descriptions")
+
+    print("Done!")
 
 
 if __name__ == "__main__":
