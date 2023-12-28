@@ -12,8 +12,9 @@ from portrait_search.open_ai import PORTRAIT_DESCRIPTION_QUERY_V1
 from portrait_search.portrait import PortraitRepository
 from portrait_search.portrait import Portrait
 
-N_JOBS = 1
-sem = asyncio.Semaphore(N_JOBS)
+# each worker uses ~10k tokens per minute, with a current limit 20k tokens it should be fine to use 2 workers
+N_JOBS = 2
+openai_semaphore = asyncio.Semaphore(N_JOBS)
 
 
 async def _generate_portraint_description_and_store(
@@ -21,7 +22,7 @@ async def _generate_portraint_description_and_store(
     openai_client: OpenAIClient,
     portrait_repository: PortraitRepository,
 ):
-    async with sem:
+    async with openai_semaphore:
         description = await openai_client.make_image_query(
             query=PORTRAIT_DESCRIPTION_QUERY_V1,
             image_path=portrait.fulllength_path,
