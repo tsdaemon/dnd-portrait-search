@@ -60,7 +60,7 @@ def mock_nexus_download_response(
 
 
 @pytest.fixture
-def expected_portraits(temp_folder_path) -> list[Portrait]:
+def expected_portraits(temp_folder_path: Path) -> list[Portrait]:
     root_folder = temp_folder_path / "nexusmods-pathfinderkingmaker-9-1"
     return [
         Portrait(
@@ -101,8 +101,7 @@ def expected_portraits(temp_folder_path) -> list[Portrait]:
         ),
         Portrait(
             fulllength_path=Path(
-                temp_folder_path
-                / "nexusmods-pathfinderkingmaker-9-1/another race/MX-IN-TL-F201/Fulllength.png"
+                root_folder / "another race/MX-IN-TL-F201/Fulllength.png"
             ),
             medium_path=Path(root_folder / "another race/MX-IN-TL-F201/Medium.png"),
             small_path=Path(root_folder / "another race/MX-IN-TL-F201/Small.png"),
@@ -125,8 +124,11 @@ async def test_retrieve(
     temp_folder_path: Path,
     mock_responses: aioresponses,
     expected_portraits: list[Portrait],
-):
+) -> None:
+    # GIVEN nothing is cached
+    # WHEN call retrieve
     portraits = await nexus_data_source.retrieve(temp_folder_path)
+    # THEN requests are made to get download link and download link
     mock_responses.assert_called_with(
         "https://api.nexusmods.com/v1/games/pathfinderkingmaker/mods/9/files/1/download_link.json",
         method="GET",
@@ -136,11 +138,12 @@ async def test_retrieve(
         "https://nexusmods.com/pathfinderkingmaker/mods/9?tab=files&file_id=1",
         method="GET",
     )
+    # THEN results are retrived
     assert portraits == expected_portraits
 
 
 @pytest.fixture
-def cached_archive(archive_fixture, temp_folder_path):
+def cached_archive(archive_fixture: Path, temp_folder_path: Path) -> None:
     shutil.copy(
         archive_fixture, temp_folder_path / "nexusmods-pathfinderkingmaker-9-1.7z"
     )
@@ -152,13 +155,16 @@ async def test_retrieve_cached_archive(
     nexus_data_source: NexusDataSource,
     temp_folder_path: Path,
     expected_portraits: list[Portrait],
-):
+) -> None:
+    # GIVEN a mod archive is downloaded
+    # WHEN call retrieve
     portraits = await nexus_data_source.retrieve(temp_folder_path)
+    # THEN no requests are made and results are retrived
     assert portraits == expected_portraits
 
 
 @pytest.fixture
-def cached_extracted_archive(archive_fixture, temp_folder_path):
+def cached_extracted_archive(archive_fixture: Path, temp_folder_path: Path) -> None:
     with py7zr.SevenZipFile(archive_fixture, mode="r") as z:
         z.extractall(path=temp_folder_path / "nexusmods-pathfinderkingmaker-9-1")
 
@@ -169,6 +175,9 @@ async def test_retrieve_cached_extracted_archive(
     nexus_data_source: NexusDataSource,
     temp_folder_path: Path,
     expected_portraits: list[Portrait],
-):
+) -> None:
+    # GIVEN a mod archive is downloaded and extracted
+    # WHEN call retrieve
     portraits = await nexus_data_source.retrieve(temp_folder_path)
+    # THEN no requests are made and results are retrived
     assert portraits == expected_portraits

@@ -21,12 +21,15 @@ async def _generate_portraint_description_and_store(
     portrait: Portrait,
     openai_client: OpenAIClient,
     portrait_repository: PortraitRepository,
-):
+) -> None:
     async with openai_semaphore:
         description = await openai_client.make_image_query(
             query=PORTRAIT_DESCRIPTION_QUERY_V1,
             image_path=portrait.fulllength_path,
         )
+
+    if not description:
+        return
 
     portrait_record = portrait.to_record()
     portrait_record.description = description
@@ -41,7 +44,7 @@ async def generate_descriptions(
     data_sources: list[BaseDataSource] = Provide[Container.data_sources],
     portrait_repository: PortraitRepository = Provide[Container.portrait_repository],
     openai_client: OpenAIClient = Provide[Container.openai_client],
-):
+) -> None:
     if isinstance(local_data_folder, Provide):
         local_data_folder = local_data_folder.provider  # type: ignore
 

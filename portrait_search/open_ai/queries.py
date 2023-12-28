@@ -1,5 +1,4 @@
-PORTRAIT_DESCRIPTION_QUERY_V1 = """
-Describe what is in a picture. Assume that it's a character for a table-top RPG game.
+PORTRAIT_DESCRIPTION_QUERY_V1 = """Describe what is in a picture. Assume that it's a character for a table-top RPG game.
 
 Specifically mention its gender, race, alignment, possible classes, and subclasses, weapon it's holding, armor, and any special traits.
 
@@ -13,5 +12,4 @@ Output a natural text description, and after two line breaks: a JSON formatted r
     "classes": ["cleric", "paladin"],
     "weapon": "quarterstaff",
     "armor": "cloth",
-}
-"""
+}"""

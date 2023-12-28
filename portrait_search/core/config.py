@@ -15,3 +15,8 @@ class Config(BaseSettings):
         default=None, alias="DATA_SOURCES_CONFIG_PATH"
     )
     nexusmods_api_key: str = Field(default=None, alias="NEXUSMODS_API_KEY")
+
+    class Config:
+        """Extra configuration options"""
+
+        anystr_strip_whitespace = True

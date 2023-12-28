@@ -21,6 +21,7 @@ imagehash = "^4.3.1"
 dependency-injector = "^4.41.0"
 openai = "^1.6.1"
 backoff = "^2.2.1"
+loguru = "^0.7.2"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.8.0"
@@ -34,7 +35,12 @@ pytest = "^7.4.3"
 pytest-cov = "^4.1.0"
 aioresponses = "^0.7.6"
 pytest-asyncio = "^0.23.2"
+mock = "^5.1.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+python_version = "3.11"
+disallow_untyped_defs = true

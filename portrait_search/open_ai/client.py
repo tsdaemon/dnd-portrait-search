@@ -2,7 +2,8 @@ import base64
 import logging
 from pathlib import Path
 import backoff
-from openai import AsyncOpenAI, RateLimitError
+from loguru import logger
+from openai import AsyncOpenAI, BadRequestError, RateLimitError
 
 
 def encode_image(image_path: Path) -> str:
@@ -20,25 +21,34 @@ class OpenAIClient:
     async def make_image_query(self, query: str, image_path: Path) -> str:
         base64_image = encode_image(image_path)
 
-        response = await self.client.chat.completions.create(
-            model="gpt-4-vision-preview",
-            messages=[
-                {
-                    "role": "user",
-                    "content": [
-                        {"type": "text", "text": query},
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:image/jpeg;base64,{base64_image}"
+        try:
+            response = await self.client.chat.completions.create(
+                model="gpt-4-vision-preview",
+                messages=[
+                    {
+                        "role": "user",
+                        "content": [
+                            {"type": "text", "text": query},
+                            {
+                                "type": "image_url",
+                                "image_url": {
+                                    "url": f"data:image/jpeg;base64,{base64_image}"
+                                },
                             },
-                        },
-                    ],
-                }
-            ],
-            n=1,
-            seed=43,
-            max_tokens=2000,
-        )
+                        ],
+                    }
+                ],
+                n=1,
+                seed=43,
+                max_tokens=2000,
+            )
 
-        return response.choices[0].message.content or ""
+            return response.choices[0].message.content or ""
+
+        except BadRequestError as e:
+            logger.exception("OpenAI bad request", exc_info=True)
+            if "You uploaded an unsupported image" in e.message:
+                # We just ignore bad images for now
+                return ""
+            else:
+                raise
