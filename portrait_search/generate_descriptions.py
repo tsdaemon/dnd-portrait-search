@@ -5,12 +5,12 @@ from tqdm import tqdm
 from tqdm.asyncio import tqdm_asyncio
 from dependency_injector.wiring import Provide, inject
 
-from portrait_search.data_source import BaseDataSource
+from portrait_search.data_sources import BaseDataSource
 from portrait_search.dependencies import Container
 from portrait_search.open_ai import OpenAIClient
 from portrait_search.open_ai import PORTRAIT_DESCRIPTION_QUERY_V1
-from portrait_search.portrait import PortraitRepository
-from portrait_search.portrait import Portrait
+from portrait_search.portraits import PortraitRepository
+from portrait_search.portraits import Portrait
 
 # each worker uses ~10k tokens per minute, with a current limit 20k tokens it should be fine to use 2 workers
 N_JOBS = 2

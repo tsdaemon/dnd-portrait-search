@@ -1,6 +1,6 @@
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
-from portrait_search.portrait.entity import PortraitRecord
+from .entities import PortraitRecord
 
 COLLECTION_NAME = "portraits"
 

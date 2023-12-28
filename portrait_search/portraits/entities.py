@@ -14,6 +14,7 @@ class Portrait(BaseModel):
     small_path: Path
     base_path: Path
     tags: list[str]
+    url: str
 
     def get_fulllength_hash(self):
         # calculate hash if it doesn't exist
@@ -32,6 +33,7 @@ class Portrait(BaseModel):
             small_path=str(self.small_path.relative_to(self.base_path)),
             tags=self.tags,
             hash=self.get_fulllength_hash(),
+            url=self.url,
             query="",
             description="",
         )
@@ -46,6 +48,7 @@ class PortraitRecord(BaseModel):
     medium_path: str
     small_path: str
     tags: list[str]
+    url: str
     hash: str
     query: str
     description: str

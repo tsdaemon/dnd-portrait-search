@@ -1,8 +1,7 @@
 import abc
 
-from pathlib import Path
 from typing import Annotated, Literal
-from pydantic import BaseModel, Field, TypeAdapter
+from pydantic import AnyHttpUrl, BaseModel, Field, TypeAdapter
 import yaml
 
 from portrait_search.core import Config
@@ -13,6 +12,7 @@ from .nexus import NexusDataSource
 
 class BaseDataSourceConfig(BaseModel):
     kind: str
+    url: AnyHttpUrl
 
     @abc.abstractmethod
     def get_data_source(self, config: Config) -> BaseDataSource:
@@ -26,16 +26,14 @@ class NexusDataSourceConfig(BaseDataSourceConfig):
     file: int
 
     def get_data_source(self, config: Config) -> BaseDataSource:
-        return NexusDataSource(config, self.game, self.mod, self.file)
+        return NexusDataSource(config, str(self.url), self.game, self.mod, self.file)
 
 
 DataSourceConfigType = Annotated[NexusDataSourceConfig, Field(discriminator="kind")]
 
 
 def data_sources_from_yaml(config: Config) -> list[BaseDataSource]:
-    data_sources_config_path = Path(__file__).parent / "data_sources.yaml"
-
-    with open(data_sources_config_path, "r") as file:
+    with open(config.data_sources_config_path, "r") as file:
         data_sources_data = yaml.safe_load(file)
 
     data_sources: list[BaseDataSource] = []

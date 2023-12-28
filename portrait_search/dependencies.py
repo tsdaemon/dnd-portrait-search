@@ -3,9 +3,9 @@ from dependency_injector import containers, providers
 from portrait_search.core import Config
 from portrait_search.core import init_logging
 
-from portrait_search.data_source import data_sources_from_yaml
+from portrait_search.data_sources import data_sources_from_yaml
 from portrait_search.open_ai import OpenAIClient
-from portrait_search.portrait import PortraitRepository
+from portrait_search.portraits import PortraitRepository
 
 
 def get_db(url: str, database_name: str) -> AsyncIOMotorDatabase:
