@@ -1,8 +1,9 @@
 from pathlib import Path
-from pydantic import BaseModel, Field
-from pydantic_mongo import ObjectIdField
+
 import imagehash  # type: ignore
 from PIL import Image
+from pydantic import BaseModel, ConfigDict, Field
+from pydantic_mongo import ObjectIdField
 
 
 class PortraitRecord(BaseModel):
@@ -19,8 +20,7 @@ class PortraitRecord(BaseModel):
     query: str
     description: str
 
-    class Config:
-        populate_by_name = True
+    model_config = ConfigDict(populate_by_name=True)
 
 
 class Portrait(BaseModel):

@@ -53,3 +53,23 @@ build-backend = "poetry.core.masonry.api"
 python_version = "3.11"
 disallow_untyped_defs = true
 ignore_missing_imports = true
+
+[tool.ruff]
+line-length = 120
+
+select = ["E", "F", "I"]
+ignore = []
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".data",
+    ".mypy_cache",
+    "experiments",
+]
+per-file-ignores = {}
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+# Assume Python 3.11.
+target-version = "py311"

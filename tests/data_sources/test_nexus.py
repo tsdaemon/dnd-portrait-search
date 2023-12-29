@@ -1,21 +1,20 @@
-from pathlib import Path
 import shutil
 import tempfile
+from pathlib import Path
 from typing import Any, Generator
-from aioresponses import aioresponses
+
 import py7zr
 import pytest
-from portrait_search.core.config import Config
+from aioresponses import aioresponses
 
+from portrait_search.core.config import Config
 from portrait_search.data_sources.nexus import NexusDataSource
 from portrait_search.portraits.entities import Portrait
 
 
 @pytest.fixture
 def nexus_data_source(temp_folder_path: Path) -> NexusDataSource:
-    config = Config(
-        NEXUSMODS_API_KEY="test_api_key", LOCAL_DATA_FOLDER=temp_folder_path
-    )
+    config = Config(NEXUSMODS_API_KEY="test_api_key", LOCAL_DATA_FOLDER=temp_folder_path)
     return NexusDataSource(
         config=config,
         url="https://www.nexusmods.com/pathfinderkingmaker/mods/9",
@@ -30,9 +29,7 @@ def mock_nexus_get_download_link_response(mock_responses: aioresponses) -> None:
     mock_responses.get(
         "https://api.nexusmods.com/v1/games/pathfinderkingmaker/mods/9/files/1/download_link.json",
         payload=[
-            {
-                "URI": "https://nexusmods.com/pathfinderkingmaker/mods/9?tab=files&file_id=1"
-            },
+            {"URI": "https://nexusmods.com/pathfinderkingmaker/mods/9?tab=files&file_id=1"},
             {},
         ],
     )
@@ -48,9 +45,7 @@ def archive_fixture(fixtures_path: Path) -> Generator[Path, Any, Any]:
 
 
 @pytest.fixture
-def mock_nexus_download_response(
-    mock_responses: aioresponses, archive_fixture: Path
-) -> None:
+def mock_nexus_download_response(mock_responses: aioresponses, archive_fixture: Path) -> None:
     archive_content = archive_fixture.read_bytes()
     mock_responses.get(
         "https://nexusmods.com/pathfinderkingmaker/mods/9?tab=files&file_id=1",
@@ -64,15 +59,9 @@ def expected_portraits(temp_folder_path: Path) -> list[Portrait]:
     root_folder = temp_folder_path / "nexusmods-pathfinderkingmaker-9-1"
     return [
         Portrait(
-            fulllength_path=Path(
-                root_folder / "some race/some type/AA-WI-MS-F107/Fulllength.png"
-            ),
-            medium_path=Path(
-                root_folder / "some race/some type/AA-WI-MS-F107/Medium.png"
-            ),
-            small_path=Path(
-                root_folder / "some race/some type/AA-WI-MS-F107/Small.png"
-            ),
+            fulllength_path=Path(root_folder / "some race/some type/AA-WI-MS-F107/Fulllength.png"),
+            medium_path=Path(root_folder / "some race/some type/AA-WI-MS-F107/Medium.png"),
+            small_path=Path(root_folder / "some race/some type/AA-WI-MS-F107/Small.png"),
             base_path=temp_folder_path,
             tags=[
                 "some race",
@@ -82,15 +71,9 @@ def expected_portraits(temp_folder_path: Path) -> list[Portrait]:
             url="https://www.nexusmods.com/pathfinderkingmaker/mods/9",
         ),
         Portrait(
-            fulllength_path=Path(
-                root_folder / "some race/some type/AA-WI-MS-F107 copy/Fulllength.png"
-            ),
-            medium_path=Path(
-                root_folder / "some race/some type/AA-WI-MS-F107 copy/Medium.png"
-            ),
-            small_path=Path(
-                root_folder / "some race/some type/AA-WI-MS-F107 copy/Small.png"
-            ),
+            fulllength_path=Path(root_folder / "some race/some type/AA-WI-MS-F107 copy/Fulllength.png"),
+            medium_path=Path(root_folder / "some race/some type/AA-WI-MS-F107 copy/Medium.png"),
+            small_path=Path(root_folder / "some race/some type/AA-WI-MS-F107 copy/Small.png"),
             base_path=temp_folder_path,
             tags=[
                 "some race",
@@ -100,9 +83,7 @@ def expected_portraits(temp_folder_path: Path) -> list[Portrait]:
             url="https://www.nexusmods.com/pathfinderkingmaker/mods/9",
         ),
         Portrait(
-            fulllength_path=Path(
-                root_folder / "another race/MX-IN-TL-F201/Fulllength.png"
-            ),
+            fulllength_path=Path(root_folder / "another race/MX-IN-TL-F201/Fulllength.png"),
             medium_path=Path(root_folder / "another race/MX-IN-TL-F201/Medium.png"),
             small_path=Path(root_folder / "another race/MX-IN-TL-F201/Small.png"),
             base_path=temp_folder_path,
@@ -115,9 +96,7 @@ def expected_portraits(temp_folder_path: Path) -> list[Portrait]:
     ]
 
 
-@pytest.mark.usefixtures(
-    "mock_nexus_get_download_link_response", "mock_nexus_download_response"
-)
+@pytest.mark.usefixtures("mock_nexus_get_download_link_response", "mock_nexus_download_response")
 @pytest.mark.asyncio
 async def test_retrieve(
     nexus_data_source: NexusDataSource,
@@ -144,9 +123,7 @@ async def test_retrieve(
 
 @pytest.fixture
 def cached_archive(archive_fixture: Path, temp_folder_path: Path) -> None:
-    shutil.copy(
-        archive_fixture, temp_folder_path / "nexusmods-pathfinderkingmaker-9-1.7z"
-    )
+    shutil.copy(archive_fixture, temp_folder_path / "nexusmods-pathfinderkingmaker-9-1.7z")
 
 
 @pytest.mark.usefixtures("cached_archive")

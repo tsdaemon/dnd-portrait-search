@@ -1,6 +1,7 @@
 from pathlib import Path
+
 from pydantic import Field
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Config(BaseSettings):
@@ -11,12 +12,7 @@ class Config(BaseSettings):
 
     local_data_folder: Path = Field(default=None, alias="LOCAL_DATA_FOLDER")
 
-    data_sources_config_path: Path = Field(
-        default=None, alias="DATA_SOURCES_CONFIG_PATH"
-    )
+    data_sources_config_path: Path = Field(default=None, alias="DATA_SOURCES_CONFIG_PATH")
     nexusmods_api_key: str = Field(default=None, alias="NEXUSMODS_API_KEY")
 
-    class Config:
-        """Extra configuration options"""
-
-        anystr_strip_whitespace = True
+    model_config = SettingsConfigDict(str_strip_whitespace=True)
