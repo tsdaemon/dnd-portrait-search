@@ -5201,6 +5201,17 @@ files = [
 ]
 
 [[package]]
+name = "types-mock"
+version = "5.1.0.3"
+description = "Typing stubs for mock"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "types-mock-5.1.0.3.tar.gz", hash = "sha256:eeeac25480287bb721fb17fcda2e9768d70a476dcc14a2c1d0389535c54f8184"},
+    {file = "types_mock-5.1.0.3-py3-none-any.whl", hash = "sha256:e5821fdfd57bd545b101dc42373b0112027a1e53e82afbd801c122840b3a2780"},
+]
+
+[[package]]
 name = "types-pillow"
 version = "10.1.0.2"
 description = "Typing stubs for Pillow"
@@ -5484,4 +5495,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.11"
-content-hash = "19ce9f2b3c7d260af9680ac34bcb4a73cc3c494e4ffff6390e81f9b1c4abf4c6"
+content-hash = "b844922dab6be4ab917416af0544c7eb231d640753eacb59168c70357d741aa1"

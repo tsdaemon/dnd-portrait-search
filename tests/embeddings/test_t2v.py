@@ -1,15 +1,14 @@
 from itertools import product
-from bson import ObjectId
+
 import pytest
+from bson import ObjectId
 
 from portrait_search.embeddings import EMBEDDERS, SPLITTERS, texts2vectors
 from portrait_search.portraits import PortraitRecord
 
 
 @pytest.mark.parametrize("embedder_name, splitter_name", product(EMBEDDERS, SPLITTERS))
-def test_texts2vectors(
-    embedder_name: str, splitter_name: str, portrait_description_example: str
-) -> None:
+def test_texts2vectors(embedder_name: str, splitter_name: str, portrait_description_example: str) -> None:
     # GIVEN a list of PortraitRecords with 2 identical records
     portraits_records = [
         PortraitRecord(

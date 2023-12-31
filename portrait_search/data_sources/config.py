@@ -1,8 +1,8 @@
 import abc
-
 from typing import Annotated, Literal
-from pydantic import AnyHttpUrl, BaseModel, Field, TypeAdapter
+
 import yaml
+from pydantic import AnyHttpUrl, BaseModel, Field, TypeAdapter
 
 from portrait_search.core import Config
 

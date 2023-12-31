@@ -1,3 +1,4 @@
+from bson import ObjectId
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from .entities import PortraitRecord
@@ -17,6 +18,12 @@ class PortraitRepository:
         hash_index = await self.db[COLLECTION_NAME].create_index("hash", unique=True)
         return {"hash": hash_index}
 
-    async def create(self, portrait: PortraitRecord) -> None:
+    async def insert(self, portrait: PortraitRecord) -> PortraitRecord:
         entity = portrait.model_dump(by_alias=True, exclude={"id"})
-        await self.db[COLLECTION_NAME].insert_one(entity)
+        insertion_result = await self.db[COLLECTION_NAME].insert_one(entity)
+        portrait.id = insertion_result.inserted_id
+        return portrait
+
+    async def get(self, id: ObjectId) -> PortraitRecord:
+        entity = await self.db[COLLECTION_NAME].find_one({"_id": id})
+        return PortraitRecord.model_validate(entity)

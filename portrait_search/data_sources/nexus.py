@@ -1,8 +1,8 @@
 import os
 from pathlib import Path
 
-import aiohttp
 import aiofiles
+import aiohttp
 import py7zr
 import tqdm
 
@@ -13,9 +13,7 @@ from .base import BaseDataSource, DataSourceError
 
 
 class NexusDataSource(BaseDataSource):
-    def __init__(
-        self, config: Config, url: str, game: str, mod: int, file: int
-    ) -> None:
+    def __init__(self, config: Config, url: str, game: str, mod: int, file: int) -> None:
         super().__init__(config, url)
         self.game = game
         self.mod = mod

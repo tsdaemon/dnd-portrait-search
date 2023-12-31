@@ -59,12 +59,12 @@ resource "mongodbatlas_database_user" "root_user" {
   auth_database_name = "admin"
 
   roles {
-    role_name     = "readWrite"
-    database_name = var.mongodb_atlas_database_name
+    role_name     = "readWriteAnyDatabase"
+    database_name = "admin"
   }
 
   roles {
-    role_name     = "readAnyDatabase"
+    role_name     = "clusterAdmin"
     database_name = "admin"
   }
 

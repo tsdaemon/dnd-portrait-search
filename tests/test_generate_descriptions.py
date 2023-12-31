@@ -1,12 +1,13 @@
-from pathlib import Path
 import shutil
 import tempfile
+from pathlib import Path
 from typing import Any, Generator
-from mock import Mock  # type: ignore
+
 import pytest
+from mock import Mock  # type: ignore
+
 from portrait_search.data_sources import BaseDataSource
 from portrait_search.dependencies import Container
-
 from portrait_search.generate_descriptions import generate_descriptions
 from portrait_search.open_ai.client import OpenAIClient
 from portrait_search.open_ai.queries import PORTRAIT_DESCRIPTION_QUERY_V1
@@ -37,15 +38,9 @@ def nexus_mods_all_portraits_fixture(nexus_mods_fixture: Path) -> list[Portrait]
     root_folder = nexus_mods_fixture
     return [
         Portrait(
-            fulllength_path=Path(
-                root_folder / "some race/some type/AA-WI-MS-F107/Fulllength.png"
-            ),
-            medium_path=Path(
-                root_folder / "some race/some type/AA-WI-MS-F107/Medium.png"
-            ),
-            small_path=Path(
-                root_folder / "some race/some type/AA-WI-MS-F107/Small.png"
-            ),
+            fulllength_path=Path(root_folder / "some race/some type/AA-WI-MS-F107/Fulllength.png"),
+            medium_path=Path(root_folder / "some race/some type/AA-WI-MS-F107/Medium.png"),
+            small_path=Path(root_folder / "some race/some type/AA-WI-MS-F107/Small.png"),
             base_path=nexus_mods_fixture,
             tags=[
                 "some race",
@@ -55,15 +50,9 @@ def nexus_mods_all_portraits_fixture(nexus_mods_fixture: Path) -> list[Portrait]
             url="https://www.nexusmods.com/pathfinderkingmaker/mods/9",
         ),
         Portrait(
-            fulllength_path=Path(
-                root_folder / "some race/some type/AA-WI-MS-F107 copy/Fulllength.png"
-            ),
-            medium_path=Path(
-                root_folder / "some race/some type/AA-WI-MS-F107 copy/Medium.png"
-            ),
-            small_path=Path(
-                root_folder / "some race/some type/AA-WI-MS-F107 copy/Small.png"
-            ),
+            fulllength_path=Path(root_folder / "some race/some type/AA-WI-MS-F107 copy/Fulllength.png"),
+            medium_path=Path(root_folder / "some race/some type/AA-WI-MS-F107 copy/Medium.png"),
+            small_path=Path(root_folder / "some race/some type/AA-WI-MS-F107 copy/Small.png"),
             base_path=nexus_mods_fixture,
             tags=[
                 "some race",
@@ -73,9 +62,7 @@ def nexus_mods_all_portraits_fixture(nexus_mods_fixture: Path) -> list[Portrait]
             url="https://www.nexusmods.com/pathfinderkingmaker/mods/9",
         ),
         Portrait(
-            fulllength_path=Path(
-                root_folder / "another race/MX-IN-TL-F201/Fulllength.png"
-            ),
+            fulllength_path=Path(root_folder / "another race/MX-IN-TL-F201/Fulllength.png"),
             medium_path=Path(root_folder / "another race/MX-IN-TL-F201/Medium.png"),
             small_path=Path(root_folder / "another race/MX-IN-TL-F201/Small.png"),
             base_path=nexus_mods_fixture,
@@ -97,9 +84,8 @@ def openai_client_mock() -> Mock:
 
 @pytest.fixture(autouse=True)
 def container(
-    portraits_repository_mock: Mock, data_source_mock: Mock, openai_client_mock: Mock
+    container: Container, portraits_repository_mock: Mock, data_source_mock: Mock, openai_client_mock: Mock
 ) -> None:
-    container = Container()
     container.init_resources()
     container.portrait_repository.override(portraits_repository_mock)
     container.data_sources.override([data_source_mock])

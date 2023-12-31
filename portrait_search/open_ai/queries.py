@@ -12,4 +12,4 @@ Output a natural text description, and after two line breaks: a JSON formatted r
     "classes": ["cleric", "paladin"],
     "weapon": "quarterstaff",
     "armor": "cloth",
-}"""
+}"""  # noqa: E501

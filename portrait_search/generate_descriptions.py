@@ -1,16 +1,14 @@
 import asyncio
 from pathlib import Path
 
+from dependency_injector.wiring import Provide, inject
 from tqdm import tqdm
 from tqdm.asyncio import tqdm_asyncio
-from dependency_injector.wiring import Provide, inject
 
 from portrait_search.data_sources import BaseDataSource
 from portrait_search.dependencies import Container
-from portrait_search.open_ai import OpenAIClient
-from portrait_search.open_ai import PORTRAIT_DESCRIPTION_QUERY_V1
-from portrait_search.portraits import PortraitRepository
-from portrait_search.portraits import Portrait
+from portrait_search.open_ai import PORTRAIT_DESCRIPTION_QUERY_V1, OpenAIClient
+from portrait_search.portraits import Portrait, PortraitRepository
 
 # each worker uses ~10k tokens per minute, with a current limit 20k tokens it should be fine to use 2 workers
 N_JOBS = 2
@@ -35,7 +33,7 @@ async def _generate_portraint_description_and_store(
     portrait_record.description = description
     portrait_record.query = PORTRAIT_DESCRIPTION_QUERY_V1
 
-    await portrait_repository.create(portrait_record)
+    await portrait_repository.insert(portrait_record)
 
 
 @inject

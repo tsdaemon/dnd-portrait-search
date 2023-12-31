@@ -14,4 +14,4 @@ def portrait_description_example() -> str:
     "weapon": "magical staff",
     "armor": "leather",
     "special_traits": ["elemental magic", "spellcasting"]
-}"""
+}"""  # noqa: E501

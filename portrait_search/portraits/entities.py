@@ -3,13 +3,14 @@ from pathlib import Path
 import imagehash  # type: ignore
 from PIL import Image
 from pydantic import BaseModel, ConfigDict, Field
-from pydantic_mongo import ObjectIdField
+
+from portrait_search.core.mongodb import PyObjectId
 
 
 class PortraitRecord(BaseModel):
     """Represents a portrait database record."""
 
-    id: ObjectIdField | None = Field(alias="_id", default=None)
+    id: PyObjectId | None = Field(alias="_id", default=None)
 
     fulllength_path: str
     medium_path: str
