@@ -8,7 +8,6 @@ import pytest
 from aioresponses import aioresponses
 from dependency_injector import providers
 from mock import Mock
-from motor.motor_asyncio import AsyncIOMotorClient
 
 from portrait_search.core.mongodb import get_database
 from portrait_search.dependencies import Container
@@ -32,6 +31,18 @@ def mock_responses() -> Generator[aioresponses, Any, Any]:
 
 
 @pytest.fixture
+async def mongodb_database_for_test() -> AsyncGenerator[str, Any]:
+    characters = string.ascii_letters + string.digits
+    db_name = "test_database_" + "".join(secrets.choice(characters) for _ in range(10))
+
+    yield db_name
+
+    # TODO: enable this when I figure out which permission to set for a user to be able to drop a database
+    # mongodb_connection: AsyncIOMotorClient = container.mongodb_connection()
+    # await mongodb_connection.drop_database(db_name)
+
+
+@pytest.fixture
 def container() -> Container:
     container = Container()
     container.db.override(Mock())
@@ -39,18 +50,14 @@ def container() -> Container:
 
 
 @pytest.fixture
-async def mongodb_database_for_test(container: Container) -> AsyncGenerator[str, Any]:
-    characters = string.ascii_letters + string.digits
-    db_name = "test_database_" + "".join(secrets.choice(characters) for _ in range(10))
-
+async def inject_mongodb_database_for_test(
+    mongodb_database_for_test: str, container: Container
+) -> AsyncGenerator[None, Any]:
     with container.db.override(
         providers.Resource(
             get_database,
             connection=Container.mongodb_connection,
-            database_name=db_name,
+            database_name=mongodb_database_for_test,
         )
     ):
-        yield db_name
-
-    mongodb_connection: AsyncIOMotorClient = container.mongodb_connection()
-    await mongodb_connection.drop_database(db_name)
+        yield

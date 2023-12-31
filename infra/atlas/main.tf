@@ -63,11 +63,6 @@ resource "mongodbatlas_database_user" "root_user" {
     database_name = "admin"
   }
 
-  roles {
-    role_name     = "clusterAdmin"
-    database_name = "admin"
-  }
-
   scopes {
     name = mongodbatlas_cluster.cluster.name
     type = "CLUSTER"

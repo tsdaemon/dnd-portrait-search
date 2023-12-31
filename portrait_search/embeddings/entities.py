@@ -1,9 +1,9 @@
-from pydantic import BaseModel, ConfigDict, Field
-from pydantic_mongo import ObjectIdField  # type: ignore
+from pydantic_mongo import ObjectIdField
+
+from portrait_search.core.mongodb import MongoDBRecord
 
 
-class EmbeddingRecord(BaseModel):
-    id: ObjectIdField | None = Field(alias="_id", default=None)
+class EmbeddingRecord(MongoDBRecord):
     portrait_id: ObjectIdField
 
     embeddings: list[list[float]]
@@ -11,5 +11,3 @@ class EmbeddingRecord(BaseModel):
 
     splitter_class: str
     embedding_model_class: str
-
-    model_config = ConfigDict(populate_by_name=True)

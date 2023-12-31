@@ -15,13 +15,6 @@ variable "mongodb_atlas_root_password" {
   sensitive   = true
 }
 
-variable "mongodb_atlas_database_name" {
-  type        = string
-  description = "MongoDB Atlas Database name"
-  default     = "portraitSearch"
-  sensitive   = true
-}
-
 variable "mongodb_atlas_ip_access_cidr_block_azure" {
   type        = string
   description = "Allowed IP addresses for Azure environment"

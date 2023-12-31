@@ -2,15 +2,13 @@ from pathlib import Path
 
 import imagehash  # type: ignore
 from PIL import Image
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict
 
-from portrait_search.core.mongodb import PyObjectId
+from portrait_search.core.mongodb import MongoDBRecord
 
 
-class PortraitRecord(BaseModel):
+class PortraitRecord(MongoDBRecord):
     """Represents a portrait database record."""
-
-    id: PyObjectId | None = Field(alias="_id", default=None)
 
     fulllength_path: str
     medium_path: str
