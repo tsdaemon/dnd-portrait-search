@@ -104,7 +104,7 @@ async def test_generate_descriptions__no_data(
     # THEN openai is not called
     openai_client_mock.make_image_query.assert_not_called()
     # THEN no portraits are saved
-    portraits_repository_mock.insert.assert_not_called()
+    portraits_repository_mock.insert_one.assert_not_called()
 
 
 @pytest.mark.asyncio
@@ -127,12 +127,12 @@ async def test_generate_descriptions__all_new_portraits(
     portrait_record1 = nexus_mods_all_portraits_fixture[1].to_record()
     portrait_record1.description = "openai image description"
     portrait_record1.query = PORTRAIT_DESCRIPTION_QUERY_V1
-    portraits_repository_mock.insert.assert_any_call(portrait_record1)
+    portraits_repository_mock.insert_one.assert_any_call(portrait_record1)
     portrait_record2 = nexus_mods_all_portraits_fixture[2].to_record()
     portrait_record2.description = "openai image description"
     portrait_record2.query = PORTRAIT_DESCRIPTION_QUERY_V1
-    portraits_repository_mock.insert.assert_any_call(portrait_record1)
-    assert portraits_repository_mock.insert.call_count == 2
+    portraits_repository_mock.insert_one.assert_any_call(portrait_record1)
+    assert portraits_repository_mock.insert_one.call_count == 2
 
 
 @pytest.mark.asyncio
@@ -155,8 +155,8 @@ async def test_generate_descriptions__one_new_portrait(
     portrait_record1 = nexus_mods_all_portraits_fixture[1].to_record()
     portrait_record1.description = "openai image description"
     portrait_record1.query = PORTRAIT_DESCRIPTION_QUERY_V1
-    portraits_repository_mock.insert.assert_any_call(portrait_record1)
-    assert portraits_repository_mock.insert.call_count == 1
+    portraits_repository_mock.insert_one.assert_any_call(portrait_record1)
+    assert portraits_repository_mock.insert_one.call_count == 1
 
 
 @pytest.mark.asyncio
@@ -179,4 +179,4 @@ async def test_generate_descriptions__no_new_portrait(
     # THEN openai is not called
     assert openai_client_mock.make_image_query.call_count == 0
     # THEN no portraits are saved
-    assert portraits_repository_mock.insert.call_count == 0
+    assert portraits_repository_mock.insert_one.call_count == 0

@@ -58,16 +58,34 @@ class MongoDBRepository(abc.ABC, Generic[TRecord]):
     def collection(self) -> str:
         raise NotImplementedError()
 
-    async def insert(self, record: TRecord) -> TRecord:
+    async def insert_one(self, record: TRecord) -> TRecord:
         entity = record.model_dump(by_alias=True, exclude={"id"})
         insertion_result = await self.db[self.collection].insert_one(entity)
         new_record = record.model_copy()
         new_record.id = insertion_result.inserted_id
         return new_record
 
-    async def get(self, id: ObjectId) -> TRecord:
+    async def insert_many(self, records: list[TRecord]) -> list[TRecord]:
+        entities = [record.model_dump(by_alias=True, exclude={"id"}) for record in records]
+        insertion_result = await self.db[self.collection].insert_many(entities)
+        new_records = [record.model_copy() for record in records]
+        for new_record, inserted_id in zip(new_records, insertion_result.inserted_ids):
+            new_record.id = inserted_id
+        return new_records
+
+    async def get_one(self, id: ObjectId) -> TRecord:
         entity = await self.db[self.collection].find_one({"_id": id})
         return self.t.model_validate(entity)
 
+    async def get_many(self, **filter: Any) -> list[TRecord]:
+        entities = await self.db[self.collection].find(filter).to_list(length=None)
+        return [self.t.model_validate(entity) for entity in entities]
+
     async def delete(self, id: ObjectId) -> None:
         await self.db[self.collection].delete_one({"_id": id})
+
+    async def prepare_collection_resources(self) -> None:
+        """
+        Prepare additional resources for the collection, like indices or views. Optionally implemented by subclasses.
+        """
+        pass

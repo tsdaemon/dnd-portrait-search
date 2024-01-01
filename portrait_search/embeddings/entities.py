@@ -1,13 +1,12 @@
-from pydantic_mongo import ObjectIdField
-
-from portrait_search.core.mongodb import MongoDBRecord
+from portrait_search.core.config import EmbedderType, SplitterType
+from portrait_search.core.mongodb import MongoDBRecord, PyObjectId
 
 
 class EmbeddingRecord(MongoDBRecord):
-    portrait_id: ObjectIdField
+    portrait_id: PyObjectId
 
-    embeddings: list[list[float]]
-    embedded_texts: list[str]
+    embedding: list[float]
+    embedded_text: str
 
-    splitter_class: str
-    embedding_model_class: str
+    splitter_type: SplitterType
+    embedder_type: EmbedderType

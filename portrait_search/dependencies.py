@@ -3,24 +3,25 @@ from dependency_injector import containers, providers
 from portrait_search.core import Config, init_logging
 from portrait_search.core.mongodb import get_connection, get_database
 from portrait_search.data_sources import data_sources_from_yaml
+from portrait_search.embeddings import EMBEDDERS, SPLITTERS, EmbeddingRepository
 from portrait_search.open_ai import OpenAIClient
 from portrait_search.portraits import PortraitRepository
 
 
 class Container(containers.DeclarativeContainer):
-    config = Config()
+    config = providers.Object(Config())
 
     logging = providers.Resource(init_logging)
 
     mongodb_connection = providers.Resource(
         get_connection,
-        url=config.mongodb_uri,
+        url=config.provided.mongodb_uri,
     )
 
     db = providers.Resource(
         get_database,
         connection=mongodb_connection,
-        database_name=config.mongodb_database_name,
+        database_name=config.provided.mongodb_database_name,
     )
 
     data_sources = providers.Resource(
@@ -33,7 +34,21 @@ class Container(containers.DeclarativeContainer):
         db=db,
     )
 
+    embedding_repository = providers.Factory(
+        EmbeddingRepository,
+        db=db,
+    )
+
     openai_client = providers.Factory(
         OpenAIClient,
-        api_key=config.openai_api_key,
+        api_key=config.provided.openai_api_key,
+    )
+
+    splitter = providers.Resource(
+        lambda config: SPLITTERS[config.splitter_type](),
+        config=config,
+    )
+    embedder = providers.Resource(
+        lambda config: EMBEDDERS[config.embedder_type](),
+        config=config,
     )

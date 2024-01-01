@@ -17,6 +17,11 @@ class PortraitRepository(MongoDBRepository[PortraitRecord]):
         db_hashes = await self.db[self.collection].distinct("hash")
         return set(db_hashes)
 
-    async def prepare_indices(self) -> dict:
-        hash_index = await self.db[self.collection].create_index("hash", unique=True)
-        return {"hash": hash_index}
+    async def prepare_collection_resources(self) -> None:
+        await self.db[self.collection].create_index("hash", unique=True)
+        portrait_embeddings_pipeline = [
+            {"$lookup": {"from": "embeddings", "localField": "id", "foreignField": "portrait_id", "as": "embeddings"}}
+        ]
+        await self.db.command(
+            "create", "portrait_embeddings", viewOn=self.collection, pipeline=portrait_embeddings_pipeline
+        )

@@ -25,7 +25,6 @@ loguru = "^0.7.2"
 sentence-transformers = "^2.2.2"
 langchain = "^0.0.352"
 instructorembedding = "^1.0.1"
-pydantic-mongo = "^2.0.3"
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.8.0"

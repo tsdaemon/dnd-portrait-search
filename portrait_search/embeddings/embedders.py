@@ -1,6 +1,8 @@
 import abc
 
-from InstructorEmbedding import INSTRUCTOR  # type: ignore
+from InstructorEmbedding import INSTRUCTOR
+
+from portrait_search.core.config import EmbedderType
 
 
 class Embedder:
@@ -10,7 +12,7 @@ class Embedder:
 
 
 class InstructorEmbeddings(Embedder, abc.ABC):
-    def __init__(self, instructions: str, model_name: str = "hkunlp/instructor-large"):
+    def __init__(self, instructions: str, model_name: str):
         self.instructions = instructions
         self.model_name = model_name
 
@@ -28,6 +30,6 @@ class InstructorEmbeddingsLargePathfinderCharacterInstructions(InstructorEmbeddi
         )
 
 
-EMBEDDERS: dict[str, type[Embedder]] = {
-    "instructor-large-pathfinder-character-instructions": InstructorEmbeddingsLargePathfinderCharacterInstructions,
+EMBEDDERS: dict[EmbedderType, type[Embedder]] = {
+    EmbedderType.INSTRUCTOR_LARGE_PATHFINDER_CHARACTER_INSTRUCTIONS: InstructorEmbeddingsLargePathfinderCharacterInstructions,  # noqa: E501
 }

@@ -2,6 +2,8 @@ import abc
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
+from portrait_search.core.config import SplitterType
+
 
 class TextSplitter(abc.ABC):
     @abc.abstractmethod
@@ -27,6 +29,6 @@ class LangChainRecursiveTextSplitterChunk120Overlap60(LangChainRecursiveTextSpli
         super().__init__(chunk_size=120, chunk_overlap=60)
 
 
-SPLITTERS: dict[str, type[TextSplitter]] = {
-    "langchain-recursive-text-splitter-chunk-120-overlap-60": LangChainRecursiveTextSplitterChunk120Overlap60,
+SPLITTERS: dict[SplitterType, type[TextSplitter]] = {
+    SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_60: LangChainRecursiveTextSplitterChunk120Overlap60,  # noqa: E501
 }

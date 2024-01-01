@@ -33,12 +33,12 @@ async def _generate_portraint_description_and_store(
     portrait_record.description = description
     portrait_record.query = PORTRAIT_DESCRIPTION_QUERY_V1
 
-    await portrait_repository.insert(portrait_record)
+    await portrait_repository.insert_one(portrait_record)
 
 
 @inject
 async def generate_descriptions(
-    local_data_folder: Path = Provide[Container.config.local_data_folder],
+    local_data_folder: Path = Provide[Container.config.provided.local_data_folder],
     data_sources: list[BaseDataSource] = Provide[Container.data_sources],
     portrait_repository: PortraitRepository = Provide[Container.portrait_repository],
     openai_client: OpenAIClient = Provide[Container.openai_client],
