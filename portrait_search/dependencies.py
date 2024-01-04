@@ -6,6 +6,7 @@ from portrait_search.data_sources import data_sources_from_yaml
 from portrait_search.embeddings import EMBEDDERS, SPLITTERS, EmbeddingRepository
 from portrait_search.open_ai import OpenAIClient
 from portrait_search.portraits import PortraitRepository
+from portrait_search.retrieval import AtlasRetriever
 
 
 class Container(containers.DeclarativeContainer):
@@ -52,3 +53,5 @@ class Container(containers.DeclarativeContainer):
         lambda config: EMBEDDERS[config.embedder_type](),
         config=config,
     )
+
+    retriever = providers.Factory(AtlasRetriever, splitter=splitter, embedder=embedder)

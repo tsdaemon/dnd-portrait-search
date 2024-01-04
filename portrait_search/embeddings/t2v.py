@@ -1,4 +1,3 @@
-from portrait_search.core.config import EmbedderType, SplitterType
 from portrait_search.portraits.entities import PortraitRecord
 
 from .embedders import Embedder
@@ -9,10 +8,9 @@ from .splitters import TextSplitter
 def portraits2embeddings(
     portraits: list[PortraitRecord],
     splitter: TextSplitter,
-    splitter_type: SplitterType,
     embedder: Embedder,
-    embedder_type: EmbedderType,
 ) -> list[EmbeddingRecord]:
+    """Returns a list of EmbeddingRecords for the given portraits and their descriptions."""
     if not portraits:
         return []
 
@@ -27,9 +25,16 @@ def portraits2embeddings(
             portrait_id=portrait.id,
             embedding=embedding,
             embedded_text=text_chunk,
-            splitter_type=splitter_type,
-            embedder_type=embedder_type,
+            splitter_type=splitter.splitter_type(),
+            embedder_type=embedder.embedder_type(),
         )
         embeddings_records.append(embedding_record)
 
     return embeddings_records
+
+
+def query2embeddings(query: str, splitter: TextSplitter, embedder: Embedder) -> tuple[list[list[float]], list[str]]:
+    """Returns a tuple of embeddings and the query chunks."""
+    query_chunks = splitter.split_query(query)
+    embeddings = embedder.embed(query_chunks)
+    return embeddings, query_chunks

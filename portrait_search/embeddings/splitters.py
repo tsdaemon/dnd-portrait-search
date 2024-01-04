@@ -6,8 +6,17 @@ from portrait_search.core.config import SplitterType
 
 
 class TextSplitter(abc.ABC):
+    @classmethod
+    @abc.abstractmethod
+    def splitter_type(cls) -> SplitterType:
+        raise NotImplementedError()
+
     @abc.abstractmethod
     def split(self, text: str) -> list[str]:
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    def split_query(self, text: str) -> list[str]:
         raise NotImplementedError()
 
 
@@ -28,7 +37,21 @@ class LangChainRecursiveTextSplitterChunk120Overlap60(LangChainRecursiveTextSpli
     def __init__(self) -> None:
         super().__init__(chunk_size=120, chunk_overlap=60)
 
+        self.query_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=30,
+            chunk_overlap=10,
+            length_function=len,
+            is_separator_regex=False,
+        )
+
+    @classmethod
+    def splitter_type(cls) -> SplitterType:
+        return SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_60
+
+    def split_query(self, text: str) -> list[str]:
+        return self.query_splitter.split_text(text)
+
 
 SPLITTERS: dict[SplitterType, type[TextSplitter]] = {
-    SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_60: LangChainRecursiveTextSplitterChunk120Overlap60,  # noqa: E501
+    t.splitter_type(): t for t in [LangChainRecursiveTextSplitterChunk120Overlap60]
 }

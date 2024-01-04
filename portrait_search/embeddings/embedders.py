@@ -6,6 +6,11 @@ from portrait_search.core.config import EmbedderType
 
 
 class Embedder:
+    @classmethod
+    @abc.abstractmethod
+    def embedder_type(cls) -> EmbedderType:
+        raise NotImplementedError()
+
     @abc.abstractmethod
     def embed(self, texts: list[str]) -> list[list[float]]:
         raise NotImplementedError()
@@ -29,7 +34,11 @@ class InstructorEmbeddingsLargePathfinderCharacterInstructions(InstructorEmbeddi
             model_name="hkunlp/instructor-large",
         )
 
+    @classmethod
+    def embedder_type(cls) -> EmbedderType:
+        return EmbedderType.INSTRUCTOR_LARGE_PATHFINDER_CHARACTER_INSTRUCTIONS
+
 
 EMBEDDERS: dict[EmbedderType, type[Embedder]] = {
-    EmbedderType.INSTRUCTOR_LARGE_PATHFINDER_CHARACTER_INSTRUCTIONS: InstructorEmbeddingsLargePathfinderCharacterInstructions,  # noqa: E501
+    t.embedder_type(): t for t in [InstructorEmbeddingsLargePathfinderCharacterInstructions]
 }

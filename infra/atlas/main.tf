@@ -83,3 +83,34 @@ resource "mongodbatlas_project_ip_access_list" "azure" {
   cidr_block = var.mongodb_atlas_ip_access_cidr_block_azure
   comment    = "Azure IP Addresses"
 }
+
+
+#
+# Create a vector search index
+#
+resource "mongodbatlas_search_index" "portrait-embeddings-search-cosine" {
+  name            = "portrait-embeddings-search-cosine"
+  project_id      = mongodbatlas_project.project.id
+  cluster_name    = mongodbatlas_cluster.cluster.name
+  collection_name = "embeddings"
+  database        = "portraitSearch"
+  type            = "vectorSearch"
+  fields          = <<-EOF
+[
+    {
+        "type": "vector",
+        "path": "embedding",
+        "numDimensions": 768,
+        "similarity": "cosine"
+    },
+    {
+        "type": "filter",
+        "path": "splitter_type"
+    },
+    {
+        "type": "filter",
+        "path": "embedder_type"
+    }
+]
+EOF
+}
