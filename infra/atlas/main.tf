@@ -114,3 +114,30 @@ resource "mongodbatlas_search_index" "portrait-embeddings-search-cosine" {
 ]
 EOF
 }
+
+resource "mongodbatlas_search_index" "portrait-embeddings-search-euclidean" {
+  name            = "portrait-embeddings-search-euclidean"
+  project_id      = mongodbatlas_project.project.id
+  cluster_name    = mongodbatlas_cluster.cluster.name
+  collection_name = "embeddings"
+  database        = "portraitSearch"
+  type            = "vectorSearch"
+  fields          = <<-EOF
+[
+    {
+        "type": "vector",
+        "path": "embedding",
+        "numDimensions": 768,
+        "similarity": "euclidean"
+    },
+    {
+        "type": "filter",
+        "path": "splitter_type"
+    },
+    {
+        "type": "filter",
+        "path": "embedder_type"
+    }
+]
+EOF
+}

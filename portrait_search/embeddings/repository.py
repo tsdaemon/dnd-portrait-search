@@ -26,7 +26,7 @@ class EmbeddingRepository(MongoDBRepository[EmbeddingRecord]):
         query_vector: list[float],
         splitter_type: SplitterType,
         embedder_type: EmbedderType,
-        method: str = "cosine",
+        method: str = "euclidean",
         limit: int = 10,
     ) -> list[EmbeddingSimilarity]:
         """Returns a list of Embeddings and their similarities that match the query vector."""
@@ -40,8 +40,10 @@ class EmbeddingRepository(MongoDBRepository[EmbeddingRecord]):
                         "numCandidates": limit * 20,
                         "limit": limit,
                         "filter": {
-                            "splitter_type": splitter_type,
-                            "embedder_type": embedder_type,
+                            "$and": [
+                                {"splitter_type": splitter_type},
+                                {"embedder_type": embedder_type},
+                            ]
                         },
                     }
                 },
@@ -49,7 +51,7 @@ class EmbeddingRepository(MongoDBRepository[EmbeddingRecord]):
                     "$project": {
                         "portrait_id": 1,
                         "embedding": 1,
-                        "embedding_text": 1,
+                        "embedded_text": 1,
                         "similarity": {"$meta": "vectorSearchScore"},
                     }
                 },

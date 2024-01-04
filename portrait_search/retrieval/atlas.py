@@ -17,12 +17,12 @@ from .retriever import Retriever
 class AtlasRetriever(Retriever):
     def __init__(
         self,
-        embeddings_repository: EmbeddingRepository,
+        embedding_repository: EmbeddingRepository,
         portrait_repository: PortraitRepository,
         splitter: TextSplitter,
         embedder: Embedder,
     ) -> None:
-        self.embeddings_repository = embeddings_repository
+        self.embedding_repository = embedding_repository
         self.portrait_repository = portrait_repository
         self.splitter = splitter
         self.embedder = embedder
@@ -39,10 +39,11 @@ class AtlasRetriever(Retriever):
         all_embedding_similarities = []
         for query_embedding_and_text in zip(*qeury_embeddings_and_texts):
             query_embedding, query_text = query_embedding_and_text
-            embedding_similarities = await self.embeddings_repository.vector_search(
+            embedding_similarities = await self.embedding_repository.vector_search(
                 query_embedding,
                 self.splitter.splitter_type(),
                 self.embedder.embedder_type(),
+                method="euclidean",
                 # Get more candidates to widen search
                 limit=limit * 3,
             )

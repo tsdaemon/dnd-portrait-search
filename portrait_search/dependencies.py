@@ -54,4 +54,10 @@ class Container(containers.DeclarativeContainer):
         config=config,
     )
 
-    retriever = providers.Factory(AtlasRetriever, splitter=splitter, embedder=embedder)
+    retriever = providers.Factory(
+        AtlasRetriever,
+        portrait_repository=portrait_repository,
+        embedding_repository=embedding_repository,
+        splitter=splitter,
+        embedder=embedder,
+    )

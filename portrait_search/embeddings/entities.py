@@ -19,7 +19,10 @@ class EmbeddingSimilarity(BaseModel):
 
     embedding: list[float]
     embedded_text: str
-    query: list[float] | None
-    query_text: str | None
+    query: list[float] | None = None
+    query_text: str | None = None
 
     similarity: float
+
+    def to_explanation(self) -> str:
+        return f"Query: {self.query_text}\nPortrait text: {self.embedded_text}\nSimilarity: {self.similarity}"

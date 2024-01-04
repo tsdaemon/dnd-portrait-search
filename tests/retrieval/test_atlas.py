@@ -17,7 +17,7 @@ def portraits_repository_mock() -> Mock:
 
 
 @pytest.fixture
-def embeddings_repository_mock() -> Mock:
+def embedding_repository_mock() -> Mock:
     m = Mock(spec=EmbeddingRepository)
     m.vector_search.return_value = []
     return m
@@ -40,13 +40,13 @@ def embedder_mock() -> Mock:
 @pytest.fixture
 def atlas_retriever(
     portraits_repository_mock: Mock,
-    embeddings_repository_mock: Mock,
+    embedding_repository_mock: Mock,
     splitter_mock: Mock,
     embedder_mock: Mock,
 ) -> AtlasRetriever:
     return AtlasRetriever(
         portrait_repository=portraits_repository_mock,
-        embeddings_repository=embeddings_repository_mock,
+        embedding_repository=embedding_repository_mock,
         splitter=splitter_mock,
         embedder=embedder_mock,
     )
@@ -60,7 +60,7 @@ async def test_get_portraits__several_results(
     atlas_retriever: AtlasRetriever,
     splitter_mock: Mock,
     embedder_mock: Mock,
-    embeddings_repository_mock: Mock,
+    embedding_repository_mock: Mock,
     portraits_repository_mock: Mock,
 ) -> None:
     # GIVEN a query
@@ -72,47 +72,37 @@ async def test_get_portraits__several_results(
     # GIVEN total number of unique portraits in the database is 10
     unique_portrait_ids = [PyObjectId() for _ in range(10)]
     # GIVEN embeddings repository returns 5 results for the first embedding and 3 for the second
-    embeddings_repository_mock.vector_search.side_effect = [
+    embedding_repository_mock.vector_search.side_effect = [
         [
             EmbeddingSimilarity(
                 embedding=[],
                 embedded_text="some original text 1",
                 similarity=0.9,
                 portrait_id=unique_portrait_ids[0],
-                query=None,
-                query_text=None,
             ),
             EmbeddingSimilarity(
                 embedding=[],
                 embedded_text="some original text 2",
                 similarity=0.8,
                 portrait_id=unique_portrait_ids[1],
-                query=None,
-                query_text=None,
             ),
             EmbeddingSimilarity(
                 embedding=[],
                 embedded_text="some original text 3",
                 similarity=0.9,
                 portrait_id=unique_portrait_ids[2],
-                query=None,
-                query_text=None,
             ),
             EmbeddingSimilarity(
                 embedding=[],
                 embedded_text="some original text 4",
                 similarity=0.6,
                 portrait_id=unique_portrait_ids[3],
-                query=None,
-                query_text=None,
             ),
             EmbeddingSimilarity(
                 embedding=[],
                 embedded_text="some original text 5",
                 similarity=0.5,
                 portrait_id=unique_portrait_ids[4],
-                query=None,
-                query_text=None,
             ),
         ],
         [
@@ -121,24 +111,18 @@ async def test_get_portraits__several_results(
                 embedded_text="some other original text ",
                 similarity=0.5,
                 portrait_id=unique_portrait_ids[8],
-                query=None,
-                query_text=None,
             ),
             EmbeddingSimilarity(
                 embedding=[],
                 embedded_text="some other original text 2",
                 similarity=0.4,
                 portrait_id=unique_portrait_ids[2],
-                query=None,
-                query_text=None,
             ),
             EmbeddingSimilarity(
                 embedding=[],
                 embedded_text="some other original text 3",
                 similarity=0.3,
                 portrait_id=unique_portrait_ids[1],
-                query=None,
-                query_text=None,
             ),
         ],
     ]
@@ -153,7 +137,7 @@ async def test_get_portraits__several_results(
     # THEN the embedder is called with the 2 parts of the query
     embedder_mock.embed.assert_called_once_with(["A rogue elf female", "female with a knife"])
     # THEN the embeddings repository vector search is called twice with the 2 queries
-    embeddings_repository_mock.vector_search.assert_has_calls(
+    embedding_repository_mock.vector_search.assert_has_calls(
         [
             call(
                 [1, 2, 3],
