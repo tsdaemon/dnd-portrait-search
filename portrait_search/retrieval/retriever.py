@@ -1,7 +1,7 @@
 import abc
 
-from portrait_search.embeddings import EmbeddingSimilarity
-from portrait_search.portraits import PortraitRecord
+from portrait_search.embeddings.entities import EmbeddingSimilarity
+from portrait_search.portraits.entities import PortraitRecord
 
 
 class Retriever(abc.ABC):

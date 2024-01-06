@@ -1,7 +1,7 @@
 import abc
 from pathlib import Path
 
-from portrait_search.core import Config
+from portrait_search.core.config import Config
 from portrait_search.portraits.entities import Portrait
 
 

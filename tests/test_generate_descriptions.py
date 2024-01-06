@@ -1,12 +1,13 @@
 import shutil
 import tempfile
+from collections.abc import Generator
 from pathlib import Path
-from typing import Any, Generator
+from typing import Any
+from unittest.mock import Mock
 
 import pytest
-from mock import Mock  # type: ignore
 
-from portrait_search.data_sources import BaseDataSource
+from portrait_search.data_sources.base import BaseDataSource
 from portrait_search.dependencies import Container
 from portrait_search.generate_descriptions import generate_descriptions
 from portrait_search.open_ai.client import OpenAIClient

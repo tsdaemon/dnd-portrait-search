@@ -3,10 +3,12 @@ from unittest.mock import Mock, call
 import pytest
 
 from portrait_search.core.mongodb import PyObjectId
-from portrait_search.embeddings import Embedder, EmbeddingRepository, TextSplitter
+from portrait_search.embeddings.embedders import Embedder
 from portrait_search.embeddings.entities import EmbeddingSimilarity
-from portrait_search.portraits import PortraitRepository
-from portrait_search.retrieval.atlas import AtlasRetriever
+from portrait_search.embeddings.repository import EmbeddingRepository
+from portrait_search.embeddings.splitters import Splitter
+from portrait_search.portraits.repository import PortraitRepository
+from portrait_search.retrieval.similarity import SimilarityRetriever
 
 
 @pytest.fixture
@@ -25,7 +27,7 @@ def embedding_repository_mock() -> Mock:
 
 @pytest.fixture
 def splitter_mock() -> Mock:
-    m = Mock(spec=TextSplitter)
+    m = Mock(spec=Splitter)
     m.split_query.return_value = []
     return m
 
@@ -38,13 +40,13 @@ def embedder_mock() -> Mock:
 
 
 @pytest.fixture
-def atlas_retriever(
+def similarity_retriever(
     portraits_repository_mock: Mock,
     embedding_repository_mock: Mock,
     splitter_mock: Mock,
     embedder_mock: Mock,
-) -> AtlasRetriever:
-    return AtlasRetriever(
+) -> SimilarityRetriever:
+    return SimilarityRetriever(
         portrait_repository=portraits_repository_mock,
         embedding_repository=embedding_repository_mock,
         splitter=splitter_mock,
@@ -52,12 +54,12 @@ def atlas_retriever(
     )
 
 
-async def test_get_portraits__no_results(atlas_retriever: AtlasRetriever) -> None:
-    assert await atlas_retriever.get_portraits("test") == ([], [])
+async def test_get_portraits__no_results(similarity_retriever: SimilarityRetriever) -> None:
+    assert await similarity_retriever.get_portraits("test") == ([], [])
 
 
 async def test_get_portraits__several_results(
-    atlas_retriever: AtlasRetriever,
+    similarity_retriever: SimilarityRetriever,
     splitter_mock: Mock,
     embedder_mock: Mock,
     embedding_repository_mock: Mock,
@@ -130,7 +132,7 @@ async def test_get_portraits__several_results(
     portraits_repository_mock.get_one.side_effect = lambda pid: f"Portrait {pid}"
 
     # WHEN get_portraits is called with the query and limit 2
-    portraits, explanations = await atlas_retriever.get_portraits(query, limit=2)
+    portraits, explanations = await similarity_retriever.get_portraits(query, limit=2)
 
     # THEN the splitter is called with the query
     splitter_mock.split_query.assert_called_once_with(query)

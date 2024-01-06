@@ -1,8 +1,8 @@
 import pytest
 
 from portrait_search.dependencies import Container
-from portrait_search.embeddings import EmbeddingRepository
-from portrait_search.portraits import PortraitRecord, PortraitRepository
+from portrait_search.portraits.entities import PortraitRecord
+from portrait_search.portraits.repository import PortraitRepository
 
 pytestmark = pytest.mark.usefixtures("inject_mongodb_database_for_test")
 
@@ -10,11 +10,6 @@ pytestmark = pytest.mark.usefixtures("inject_mongodb_database_for_test")
 @pytest.fixture
 def portraits_repository(container: Container) -> PortraitRepository:
     return container.portrait_repository()
-
-
-@pytest.fixture
-def embeddings_repository(container: Container) -> EmbeddingRepository:
-    return container.embedding_repository()
 
 
 async def test_get_hashes(portraits_repository: PortraitRepository) -> None:

@@ -1,13 +1,14 @@
 import secrets
 import string
 import tempfile
+from collections.abc import AsyncGenerator, Generator
 from pathlib import Path
-from typing import Any, AsyncGenerator, Generator
+from typing import Any
+from unittest.mock import Mock
 
 import pytest
 from aioresponses import aioresponses
 from dependency_injector import providers
-from mock import Mock
 
 from portrait_search.core.mongodb import get_database
 from portrait_search.dependencies import Container

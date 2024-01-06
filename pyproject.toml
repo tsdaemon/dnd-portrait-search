@@ -60,7 +60,7 @@ ignore_missing_imports = true
 [tool.ruff]
 line-length = 120
 
-select = ["E", "F", "I"]
+select = ["E", "F", "I", "N", "UP", "INP"]
 ignore = []
 
 # Exclude a variety of commonly ignored directories.

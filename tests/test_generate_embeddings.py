@@ -1,13 +1,14 @@
+from unittest.mock import Mock
+
 import pytest
-from mock import Mock
 
 from portrait_search.core.mongodb import PyObjectId
 from portrait_search.dependencies import Container
-from portrait_search.embeddings import EmbeddingRepository
 from portrait_search.embeddings.entities import EmbeddingRecord
+from portrait_search.embeddings.repository import EmbeddingRepository
 from portrait_search.generate_embeddings import generate_embeddings
-from portrait_search.portraits import PortraitRepository
 from portrait_search.portraits.entities import PortraitRecord
+from portrait_search.portraits.repository import PortraitRepository
 
 
 @pytest.fixture

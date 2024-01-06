@@ -1,4 +1,4 @@
-from portrait_search.core import Config, EmbedderType, SplitterType
+from portrait_search.core.config import Config, EmbedderType, SplitterType
 from portrait_search.dependencies import Container
 
 from .judge import Judge

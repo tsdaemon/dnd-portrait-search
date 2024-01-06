@@ -1,5 +1,5 @@
-from portrait_search.portraits import PortraitRecord
-from portrait_search.retrieval import Retriever
+from portrait_search.portraits.entities import PortraitRecord
+from portrait_search.retrieval.retriever import Retriever
 
 from .dataset import load_dataset
 from .metrics import METRICS

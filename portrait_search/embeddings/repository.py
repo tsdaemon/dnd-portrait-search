@@ -1,20 +1,45 @@
+import abc
+from collections.abc import Sequence
+
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from portrait_search.core.config import EmbedderType, SplitterType
 from portrait_search.core.mongodb import MongoDBRepository
 
-from .entities import EmbeddingRecord, EmbeddingSimilarity
+from .entities import EmbeddingRecord, EmbeddingSimilarity, MongoEmbeddingRecord
 
 
-class EmbeddingRepository(MongoDBRepository[EmbeddingRecord]):
+class EmbeddingRepository(abc.ABC):
+    @abc.abstractmethod
+    async def get_by_type(self, splitter_type: SplitterType, embedder_type: EmbedderType) -> Sequence[EmbeddingRecord]:
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    async def vector_search(
+        self,
+        query_vector: list[float],
+        splitter_type: SplitterType,
+        embedder_type: EmbedderType,
+        experiment: str | None = None,
+        method: str = "euclidean",
+        limit: int = 10,
+    ) -> list[EmbeddingSimilarity]:
+        raise NotImplementedError()
+
+    @abc.abstractmethod
+    async def insert_many(self, records: Sequence[EmbeddingRecord]) -> Sequence[EmbeddingRecord]:
+        raise NotImplementedError()
+
+
+class MongoEmbeddingRepository(MongoDBRepository[MongoEmbeddingRecord]):
     def __init__(self, db: AsyncIOMotorDatabase):
-        super().__init__(db, EmbeddingRecord)
+        super().__init__(db, MongoEmbeddingRecord)
 
     @property
     def collection(self) -> str:
         return "embeddings"
 
-    async def get_by_type(self, splitter_type: SplitterType, embedder_type: EmbedderType) -> list[EmbeddingRecord]:
+    async def get_by_type(self, splitter_type: SplitterType, embedder_type: EmbedderType) -> Sequence[EmbeddingRecord]:
         return await self.get_many(
             splitter_type=splitter_type,
             embedder_type=embedder_type,

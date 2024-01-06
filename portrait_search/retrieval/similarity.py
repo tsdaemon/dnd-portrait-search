@@ -2,24 +2,23 @@ from collections import defaultdict
 
 import numpy as np
 
-from portrait_search.embeddings import (
-    Embedder,
-    EmbeddingRepository,
-    EmbeddingSimilarity,
-    TextSplitter,
-    query2embeddings,
-)
-from portrait_search.portraits import PortraitRecord, PortraitRepository
+from portrait_search.embeddings.embedders import Embedder
+from portrait_search.embeddings.entities import EmbeddingSimilarity
+from portrait_search.embeddings.repository import EmbeddingRepository
+from portrait_search.embeddings.splitters import Splitter
+from portrait_search.embeddings.t2v import query2embeddings
+from portrait_search.portraits.entities import PortraitRecord
+from portrait_search.portraits.repository import PortraitRepository
 
 from .retriever import Retriever
 
 
-class AtlasRetriever(Retriever):
+class SimilarityRetriever(Retriever):
     def __init__(
         self,
         embedding_repository: EmbeddingRepository,
         portrait_repository: PortraitRepository,
-        splitter: TextSplitter,
+        splitter: Splitter,
         embedder: Embedder,
     ) -> None:
         self.embedding_repository = embedding_repository

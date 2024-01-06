@@ -6,7 +6,7 @@ import aiohttp
 import py7zr
 import tqdm
 
-from portrait_search.core import Config
+from portrait_search.core.config import Config
 from portrait_search.portraits.entities import Portrait
 
 from .base import BaseDataSource, DataSourceError

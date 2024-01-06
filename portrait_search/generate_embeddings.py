@@ -3,16 +3,18 @@ import asyncio
 from dependency_injector.wiring import Provide, inject
 
 from portrait_search.dependencies import Container
-from portrait_search.embeddings import Embedder, EmbeddingRepository, TextSplitter
+from portrait_search.embeddings.embedders import Embedder
+from portrait_search.embeddings.repository import EmbeddingRepository
+from portrait_search.embeddings.splitters import Splitter
 from portrait_search.embeddings.t2v import portraits2embeddings
-from portrait_search.portraits import PortraitRepository
+from portrait_search.portraits.repository import PortraitRepository
 
 
 @inject
 async def generate_embeddings(
     portrait_repository: PortraitRepository = Provide[Container.portrait_repository],
     embedding_repository: EmbeddingRepository = Provide[Container.embedding_repository],
-    splitter: TextSplitter = Provide[Container.splitter],
+    splitter: Splitter = Provide[Container.splitter],
     embedder: Embedder = Provide[Container.embedder],
 ) -> None:
     # find existing embeddings

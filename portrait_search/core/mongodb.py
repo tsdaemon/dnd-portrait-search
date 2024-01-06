@@ -1,5 +1,6 @@
 import abc
-from typing import Any, Callable, Generator, Generic, TypeVar
+from collections.abc import Callable, Generator
+from typing import Any, Generic, TypeVar
 
 from bson import ObjectId
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase

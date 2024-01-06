@@ -1,4 +1,5 @@
 import abc
+from typing import Any
 
 import numpy as np
 from InstructorEmbedding import INSTRUCTOR
@@ -6,10 +7,11 @@ from numpy.typing import NDArray
 
 from portrait_search.core.config import EmbedderType
 
-EXPECTED_DIMENSIONALITY = 2048
-
 
 class Embedder:
+    def __init__(self, expected_dimensionality: int | None = None) -> None:
+        self.expected_dimensionality = expected_dimensionality
+
     @classmethod
     @abc.abstractmethod
     def embedder_type(cls) -> EmbedderType:
@@ -24,13 +26,26 @@ class Embedder:
         raise NotImplementedError()
 
     def _match_dimensionality(self, vectors: NDArray[np.float_]) -> NDArray[np.float_]:
-        zeros = np.zeros((vectors.shape[0], EXPECTED_DIMENSIONALITY - vectors.shape[1]))
+        if self.expected_dimensionality is None:
+            return vectors
+
+        if self.expected_dimensionality == vectors.shape[1]:
+            return vectors
+
+        if self.expected_dimensionality < vectors.shape[1]:
+            raise ValueError(
+                f"Expected dimensionality {self.expected_dimensionality} is smaller than the"
+                f"actual dimensionality {vectors.shape[1]}. Can not reduce dimensionality."
+            )
+
+        zeros = np.zeros((vectors.shape[0], self.expected_dimensionality - vectors.shape[1]))
         result = np.concatenate((vectors, zeros), axis=1)
         return result
 
 
 class InstructorEmbeddings(Embedder, abc.ABC):
-    def __init__(self, instructions: str, model_name: str):
+    def __init__(self, instructions: str, model_name: str, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
         self.instructions = instructions
         self.model = INSTRUCTOR(model_name)
 
@@ -40,10 +55,9 @@ class InstructorEmbeddings(Embedder, abc.ABC):
 
 
 class InstructorEmbeddingsLargePathfinderCharacterInstructions(InstructorEmbeddings):
-    def __init__(self) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(
-            "Represents a description of a Pathfinder character:",
-            model_name="hkunlp/instructor-large",
+            "Represents a description of a Pathfinder character:", "hkunlp/instructor-large", *args, **kwargs
         )
 
     @classmethod

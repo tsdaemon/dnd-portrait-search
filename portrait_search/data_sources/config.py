@@ -4,7 +4,7 @@ from typing import Annotated, Literal
 import yaml
 from pydantic import AnyHttpUrl, BaseModel, Field, TypeAdapter
 
-from portrait_search.core import Config
+from portrait_search.core.config import Config
 
 from .base import BaseDataSource
 from .nexus import NexusDataSource
@@ -33,7 +33,7 @@ DataSourceConfigType = Annotated[NexusDataSourceConfig, Field(discriminator="kin
 
 
 def data_sources_from_yaml(config: Config) -> list[BaseDataSource]:
-    with open(config.data_sources_config_path, "r") as file:
+    with open(config.data_sources_config_path) as file:
         data_sources_data = yaml.safe_load(file)
 
     data_sources: list[BaseDataSource] = []

@@ -2,12 +2,12 @@ from portrait_search.portraits.entities import PortraitRecord
 
 from .embedders import Embedder
 from .entities import EmbeddingRecord
-from .splitters import TextSplitter
+from .splitters import Splitter
 
 
 def portraits2embeddings(
     portraits: list[PortraitRecord],
-    splitter: TextSplitter,
+    splitter: Splitter,
     embedder: Embedder,
 ) -> list[EmbeddingRecord]:
     """Returns a list of EmbeddingRecords for the given portraits and their descriptions."""
@@ -33,7 +33,7 @@ def portraits2embeddings(
     return embeddings_records
 
 
-def query2embeddings(query: str, splitter: TextSplitter, embedder: Embedder) -> tuple[list[list[float]], list[str]]:
+def query2embeddings(query: str, splitter: Splitter, embedder: Embedder) -> tuple[list[list[float]], list[str]]:
     """Returns a tuple of embeddings and the query chunks."""
     query_chunks = splitter.split_query(query)
     embeddings = embedder.embed(query_chunks)

@@ -4,15 +4,10 @@ import pytest
 from bson import ObjectId
 
 from portrait_search.core.config import EmbedderType, SplitterType
-from portrait_search.embeddings import (
-    EMBEDDERS,
-    SPLITTERS,
-    Embedder,
-    TextSplitter,
-    portraits2embeddings,
-    query2embeddings,
-)
-from portrait_search.portraits import PortraitRecord
+from portrait_search.embeddings.embedders import EMBEDDERS, Embedder
+from portrait_search.embeddings.splitters import SPLITTERS, Splitter
+from portrait_search.embeddings.t2v import portraits2embeddings, query2embeddings
+from portrait_search.portraits.entities import PortraitRecord
 
 
 @pytest.mark.parametrize("embedder_type, splitter_type", product(EMBEDDERS, SPLITTERS))
@@ -68,7 +63,7 @@ def test_portraits2embeddings(
 
 
 @pytest.mark.parametrize("embedder_type, splitter_type", product(EMBEDDERS.values(), SPLITTERS.values()))
-def test_query2embeddings(embedder_type: type[Embedder], splitter_type: type[TextSplitter]) -> None:
+def test_query2embeddings(embedder_type: type[Embedder], splitter_type: type[Splitter]) -> None:
     # GIVEN a query string
     query = "A rogue elf female with a knife"
 

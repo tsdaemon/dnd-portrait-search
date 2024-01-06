@@ -1,12 +1,16 @@
 from dependency_injector import containers, providers
 
-from portrait_search.core import Config, init_logging
+from portrait_search.core.config import Config
+from portrait_search.core.logging import init_logging
 from portrait_search.core.mongodb import get_connection, get_database
-from portrait_search.data_sources import data_sources_from_yaml
-from portrait_search.embeddings import EMBEDDERS, SPLITTERS, EmbeddingRepository
-from portrait_search.open_ai import OpenAIClient
-from portrait_search.portraits import PortraitRepository
-from portrait_search.retrieval import AtlasRetriever
+from portrait_search.data_sources.config import data_sources_from_yaml
+from portrait_search.embeddings.embedders import EMBEDDERS
+from portrait_search.embeddings.repository import EmbeddingRepository, MongoEmbeddingRepository
+from portrait_search.embeddings.splitters import SPLITTERS
+from portrait_search.open_ai.client import OpenAIClient
+from portrait_search.portraits.repository import PortraitRepository
+from portrait_search.retrieval.retriever import Retriever
+from portrait_search.retrieval.similarity import SimilarityRetriever
 
 
 class Container(containers.DeclarativeContainer):
@@ -35,10 +39,15 @@ class Container(containers.DeclarativeContainer):
         db=db,
     )
 
-    embedding_repository = providers.Factory(
-        EmbeddingRepository,
+    # Embedding repository
+    # Known mypy issue: can't use abstract classes as dependencies
+    # https://github.com/ets-labs/python-dependency-injector/issues/497
+    embedding_repository = providers.Dependency(EmbeddingRepository)  # type: ignore[type-abstract]
+    mongo_embedding_repository = providers.Factory(
+        MongoEmbeddingRepository,
         db=db,
     )
+    embedding_repository.override(mongo_embedding_repository)
 
     openai_client = providers.Factory(
         OpenAIClient,
@@ -54,10 +63,14 @@ class Container(containers.DeclarativeContainer):
         config=config,
     )
 
-    retriever = providers.Factory(
-        AtlasRetriever,
+    # Retriever
+    retriever = providers.Dependency(Retriever)  # type: ignore[type-abstract]
+    vector_similarity_retriever = providers.Factory(
+        SimilarityRetriever,
         portrait_repository=portrait_repository,
         embedding_repository=embedding_repository,
         splitter=splitter,
         embedder=embedder,
     )
+
+    retriever.override(vector_similarity_retriever)
