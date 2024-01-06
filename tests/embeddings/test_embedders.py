@@ -1,6 +1,7 @@
 import pytest
 
 from portrait_search.embeddings import EMBEDDERS, Embedder
+from portrait_search.embeddings.embedders import EXPECTED_DIMENSIONALITY
 
 
 @pytest.mark.parametrize("embedder", EMBEDDERS.values(), ids=EMBEDDERS.keys())
@@ -12,4 +13,4 @@ def test_embedders(embedder: type[Embedder]) -> None:
     ]
     embeddings = embedder().embed(texts)
     assert len(embeddings) == len(texts)
-    assert all(len(embedding) == 768 for embedding in embeddings)
+    assert all(len(embedding) == EXPECTED_DIMENSIONALITY for embedding in embeddings)

@@ -143,12 +143,16 @@ async def test_get_portraits__several_results(
                 [1, 2, 3],
                 splitter_mock.splitter_type(),
                 embedder_mock.embedder_type(),
+                method="euclidean",
+                experiment=None,
                 limit=6,
             ),
             call(
                 [4, 5, 6],
                 splitter_mock.splitter_type(),
                 embedder_mock.embedder_type(),
+                method="euclidean",
+                experiment=None,
                 limit=6,
             ),
         ]

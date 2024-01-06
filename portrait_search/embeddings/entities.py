@@ -13,6 +13,8 @@ class EmbeddingRecord(MongoDBRecord):
     splitter_type: SplitterType
     embedder_type: EmbedderType
 
+    experiment: str | None = None
+
 
 class EmbeddingSimilarity(BaseModel):
     portrait_id: PyObjectId

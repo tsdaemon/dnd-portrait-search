@@ -100,7 +100,7 @@ resource "mongodbatlas_search_index" "portrait-embeddings-search-cosine" {
     {
         "type": "vector",
         "path": "embedding",
-        "numDimensions": 768,
+        "numDimensions": 2048,
         "similarity": "cosine"
     },
     {
@@ -127,7 +127,7 @@ resource "mongodbatlas_search_index" "portrait-embeddings-search-euclidean" {
     {
         "type": "vector",
         "path": "embedding",
-        "numDimensions": 768,
+        "numDimensions": 2048,
         "similarity": "euclidean"
     },
     {
@@ -137,6 +137,10 @@ resource "mongodbatlas_search_index" "portrait-embeddings-search-euclidean" {
     {
         "type": "filter",
         "path": "embedder_type"
+    },
+    {
+        "type": "filter",
+        "path": "experiment"
     }
 ]
 EOF

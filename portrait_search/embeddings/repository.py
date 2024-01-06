@@ -1,4 +1,3 @@
-import pymongo
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from portrait_search.core.config import EmbedderType, SplitterType
@@ -26,10 +25,17 @@ class EmbeddingRepository(MongoDBRepository[EmbeddingRecord]):
         query_vector: list[float],
         splitter_type: SplitterType,
         embedder_type: EmbedderType,
+        experiment: str | None = None,
         method: str = "euclidean",
         limit: int = 10,
     ) -> list[EmbeddingSimilarity]:
         """Returns a list of Embeddings and their similarities that match the query vector."""
+        filter = [
+            {"splitter_type": splitter_type},
+            {"embedder_type": embedder_type},
+        ]
+        if experiment:
+            filter.append({"experiment": experiment})
         entities = self.db[self.collection].aggregate(
             [
                 {
@@ -40,10 +46,7 @@ class EmbeddingRepository(MongoDBRepository[EmbeddingRecord]):
                         "numCandidates": limit * 20,
                         "limit": limit,
                         "filter": {
-                            "$and": [
-                                {"splitter_type": splitter_type},
-                                {"embedder_type": embedder_type},
-                            ]
+                            "$and": filter  # for some reason, $and is required here
                         },
                     }
                 },
@@ -58,20 +61,3 @@ class EmbeddingRepository(MongoDBRepository[EmbeddingRecord]):
             ]
         )
         return [EmbeddingSimilarity.model_validate(entity) async for entity in entities]
-
-    async def prepare_collection_resources(self) -> None:
-        await self.db[self.collection].create_index("portrait_id")
-        await self.db[self.collection].create_index(
-            [
-                ("splitter_type", pymongo.DESCENDING),
-                ("embedder_type", pymongo.DESCENDING),
-            ]
-        )
-        await self.db[self.collection].create_index(
-            [
-                ("portrait_id", pymongo.DESCENDING),
-                ("splitter_type", pymongo.DESCENDING),
-                ("embedder_type", pymongo.DESCENDING),
-            ],
-            unique=True,
-        )

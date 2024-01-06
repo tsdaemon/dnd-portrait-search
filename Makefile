@@ -3,3 +3,7 @@ export
 
 test:
 	poetry run pytest --cov=portrait_search tests/
+
+
+tf-atlas:
+	cd infra/atlas && terraform plan && terraform apply -auto-approve

@@ -28,7 +28,7 @@ class AtlasRetriever(Retriever):
         self.embedder = embedder
 
     async def get_portraits(
-        self, query: str, limit: int = 10
+        self, query: str, experiment: str | None = None, limit: int = 10
     ) -> tuple[list[PortraitRecord], list[list[EmbeddingSimilarity]]]:
         """Returns a list of PortraitRecords that match the query string."""
 
@@ -43,6 +43,7 @@ class AtlasRetriever(Retriever):
                 query_embedding,
                 self.splitter.splitter_type(),
                 self.embedder.embedder_type(),
+                experiment=experiment,
                 method="euclidean",
                 # Get more candidates to widen search
                 limit=limit * 3,
