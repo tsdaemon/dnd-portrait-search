@@ -2,6 +2,7 @@ from unittest.mock import Mock, call
 
 import pytest
 
+from portrait_search.core.enums import DistanceType
 from portrait_search.core.mongodb import PyObjectId
 from portrait_search.embeddings.embedders import Embedder
 from portrait_search.embeddings.entities import EmbeddingSimilarity
@@ -47,6 +48,7 @@ def similarity_retriever(
     embedder_mock: Mock,
 ) -> SimilarityRetriever:
     return SimilarityRetriever(
+        distance_type=DistanceType.EUCLIDEAN,
         portrait_repository=portraits_repository_mock,
         embedding_repository=embedding_repository_mock,
         splitter=splitter_mock,
@@ -145,7 +147,7 @@ async def test_get_portraits__several_results(
                 [1, 2, 3],
                 splitter_mock.splitter_type(),
                 embedder_mock.embedder_type(),
-                method="euclidean",
+                DistanceType.EUCLIDEAN,
                 experiment=None,
                 limit=6,
             ),
@@ -153,7 +155,7 @@ async def test_get_portraits__several_results(
                 [4, 5, 6],
                 splitter_mock.splitter_type(),
                 embedder_mock.embedder_type(),
-                method="euclidean",
+                DistanceType.EUCLIDEAN,
                 experiment=None,
                 limit=6,
             ),

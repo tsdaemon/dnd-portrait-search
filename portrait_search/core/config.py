@@ -3,7 +3,7 @@ from pathlib import Path
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from .enums import EmbedderType, SplitterType
+from .enums import DistanceType, EmbedderType, SplitterType
 
 
 class Config(BaseSettings):
@@ -23,5 +23,6 @@ class Config(BaseSettings):
     splitter_type: SplitterType = Field(
         default=SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_60, alias="SPLITTER_TYPE"
     )
+    distance_type: DistanceType = Field(default=DistanceType.COSINE, alias="DISTANCE_TYPE")
 
     model_config = SettingsConfigDict(str_strip_whitespace=True)

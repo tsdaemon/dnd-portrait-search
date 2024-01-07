@@ -8,7 +8,6 @@ from portrait_search.embeddings.embedders import EMBEDDERS
 from portrait_search.embeddings.repository import (
     ChromaEmbeddingRepository,
     EmbeddingRepository,
-    MongoEmbeddingRepository,
 )
 from portrait_search.embeddings.splitters import SPLITTERS
 from portrait_search.open_ai.client import OpenAIClient
@@ -36,20 +35,18 @@ class Container(containers.DeclarativeContainer):
         data_sources_from_yaml,
         config=config,
     )
-    chroma_database_folder = providers.Resource(
-        lambda config: config.local_data_folder / "chroma",
-        config=config,
-    )
-    experiment_results_folder = providers.Resource(
-        lambda config: config.local_data_folder / "experiment_results",
-        config=config,
-    )
+
+    # Data science config
     splitter = providers.Resource(
         lambda config: SPLITTERS[config.splitter_type](),
         config=config,
     )
     embedder = providers.Resource(
         lambda config: EMBEDDERS[config.embedder_type](),
+        config=config,
+    )
+    distance_type = providers.Resource(
+        lambda config: config.distance_type,
         config=config,
     )
 
@@ -63,13 +60,9 @@ class Container(containers.DeclarativeContainer):
     # Known mypy issue: can't use abstract classes as dependencies
     # https://github.com/ets-labs/python-dependency-injector/issues/497
     embedding_repository = providers.Dependency(EmbeddingRepository)  # type: ignore[type-abstract]
-    mongo_embedding_repository = providers.Factory(
-        MongoEmbeddingRepository,
-        db=db,
-    )
     chroma_embedding_repository = providers.Factory(
         ChromaEmbeddingRepository,
-        databases_path=chroma_database_folder,
+        databases_path=config.provided.local_data_folder,
     )
     embedding_repository.override(chroma_embedding_repository)
 
@@ -83,6 +76,7 @@ class Container(containers.DeclarativeContainer):
     retriever = providers.Dependency(Retriever)  # type: ignore[type-abstract]
     vector_similarity_retriever = providers.Factory(
         SimilarityRetriever,
+        distance_type=distance_type,
         portrait_repository=portrait_repository,
         embedding_repository=embedding_repository,
         splitter=splitter,

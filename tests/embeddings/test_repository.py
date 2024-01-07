@@ -6,7 +6,7 @@ from typing import Any
 
 import pytest
 
-from portrait_search.core.enums import EmbedderType, SimilarityType, SplitterType
+from portrait_search.core.enums import DistanceType, EmbedderType, SplitterType
 from portrait_search.core.mongodb import PyObjectId
 from portrait_search.dependencies import Container
 from portrait_search.embeddings.entities import EmbeddingRecord
@@ -51,13 +51,13 @@ class TestChromaEmbeddingRepository:
         yield records_new
 
     @pytest.mark.parametrize(
-        "embedder_type, splitter_type, similarity_type", product(EmbedderType, SplitterType, SimilarityType)
+        "embedder_type, splitter_type, similarity_type", product(EmbedderType, SplitterType, DistanceType)
     )
     def test_get_collection(
         self,
         embedder_type: EmbedderType,
         splitter_type: SplitterType,
-        similarity_type: SimilarityType,
+        similarity_type: DistanceType,
         embedding_repository: ChromaEmbeddingRepository,
     ) -> None:
         collection = embedding_repository.get_collection(splitter_type, embedder_type, similarity_type)
@@ -78,10 +78,10 @@ class TestChromaEmbeddingRepository:
         assert embeddings[0] == existing_embedding_records[0]
         assert embeddings[1] == existing_embedding_records[1]
 
-    @pytest.mark.parametrize("similarity_type", SimilarityType)
+    @pytest.mark.parametrize("distance_type", DistanceType)
     async def test_vector_search(
         self,
-        similarity_type: SimilarityType,
+        distance_type: DistanceType,
         embedding_repository: ChromaEmbeddingRepository,
         existing_embedding_records: list[EmbeddingRecord],
     ) -> None:
@@ -92,7 +92,7 @@ class TestChromaEmbeddingRepository:
             query_vector=[1, 1, 1],
             splitter_type=SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_60,
             embedder_type=EmbedderType.INSTRUCTOR_LARGE_PATHFINDER_CHARACTER_INSTRUCTIONS,
-            method=similarity_type,
+            distance_type=distance_type,
         )
 
         # THEN found 2 embedding similarities

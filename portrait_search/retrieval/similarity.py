@@ -2,6 +2,7 @@ from collections import defaultdict
 
 import numpy as np
 
+from portrait_search.core.enums import DistanceType
 from portrait_search.embeddings.embedders import Embedder
 from portrait_search.embeddings.entities import EmbeddingSimilarity
 from portrait_search.embeddings.repository import EmbeddingRepository
@@ -16,11 +17,13 @@ from .retriever import Retriever
 class SimilarityRetriever(Retriever):
     def __init__(
         self,
+        distance_type: DistanceType,
         embedding_repository: EmbeddingRepository,
         portrait_repository: PortraitRepository,
         splitter: Splitter,
         embedder: Embedder,
     ) -> None:
+        self.distance_type = distance_type
         self.embedding_repository = embedding_repository
         self.portrait_repository = portrait_repository
         self.splitter = splitter
@@ -42,8 +45,8 @@ class SimilarityRetriever(Retriever):
                 query_embedding,
                 self.splitter.splitter_type(),
                 self.embedder.embedder_type(),
+                self.distance_type,
                 experiment=experiment,
-                method="euclidean",
                 # Get more candidates to widen search
                 limit=limit * 3,
             )

@@ -4,7 +4,7 @@ from pathlib import Path
 import chromadb
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
-from portrait_search.core.enums import EmbedderType, SimilarityType, SplitterType
+from portrait_search.core.enums import DistanceType, EmbedderType, SplitterType
 from portrait_search.core.mongodb import MongoDBRepository, PyObjectId
 
 from .entities import EmbeddingRecord, EmbeddingSimilarity
@@ -21,7 +21,7 @@ class EmbeddingRepository(abc.ABC):
         query_vector: list[float],
         splitter_type: SplitterType,
         embedder_type: EmbedderType,
-        method: SimilarityType,
+        distance_type: DistanceType,
         experiment: str | None = None,
         limit: int = 10,
     ) -> list[EmbeddingSimilarity]:
@@ -36,22 +36,22 @@ class ChromaEmbeddingRepository(EmbeddingRepository):
     def __init__(self, databases_path: Path):
         self.client = chromadb.PersistentClient(path=str(databases_path / "chroma.db"))
 
-    def _similarity_type_to_space(self, similarity_type: SimilarityType) -> str:
-        if similarity_type == SimilarityType.EUCLIDEAN:
+    def _distance_type_to_space(self, distance_type: DistanceType) -> str:
+        if distance_type == DistanceType.EUCLIDEAN:
             return "l2"
-        if similarity_type == SimilarityType.COSINE:
+        if distance_type == DistanceType.COSINE:
             return "cosine"
-        if similarity_type == SimilarityType.DOT_PRODUCT:
+        if distance_type == DistanceType.DOT_PRODUCT:
             return "ip"
 
-        raise ValueError(f"similarity_type {similarity_type} is not supported in Chroma")
+        raise ValueError(f"distance_type {distance_type} is not supported in Chroma")
 
     def get_collection(
-        self, splitter_type: SplitterType, embedder_type: EmbedderType, similarity_type: SimilarityType
+        self, splitter_type: SplitterType, embedder_type: EmbedderType, distance_type: DistanceType
     ) -> chromadb.Collection:
-        name = f"e-{splitter_type.value}-{embedder_type.value}-{similarity_type.value}"
+        name = f"e-{splitter_type.value}-{embedder_type.value}-{distance_type.value}"
         return self.client.get_or_create_collection(
-            name, metadata={"hnsw:space": self._similarity_type_to_space(similarity_type)}
+            name, metadata={"hnsw:space": self._distance_type_to_space(distance_type)}
         )
 
     def _chroma_get_to_embedding_record(
@@ -121,7 +121,7 @@ class ChromaEmbeddingRepository(EmbeddingRepository):
 
     async def get_by_type(self, splitter_type: SplitterType, embedder_type: EmbedderType) -> list[EmbeddingRecord]:
         # Similarity does not matter in this context, data should be replicated across all spaces
-        collection = self.get_collection(splitter_type, embedder_type, SimilarityType.EUCLIDEAN)
+        collection = self.get_collection(splitter_type, embedder_type, DistanceType.EUCLIDEAN)
         records = collection.get(include=["documents", "embeddings", "metadatas"])
         return self._chroma_get_to_embedding_record(records, splitter_type, embedder_type)
 
@@ -130,14 +130,14 @@ class ChromaEmbeddingRepository(EmbeddingRepository):
         query_vector: list[float],
         splitter_type: SplitterType,
         embedder_type: EmbedderType,
-        method: SimilarityType,
+        distance_type: DistanceType,
         experiment: str | None = None,
         limit: int = 10,
     ) -> list[EmbeddingSimilarity]:
         # experiment is ignored
         _ = experiment
 
-        collection = self.get_collection(splitter_type, embedder_type, method)
+        collection = self.get_collection(splitter_type, embedder_type, distance_type)
         records = collection.query(
             query_embeddings=query_vector,
             n_results=limit,
@@ -152,7 +152,7 @@ class ChromaEmbeddingRepository(EmbeddingRepository):
     async def insert_many(self, records: list[EmbeddingRecord]) -> list[EmbeddingRecord]:
         for record in records:
             record.id = PyObjectId()
-            for similarity_type in SimilarityType:
+            for similarity_type in DistanceType:
                 collection = self.get_collection(record.splitter_type, record.embedder_type, similarity_type)
                 collection.add(
                     ids=[str(record.id)],
@@ -193,8 +193,8 @@ class MongoEmbeddingRepository(MongoDBRepository[EmbeddingRecord]):
         query_vector: list[float],
         splitter_type: SplitterType,
         embedder_type: EmbedderType,
+        distance_type: DistanceType,
         experiment: str | None = None,
-        method: str = "euclidean",
         limit: int = 10,
     ) -> list[EmbeddingSimilarity]:
         """Returns a list of Embeddings and their similarities that match the query vector."""
@@ -208,7 +208,7 @@ class MongoEmbeddingRepository(MongoDBRepository[EmbeddingRecord]):
             [
                 {
                     "$vectorSearch": {
-                        "index": f"portrait-embeddings-search-{method}",
+                        "index": f"portrait-embeddings-search-{distance_type}",
                         "path": "embedding",
                         "queryVector": query_vector,
                         "numCandidates": limit * 20,
