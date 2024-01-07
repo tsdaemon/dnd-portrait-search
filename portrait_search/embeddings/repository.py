@@ -1,4 +1,5 @@
 import abc
+from collections import defaultdict
 from pathlib import Path
 
 import chromadb
@@ -6,6 +7,7 @@ from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from portrait_search.core.enums import DistanceType, EmbedderType, SplitterType
 from portrait_search.core.mongodb import MongoDBRepository, PyObjectId
+from portrait_search.embeddings.distance import DISTANCE_TO_SIMILARITY
 
 from .entities import EmbeddingRecord, EmbeddingSimilarity
 
@@ -33,23 +35,38 @@ class EmbeddingRepository(abc.ABC):
 
 
 class ChromaEmbeddingRepository(EmbeddingRepository):
+    # map internally to avoid hitting the 64 character limit
+    EMBEDDER_TYPE_MAPPTING = {
+        EmbedderType.INSTRUCTOR_LARGE_PATHFINDER_CHARACTER_INSTRUCTIONS: "instrLargePFChar",
+        EmbedderType.ALL_MINI_LM_L6_V2: "allMLML6v2",
+        EmbedderType.MS_MARCO_DISTILBERT_BASE_V4: "msmarcoDBBv4",
+        EmbedderType.MS_MARCO_ROBERTA_BASE_ANCE_FIRSTP: "msmarcoRBAFp",
+    }
+    SPLITTER_TYPE_MAPPING = {
+        SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_60: "langchainRec120o60",
+        SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_160_OVERLAP_40_SAME_QUERY: "langchainRec160o40",
+    }
+    DISTANCE_TYPE_MAPPING = {
+        DistanceType.EUCLIDEAN: "l2",
+        DistanceType.COSINE: "cosine",
+        DistanceType.DOT_PRODUCT: "ip",
+    }
+
     def __init__(self, databases_path: Path):
         self.client = chromadb.PersistentClient(path=str(databases_path / "chroma.db"))
 
     def _distance_type_to_space(self, distance_type: DistanceType) -> str:
-        if distance_type == DistanceType.EUCLIDEAN:
-            return "l2"
-        if distance_type == DistanceType.COSINE:
-            return "cosine"
-        if distance_type == DistanceType.DOT_PRODUCT:
-            return "ip"
-
+        if distance_type in self.DISTANCE_TYPE_MAPPING:
+            return self.DISTANCE_TYPE_MAPPING[distance_type]
         raise ValueError(f"distance_type {distance_type} is not supported in Chroma")
 
     def get_collection(
         self, splitter_type: SplitterType, embedder_type: EmbedderType, distance_type: DistanceType
     ) -> chromadb.Collection:
-        name = f"e-{splitter_type.value}-{embedder_type.value}-{distance_type.value}"
+        stype = self.SPLITTER_TYPE_MAPPING[splitter_type]
+        etype = self.EMBEDDER_TYPE_MAPPTING[embedder_type]
+        dtype = self._distance_type_to_space(distance_type)
+        name = f"e-{stype}-{etype}-{dtype}"
         return self.client.get_or_create_collection(
             name, metadata={"hnsw:space": self._distance_type_to_space(distance_type)}
         )
@@ -85,7 +102,9 @@ class ChromaEmbeddingRepository(EmbeddingRepository):
             )
         return results
 
-    def _chroma_query_to_embedding_similarity(self, query_result: chromadb.QueryResult) -> list[EmbeddingSimilarity]:
+    def _chroma_query_to_embedding_similarity(
+        self, query_result: chromadb.QueryResult, distance_type: DistanceType
+    ) -> list[EmbeddingSimilarity]:
         if query_result is None:
             return []
         if query_result["metadatas"] is None:
@@ -107,7 +126,7 @@ class ChromaEmbeddingRepository(EmbeddingRepository):
         ):
             if not isinstance(metatada["portrait_id"], str):
                 raise ValueError("metatada['portrait_id'] must be str")
-            similarity = 1 / (1 + distance)
+            similarity = DISTANCE_TO_SIMILARITY[distance_type](distance)
             results.append(
                 EmbeddingSimilarity(
                     id=PyObjectId(id),  # type: ignore
@@ -143,22 +162,31 @@ class ChromaEmbeddingRepository(EmbeddingRepository):
             n_results=limit,
             include=["documents", "embeddings", "metadatas", "distances"],
         )
-        similarities = self._chroma_query_to_embedding_similarity(records)
+        similarities = self._chroma_query_to_embedding_similarity(records, distance_type)
         for similarity in similarities:
             similarity.query = query_vector
 
         return similarities
 
     async def insert_many(self, records: list[EmbeddingRecord]) -> list[EmbeddingRecord]:
+        records_by_type = defaultdict(list)
         for record in records:
             record.id = PyObjectId()
-            for similarity_type in DistanceType:
-                collection = self.get_collection(record.splitter_type, record.embedder_type, similarity_type)
+            records_by_type[(record.splitter_type, record.embedder_type)].append(record)
+
+        for similarity_type in DistanceType:
+            for (splitter_type, embedder_type), records in records_by_type.items():
+                collection = self.get_collection(splitter_type, embedder_type, similarity_type)
+                ids = [str(record.id) for record in records]
+                documents = [record.embedded_text for record in records]
+                embeddings = [record.embedding for record in records]
+                metadatas = [{"portrait_id": str(record.portrait_id)} for record in records]
+
                 collection.add(
-                    ids=[str(record.id)],
-                    documents=[record.embedded_text],
-                    embeddings=[record.embedding],  # type: ignore
-                    metadatas=[{"portrait_id": str(record.portrait_id)}],
+                    ids=ids,
+                    documents=documents,
+                    embeddings=embeddings,  # type: ignore
+                    metadatas=metadatas,  # type: ignore
                 )
         return records
 
@@ -172,20 +200,9 @@ class MongoEmbeddingRepository(MongoDBRepository[EmbeddingRecord]):
         return "embeddings"
 
     async def get_by_type(self, splitter_type: SplitterType, embedder_type: EmbedderType) -> list[EmbeddingRecord]:
-        # legacy long names
-        if splitter_type == SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_60:
-            splitter_type_s = "langchain-recursive-text-splitter-chunk-120-overlap-60"
-        else:
-            splitter_type_s = str(splitter_type)
-
-        if embedder_type == EmbedderType.INSTRUCTOR_LARGE_PATHFINDER_CHARACTER_INSTRUCTIONS:
-            embedder_type_s = "instructor-large-pathfinder-character-instructions"
-        else:
-            embedder_type_s = str(embedder_type)
-
         return await self.get_many(
-            splitter_type=splitter_type_s,
-            embedder_type=embedder_type_s,
+            splitter_type=str(splitter_type),
+            embedder_type=str(embedder_type),
         )
 
     async def vector_search(

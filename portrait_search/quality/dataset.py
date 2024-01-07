@@ -18,7 +18,7 @@ def load_dataset(experiment: str) -> list[DatasetEntry]:
 
     dataset_entries = []
     for yaml_file in path_to_dataset.glob("*.yaml"):
-        with open(yaml_file, "r") as file:
+        with open(yaml_file) as file:
             yaml_data = yaml.safe_load(file)
             dataset_entry = DatasetEntry(name=yaml_file.stem, **yaml_data)
             dataset_entries.append(dataset_entry)

@@ -5,7 +5,11 @@ from dependency_injector.wiring import Provide, inject
 from tabulate import tabulate
 
 from portrait_search.dependencies import Container
-from portrait_search.quality.experiments import EXPERIMENTS, load_or_create_experiment_results, store_experiment_results
+from portrait_search.quality.experiments import (
+    EXPERIMENTS_GENERATED,
+    load_or_create_experiment_results,
+    store_experiment_results,
+)
 
 
 @inject
@@ -15,7 +19,7 @@ async def do_experiments(
     results_path = local_data_folder / "experiment_results/results.json"
 
     results = load_or_create_experiment_results(results_path)
-    for description, judge_factory in EXPERIMENTS.items():
+    for description, judge_factory in EXPERIMENTS_GENERATED.items():
         if description in results:
             print(f"Skipping finished experiment: {description}")
             continue
@@ -30,6 +34,7 @@ async def do_experiments(
     print("All experiments")
     print("---------------")
     results_table = [{"description": description, **result} for description, result in results.items()]
+    results_table.sort(key=lambda x: x["precision@k"], reverse=True)  # type: ignore
     print(tabulate(results_table, headers="keys", tablefmt="grid"))
 
 

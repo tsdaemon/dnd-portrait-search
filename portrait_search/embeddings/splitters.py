@@ -52,6 +52,22 @@ class LangChainRecursiveTextSplitterChunk120Overlap60(LangChainRecursiveSplitter
         return self.query_splitter.split_text(text)
 
 
+class LangChainRecursiveTextSplitterChunk160Overlap40SameQuery(LangChainRecursiveSplitter):
+    def __init__(self) -> None:
+        super().__init__(chunk_size=120, chunk_overlap=60)
+
+    @classmethod
+    def splitter_type(cls) -> SplitterType:
+        return SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_160_OVERLAP_40_SAME_QUERY
+
+    def split_query(self, text: str) -> list[str]:
+        return self.splitter.split_text(text)
+
+
 SPLITTERS: dict[SplitterType, type[Splitter]] = {
-    t.splitter_type(): t for t in [LangChainRecursiveTextSplitterChunk120Overlap60]
+    t.splitter_type(): t  # type: ignore[type-abstract]
+    for t in [
+        LangChainRecursiveTextSplitterChunk120Overlap60,
+        LangChainRecursiveTextSplitterChunk160Overlap40SameQuery,
+    ]
 }

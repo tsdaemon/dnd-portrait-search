@@ -93,11 +93,21 @@ class MSMarcoDistilbertBaseV4(SentenceTransformerEmbeddings):
         return EmbedderType.MS_MARCO_DISTILBERT_BASE_V4
 
 
+class MSMarcoRobertaBaseAnceFirstp(SentenceTransformerEmbeddings):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__("msmarco-roberta-base-ance-firstp", *args, **kwargs)
+
+    @classmethod
+    def embedder_type(cls) -> EmbedderType:
+        return EmbedderType.MS_MARCO_ROBERTA_BASE_ANCE_FIRSTP
+
+
 EMBEDDERS: dict[EmbedderType, type[Embedder]] = {
     t.embedder_type(): t  # type: ignore[type-abstract]
     for t in [
         InstructorEmbeddingsLargePathfinderCharacterInstructions,
         AllMiniLML6v2,
         MSMarcoDistilbertBaseV4,
+        MSMarcoRobertaBaseAnceFirstp,
     ]
 }

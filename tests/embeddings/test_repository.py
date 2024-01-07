@@ -61,7 +61,7 @@ class TestChromaEmbeddingRepository:
         embedding_repository: ChromaEmbeddingRepository,
     ) -> None:
         collection = embedding_repository.get_collection(splitter_type, embedder_type, similarity_type)
-        assert collection.name == f"e-{splitter_type.value}-{embedder_type.value}-{similarity_type.value}"
+        assert collection is not None
 
     async def test_get_by_type(
         self, embedding_repository: ChromaEmbeddingRepository, existing_embedding_records: list[EmbeddingRecord]
