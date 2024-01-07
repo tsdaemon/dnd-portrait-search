@@ -1,17 +1,18 @@
 import abc
-from collections.abc import Sequence
+from pathlib import Path
 
+import chromadb
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
 from portrait_search.core.config import EmbedderType, SplitterType
-from portrait_search.core.mongodb import MongoDBRepository
+from portrait_search.core.mongodb import MongoDBRepository, PyObjectId
 
-from .entities import EmbeddingRecord, EmbeddingSimilarity, MongoEmbeddingRecord
+from .entities import EmbeddingRecord, EmbeddingSimilarity
 
 
 class EmbeddingRepository(abc.ABC):
     @abc.abstractmethod
-    async def get_by_type(self, splitter_type: SplitterType, embedder_type: EmbedderType) -> Sequence[EmbeddingRecord]:
+    async def get_by_type(self, splitter_type: SplitterType, embedder_type: EmbedderType) -> list[EmbeddingRecord]:
         raise NotImplementedError()
 
     @abc.abstractmethod
@@ -27,22 +28,152 @@ class EmbeddingRepository(abc.ABC):
         raise NotImplementedError()
 
     @abc.abstractmethod
-    async def insert_many(self, records: Sequence[EmbeddingRecord]) -> Sequence[EmbeddingRecord]:
+    async def insert_many(self, records: list[EmbeddingRecord]) -> list[EmbeddingRecord]:
         raise NotImplementedError()
 
 
-class MongoEmbeddingRepository(MongoDBRepository[MongoEmbeddingRecord]):
+class ChromaEmbeddingRepository(EmbeddingRepository):
+    def __init__(self, databases_path: Path):
+        self.client = chromadb.PersistentClient(path=str(databases_path / "chroma.db"))
+
+    def get_collection(self, splitter_type: SplitterType, embedder_type: EmbedderType) -> chromadb.Collection:
+        name = f"embeddings-{splitter_type.value}-{embedder_type.value}"
+        return self.client.get_or_create_collection(name)
+
+    def _chroma_get_to_embedding_record(
+        self, get_result: chromadb.GetResult, splitter_type: SplitterType, embedder_type: EmbedderType
+    ) -> list[EmbeddingRecord]:
+        if get_result is None:
+            return []
+        if get_result["metadatas"] is None:
+            raise ValueError("get_result must have metadatas")
+        if get_result["documents"] is None:
+            raise ValueError("get_result must have documents")
+        if get_result["embeddings"] is None:
+            raise ValueError("get_result must have embeddings")
+
+        results = []
+        for id, metatada, document, embedding in zip(
+            get_result["ids"], get_result["metadatas"], get_result["documents"], get_result["embeddings"]
+        ):
+            if not isinstance(metatada["portrait_id"], str):
+                raise ValueError("metatada['portrait_id'] must be str")
+
+            results.append(
+                EmbeddingRecord(
+                    id=PyObjectId(id),  # type: ignore
+                    portrait_id=PyObjectId(metatada["portrait_id"]),
+                    embedding=list(embedding),
+                    embedded_text=document,
+                    splitter_type=splitter_type,
+                    embedder_type=embedder_type,
+                )
+            )
+        return results
+
+    def _chroma_query_to_embedding_similarity(self, query_result: chromadb.QueryResult) -> list[EmbeddingSimilarity]:
+        if query_result is None:
+            return []
+        if query_result["metadatas"] is None:
+            raise ValueError("query_result must have metadatas")
+        if query_result["documents"] is None:
+            raise ValueError("query_result must have documents")
+        if query_result["embeddings"] is None:
+            raise ValueError("query_result must have embeddings")
+        if query_result["distances"] is None:
+            raise ValueError("query_result must have distances")
+
+        results = []
+        for id, metatada, document, embedding, distance in zip(
+            query_result["ids"][0],
+            query_result["metadatas"][0],
+            query_result["documents"][0],
+            query_result["embeddings"][0],
+            query_result["distances"][0],
+        ):
+            if not isinstance(metatada["portrait_id"], str):
+                raise ValueError("metatada['portrait_id'] must be str")
+            similarity = 1 / (1 + distance)
+            results.append(
+                EmbeddingSimilarity(
+                    id=PyObjectId(id),  # type: ignore
+                    portrait_id=PyObjectId(metatada["portrait_id"]),
+                    embedding=list(embedding),
+                    embedded_text=document,
+                    similarity=similarity,
+                )
+            )
+        return results
+
+    async def get_by_type(self, splitter_type: SplitterType, embedder_type: EmbedderType) -> list[EmbeddingRecord]:
+        collection = self.get_collection(splitter_type, embedder_type)
+        records = collection.get(include=["documents", "embeddings", "metadatas"])
+        return self._chroma_get_to_embedding_record(records, splitter_type, embedder_type)
+
+    async def vector_search(
+        self,
+        query_vector: list[float],
+        splitter_type: SplitterType,
+        embedder_type: EmbedderType,
+        experiment: str | None = None,
+        method: str = "euclidean",
+        limit: int = 10,
+    ) -> list[EmbeddingSimilarity]:
+        if method != "euclidean":
+            raise NotImplementedError("Only euclidean method is supported")
+        # experiment is ignored
+        _ = experiment
+
+        collection = self.get_collection(splitter_type, embedder_type)
+        records = collection.query(
+            query_embeddings=query_vector,
+            n_results=limit,
+            include=["documents", "embeddings", "metadatas", "distances"],
+        )
+        similarities = self._chroma_query_to_embedding_similarity(records)
+        for similarity in similarities:
+            similarity.query = query_vector
+
+        return similarities
+
+    async def insert_many(self, records: list[EmbeddingRecord]) -> list[EmbeddingRecord]:
+        for record in records:
+            splitter_type = record.splitter_type
+            embedder_type = record.embedder_type
+            collection = self.get_collection(splitter_type, embedder_type)
+            record.id = PyObjectId()
+            collection.add(
+                ids=[str(record.id)],
+                documents=[record.embedded_text],
+                embeddings=[record.embedding],  # type: ignore
+                metadatas=[{"portrait_id": str(record.portrait_id)}],
+            )
+        return records
+
+
+class MongoEmbeddingRepository(MongoDBRepository[EmbeddingRecord]):
     def __init__(self, db: AsyncIOMotorDatabase):
-        super().__init__(db, MongoEmbeddingRecord)
+        super().__init__(db, EmbeddingRecord)
 
     @property
     def collection(self) -> str:
         return "embeddings"
 
-    async def get_by_type(self, splitter_type: SplitterType, embedder_type: EmbedderType) -> Sequence[EmbeddingRecord]:
+    async def get_by_type(self, splitter_type: SplitterType, embedder_type: EmbedderType) -> list[EmbeddingRecord]:
+        # legacy long names
+        if splitter_type == SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_60:
+            splitter_type_s = "langchain-recursive-text-splitter-chunk-120-overlap-60"
+        else:
+            splitter_type_s = str(splitter_type)
+
+        if embedder_type == EmbedderType.INSTRUCTOR_LARGE_PATHFINDER_CHARACTER_INSTRUCTIONS:
+            embedder_type_s = "instructor-large-pathfinder-character-instructions"
+        else:
+            embedder_type_s = str(embedder_type)
+
         return await self.get_many(
-            splitter_type=str(splitter_type),
-            embedder_type=str(embedder_type),
+            splitter_type=splitter_type_s,
+            embedder_type=embedder_type_s,
         )
 
     async def vector_search(
