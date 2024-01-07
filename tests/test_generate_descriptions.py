@@ -86,12 +86,14 @@ def openai_client_mock() -> Mock:
 @pytest.fixture(autouse=True)
 def container(
     container: Container, portraits_repository_mock: Mock, data_source_mock: Mock, openai_client_mock: Mock
-) -> None:
-    container.init_resources()
-    container.portrait_repository.override(portraits_repository_mock)
-    container.data_sources.override([data_source_mock])
-    container.openai_client.override(openai_client_mock)
-    container.wire(modules=["portrait_search.generate_descriptions"])
+) -> Generator[None, Any, Any]:
+    with (
+        container.portrait_repository.override(portraits_repository_mock),
+        container.data_sources.override([data_source_mock]),
+        container.openai_client.override(openai_client_mock),
+    ):
+        container.wire(modules=["portrait_search.generate_descriptions"])
+        yield
 
 
 @pytest.mark.asyncio

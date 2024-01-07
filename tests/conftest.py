@@ -1,3 +1,4 @@
+import asyncio
 import secrets
 import string
 import tempfile
@@ -12,6 +13,16 @@ from dependency_injector import providers
 
 from portrait_search.core.mongodb import get_database
 from portrait_search.dependencies import Container
+
+
+@pytest.fixture(scope="session")
+def event_loop() -> Generator[asyncio.AbstractEventLoop, Any, Any]:
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+    yield loop
+    loop.close()
 
 
 @pytest.fixture
@@ -43,11 +54,11 @@ async def mongodb_database_for_test() -> AsyncGenerator[str, Any]:
     # await mongodb_connection.drop_database(db_name)
 
 
-@pytest.fixture
-def container() -> Container:
+@pytest.fixture(scope="session")
+def container() -> Generator[Container, Any, Any]:
     container = Container()
     container.db.override(Mock())
-    return container
+    yield container
 
 
 @pytest.fixture

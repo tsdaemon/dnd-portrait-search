@@ -41,8 +41,8 @@ class MongoEmbeddingRepository(MongoDBRepository[MongoEmbeddingRecord]):
 
     async def get_by_type(self, splitter_type: SplitterType, embedder_type: EmbedderType) -> Sequence[EmbeddingRecord]:
         return await self.get_many(
-            splitter_type=splitter_type,
-            embedder_type=embedder_type,
+            splitter_type=str(splitter_type),
+            embedder_type=str(embedder_type),
         )
 
     async def vector_search(

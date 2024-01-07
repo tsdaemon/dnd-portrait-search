@@ -82,7 +82,9 @@ class MongoDBRepository(abc.ABC, Generic[TRecord]):
         entities = await self.db[self.collection].find(filter).to_list(length=None)
         return [self.t.model_validate(entity) for entity in entities]
 
-    async def delete(self, id: ObjectId) -> None:
+    async def delete(self, id: ObjectId | None) -> None:
+        if id is None:
+            return
         await self.db[self.collection].delete_one({"_id": id})
 
     async def prepare_collection_resources(self) -> None:

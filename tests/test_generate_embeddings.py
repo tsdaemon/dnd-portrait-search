@@ -1,3 +1,5 @@
+from collections.abc import Generator
+from typing import Any
 from unittest.mock import Mock
 
 import pytest
@@ -26,11 +28,15 @@ def embeddings_repository_mock() -> Mock:
 
 
 @pytest.fixture(autouse=True)
-def container(container: Container, portraits_repository_mock: Mock, embeddings_repository_mock: Mock) -> None:
-    container.init_resources()
-    container.portrait_repository.override(portraits_repository_mock)
-    container.embedding_repository.override(embeddings_repository_mock)
-    container.wire(modules=["portrait_search.generate_embeddings"])
+def container(
+    container: Container, portraits_repository_mock: Mock, embeddings_repository_mock: Mock
+) -> Generator[None, Any, Any]:
+    with (
+        container.portrait_repository.override(portraits_repository_mock),
+        container.embedding_repository.override(embeddings_repository_mock),
+    ):
+        container.wire(modules=["portrait_search.generate_embeddings"])
+        yield
 
 
 async def test_generate_embeddings__empty_database(embeddings_repository_mock: Mock) -> None:

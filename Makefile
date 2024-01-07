@@ -1,8 +1,10 @@
 include .env
 export
 
+# PYTEST_OPT ?= --cov=portrait_search
+
 test:
-	poetry run pytest --cov=portrait_search tests/
+	poetry run pytest ${PYTEST_OPT} tests/
 
 
 tf-atlas:
