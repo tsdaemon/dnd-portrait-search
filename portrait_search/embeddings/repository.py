@@ -4,7 +4,7 @@ from pathlib import Path
 import chromadb
 from motor.motor_asyncio import AsyncIOMotorDatabase
 
-from portrait_search.core.config import EmbedderType, SplitterType
+from portrait_search.core.enums import EmbedderType, SimilarityType, SplitterType
 from portrait_search.core.mongodb import MongoDBRepository, PyObjectId
 
 from .entities import EmbeddingRecord, EmbeddingSimilarity
@@ -21,8 +21,8 @@ class EmbeddingRepository(abc.ABC):
         query_vector: list[float],
         splitter_type: SplitterType,
         embedder_type: EmbedderType,
+        method: SimilarityType,
         experiment: str | None = None,
-        method: str = "euclidean",
         limit: int = 10,
     ) -> list[EmbeddingSimilarity]:
         raise NotImplementedError()
@@ -36,9 +36,23 @@ class ChromaEmbeddingRepository(EmbeddingRepository):
     def __init__(self, databases_path: Path):
         self.client = chromadb.PersistentClient(path=str(databases_path / "chroma.db"))
 
-    def get_collection(self, splitter_type: SplitterType, embedder_type: EmbedderType) -> chromadb.Collection:
-        name = f"embeddings-{splitter_type.value}-{embedder_type.value}"
-        return self.client.get_or_create_collection(name)
+    def _similarity_type_to_space(self, similarity_type: SimilarityType) -> str:
+        if similarity_type == SimilarityType.EUCLIDEAN:
+            return "l2"
+        if similarity_type == SimilarityType.COSINE:
+            return "cosine"
+        if similarity_type == SimilarityType.DOT_PRODUCT:
+            return "ip"
+
+        raise ValueError(f"similarity_type {similarity_type} is not supported in Chroma")
+
+    def get_collection(
+        self, splitter_type: SplitterType, embedder_type: EmbedderType, similarity_type: SimilarityType
+    ) -> chromadb.Collection:
+        name = f"e-{splitter_type.value}-{embedder_type.value}-{similarity_type.value}"
+        return self.client.get_or_create_collection(
+            name, metadata={"hnsw:space": self._similarity_type_to_space(similarity_type)}
+        )
 
     def _chroma_get_to_embedding_record(
         self, get_result: chromadb.GetResult, splitter_type: SplitterType, embedder_type: EmbedderType
@@ -106,7 +120,8 @@ class ChromaEmbeddingRepository(EmbeddingRepository):
         return results
 
     async def get_by_type(self, splitter_type: SplitterType, embedder_type: EmbedderType) -> list[EmbeddingRecord]:
-        collection = self.get_collection(splitter_type, embedder_type)
+        # Similarity does not matter in this context, data should be replicated across all spaces
+        collection = self.get_collection(splitter_type, embedder_type, SimilarityType.EUCLIDEAN)
         records = collection.get(include=["documents", "embeddings", "metadatas"])
         return self._chroma_get_to_embedding_record(records, splitter_type, embedder_type)
 
@@ -115,16 +130,14 @@ class ChromaEmbeddingRepository(EmbeddingRepository):
         query_vector: list[float],
         splitter_type: SplitterType,
         embedder_type: EmbedderType,
+        method: SimilarityType,
         experiment: str | None = None,
-        method: str = "euclidean",
         limit: int = 10,
     ) -> list[EmbeddingSimilarity]:
-        if method != "euclidean":
-            raise NotImplementedError("Only euclidean method is supported")
         # experiment is ignored
         _ = experiment
 
-        collection = self.get_collection(splitter_type, embedder_type)
+        collection = self.get_collection(splitter_type, embedder_type, method)
         records = collection.query(
             query_embeddings=query_vector,
             n_results=limit,
@@ -138,16 +151,15 @@ class ChromaEmbeddingRepository(EmbeddingRepository):
 
     async def insert_many(self, records: list[EmbeddingRecord]) -> list[EmbeddingRecord]:
         for record in records:
-            splitter_type = record.splitter_type
-            embedder_type = record.embedder_type
-            collection = self.get_collection(splitter_type, embedder_type)
             record.id = PyObjectId()
-            collection.add(
-                ids=[str(record.id)],
-                documents=[record.embedded_text],
-                embeddings=[record.embedding],  # type: ignore
-                metadatas=[{"portrait_id": str(record.portrait_id)}],
-            )
+            for similarity_type in SimilarityType:
+                collection = self.get_collection(record.splitter_type, record.embedder_type, similarity_type)
+                collection.add(
+                    ids=[str(record.id)],
+                    documents=[record.embedded_text],
+                    embeddings=[record.embedding],  # type: ignore
+                    metadatas=[{"portrait_id": str(record.portrait_id)}],
+                )
         return records
 
 

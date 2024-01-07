@@ -1,16 +1,9 @@
-from enum import StrEnum
 from pathlib import Path
 
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-
-class EmbedderType(StrEnum):
-    INSTRUCTOR_LARGE_PATHFINDER_CHARACTER_INSTRUCTIONS = "instructor-large"
-
-
-class SplitterType(StrEnum):
-    LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_60 = "langchain-recursive-c-120-o-60"
+from .enums import EmbedderType, SplitterType
 
 
 class Config(BaseSettings):

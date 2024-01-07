@@ -4,11 +4,12 @@ from typing import Any
 import numpy as np
 from InstructorEmbedding import INSTRUCTOR
 from numpy.typing import NDArray
+from sentence_transformers import SentenceTransformer
 
-from portrait_search.core.config import EmbedderType
+from portrait_search.core.enums import EmbedderType
 
 
-class Embedder:
+class Embedder(abc.ABC):
     def __init__(self, expected_dimensionality: int | None = None) -> None:
         self.expected_dimensionality = expected_dimensionality
 
@@ -43,7 +44,7 @@ class Embedder:
         return result
 
 
-class InstructorEmbeddings(Embedder, abc.ABC):
+class InstructorEmbeddings(Embedder):
     def __init__(self, instructions: str, model_name: str, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         self.instructions = instructions
@@ -65,6 +66,38 @@ class InstructorEmbeddingsLargePathfinderCharacterInstructions(InstructorEmbeddi
         return EmbedderType.INSTRUCTOR_LARGE_PATHFINDER_CHARACTER_INSTRUCTIONS
 
 
+class SentenceTransformerEmbeddings(Embedder):
+    def __init__(self, model_name: str, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        self.model = SentenceTransformer(model_name)
+
+    def _embed(self, texts: list[str]) -> NDArray[np.float_]:
+        return np.array(self.model.encode(texts, convert_to_numpy=True))
+
+
+class AllMiniLML6v2(SentenceTransformerEmbeddings):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__("all-MiniLM-L6-v2", *args, **kwargs)
+
+    @classmethod
+    def embedder_type(cls) -> EmbedderType:
+        return EmbedderType.ALL_MINI_LM_L6_V2
+
+
+class MSMarcoDistilbertBaseV4(SentenceTransformerEmbeddings):
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__("msmarco-distilbert-base-v4", *args, **kwargs)
+
+    @classmethod
+    def embedder_type(cls) -> EmbedderType:
+        return EmbedderType.MS_MARCO_DISTILBERT_BASE_V4
+
+
 EMBEDDERS: dict[EmbedderType, type[Embedder]] = {
-    t.embedder_type(): t for t in [InstructorEmbeddingsLargePathfinderCharacterInstructions]
+    t.embedder_type(): t  # type: ignore[type-abstract]
+    for t in [
+        InstructorEmbeddingsLargePathfinderCharacterInstructions,
+        AllMiniLML6v2,
+        MSMarcoDistilbertBaseV4,
+    ]
 }

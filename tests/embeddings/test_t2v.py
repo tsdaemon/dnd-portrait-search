@@ -3,7 +3,7 @@ from itertools import product
 import pytest
 from bson import ObjectId
 
-from portrait_search.core.config import EmbedderType, SplitterType
+from portrait_search.core.enums import EmbedderType, SplitterType
 from portrait_search.embeddings.embedders import EMBEDDERS, Embedder
 from portrait_search.embeddings.splitters import SPLITTERS, Splitter
 from portrait_search.embeddings.t2v import portraits2embeddings, query2embeddings
@@ -54,8 +54,8 @@ def test_portraits2embeddings(
     assert embeddings_records[0].embedding == embeddings_records[19].embedding
     assert embeddings_records[0].embedded_text == embeddings_records[19].embedded_text
 
-    # THEN length of all embedding vectors is 768
-    assert all(len(er.embedding) == 768 for er in embeddings_records)
+    # THEN all embedding vectors are non-empty
+    assert all(len(er.embedding) > 0 for er in embeddings_records)
 
     # THEN splitter_type and embedder_type are set correctly
     assert all(e.splitter_type == splitter_type for e in embeddings_records)
@@ -79,5 +79,5 @@ def test_query2embeddings(embedder_type: type[Embedder], splitter_type: type[Spl
     # THEN the result is a list of vectors
     assert len(embeddings) > 1
 
-    # THEN length of all embedding vectors is 768
-    assert all(len(e) == 768 for e in embeddings)
+    # THEN all embedding vectors are non-empty
+    assert all(len(e) > 0 for e in embeddings)

@@ -5,7 +5,11 @@ from portrait_search.core.logging import init_logging
 from portrait_search.core.mongodb import get_connection, get_database
 from portrait_search.data_sources.config import data_sources_from_yaml
 from portrait_search.embeddings.embedders import EMBEDDERS
-from portrait_search.embeddings.repository import EmbeddingRepository, MongoEmbeddingRepository
+from portrait_search.embeddings.repository import (
+    ChromaEmbeddingRepository,
+    EmbeddingRepository,
+    MongoEmbeddingRepository,
+)
 from portrait_search.embeddings.splitters import SPLITTERS
 from portrait_search.open_ai.client import OpenAIClient
 from portrait_search.portraits.repository import PortraitRepository
@@ -16,24 +20,40 @@ from portrait_search.retrieval.similarity import SimilarityRetriever
 class Container(containers.DeclarativeContainer):
     config = providers.Object(Config())
 
+    # Configuration resources
     logging = providers.Resource(init_logging)
 
     mongodb_connection = providers.Resource(
         get_connection,
         url=config.provided.mongodb_uri,
     )
-
     db = providers.Resource(
         get_database,
         connection=mongodb_connection,
         database_name=config.provided.mongodb_database_name,
     )
-
     data_sources = providers.Resource(
         data_sources_from_yaml,
         config=config,
     )
+    chroma_database_folder = providers.Resource(
+        lambda config: config.local_data_folder / "chroma",
+        config=config,
+    )
+    experiment_results_folder = providers.Resource(
+        lambda config: config.local_data_folder / "experiment_results",
+        config=config,
+    )
+    splitter = providers.Resource(
+        lambda config: SPLITTERS[config.splitter_type](),
+        config=config,
+    )
+    embedder = providers.Resource(
+        lambda config: EMBEDDERS[config.embedder_type](),
+        config=config,
+    )
 
+    # Portrait repository
     portrait_repository = providers.Factory(
         PortraitRepository,
         db=db,
@@ -47,20 +67,16 @@ class Container(containers.DeclarativeContainer):
         MongoEmbeddingRepository,
         db=db,
     )
-    embedding_repository.override(mongo_embedding_repository)
+    chroma_embedding_repository = providers.Factory(
+        ChromaEmbeddingRepository,
+        databases_path=chroma_database_folder,
+    )
+    embedding_repository.override(chroma_embedding_repository)
 
+    # OpenAI client
     openai_client = providers.Factory(
         OpenAIClient,
         api_key=config.provided.openai_api_key,
-    )
-
-    splitter = providers.Resource(
-        lambda config: SPLITTERS[config.splitter_type](),
-        config=config,
-    )
-    embedder = providers.Resource(
-        lambda config: EMBEDDERS[config.embedder_type](),
-        config=config,
     )
 
     # Retriever

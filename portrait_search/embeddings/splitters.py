@@ -2,7 +2,7 @@ import abc
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-from portrait_search.core.config import SplitterType
+from portrait_search.core.enums import SplitterType
 
 
 class Splitter(abc.ABC):

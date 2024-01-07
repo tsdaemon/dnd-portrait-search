@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from portrait_search.core.config import EmbedderType, SplitterType
+from portrait_search.core.enums import EmbedderType, SplitterType
 from portrait_search.core.mongodb import MongoDBRecord, PyObjectId
 
 
