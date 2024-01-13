@@ -153,13 +153,15 @@ class ChromaEmbeddingRepository(EmbeddingRepository):
         experiment: str | None = None,
         limit: int = 10,
     ) -> list[EmbeddingSimilarity]:
-        # experiment is ignored
-        _ = experiment
-
         collection = self.get_collection(splitter_type, embedder_type, distance_type)
+        if experiment:
+            where: chromadb.Where | None = {"experiment": experiment}
+        else:
+            where = None
         records = collection.query(
             query_embeddings=query_vector,
             n_results=limit,
+            where=where,
             include=["documents", "embeddings", "metadatas", "distances"],
         )
         similarities = self._chroma_query_to_embedding_similarity(records, distance_type)
@@ -180,7 +182,10 @@ class ChromaEmbeddingRepository(EmbeddingRepository):
                 ids = [str(record.id) for record in records]
                 documents = [record.embedded_text for record in records]
                 embeddings = [record.embedding for record in records]
-                metadatas = [{"portrait_id": str(record.portrait_id)} for record in records]
+                metadatas = [
+                    {"portrait_id": str(record.portrait_id), "experiment": record.experiment or ""}
+                    for record in records
+                ]
 
                 collection.add(
                     ids=ids,

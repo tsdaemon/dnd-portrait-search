@@ -104,15 +104,15 @@ EXPERIMENTS: EXPERIMENTS_COLLECTION_TYPE = {
 }
 
 
-def all_possible_combinations_generator_v1() -> PARAMETERS_GENERATOR_TYPE:
+def all_possible_combinations_generator(experiment: str) -> PARAMETERS_GENERATOR_TYPE:
     for embedder, splitter, distance in product(EmbedderType, SplitterType, DistanceType):
-        yield embedder, splitter, distance, "v1"  # type: ignore
+        yield embedder, splitter, distance, experiment  # type: ignore
 
 
 def multi_experiment(
-    generator: Callable[[], PARAMETERS_GENERATOR_TYPE],
+    generator: Callable[[str], PARAMETERS_GENERATOR_TYPE], experiment: str
 ) -> Generator[tuple[str, EXPERIMENT_TYPE], Any, Any]:
-    for embedder, splitter, distance, dataset_name in generator():
+    for embedder, splitter, distance, dataset_name in generator(experiment):
         experiment_name = f"[{dataset_name}] Split {splitter}, embed {embedder}, distance {distance}"
 
         def generated_experiment(
@@ -134,4 +134,5 @@ def multi_experiment(
         yield experiment_name, partial(generated_experiment, embedder, splitter, distance, dataset_name)
 
 
-EXPERIMENTS_GENERATED: EXPERIMENTS_COLLECTION_TYPE = dict(multi_experiment(all_possible_combinations_generator_v1))
+def all_possible_combinations_by_experiment(experiment: str) -> EXPERIMENTS_COLLECTION_TYPE:
+    return dict(multi_experiment(all_possible_combinations_generator, experiment))

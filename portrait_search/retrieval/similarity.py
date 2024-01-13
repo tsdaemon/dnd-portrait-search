@@ -35,11 +35,11 @@ class SimilarityRetriever(Retriever):
         """Returns a list of PortraitRecords that match the query string."""
 
         # First get the embeddings for the query
-        qeury_embeddings_and_texts = query2embeddings(query, self.splitter, self.embedder)
+        query_embeddings_and_texts = query2embeddings(query, self.splitter, self.embedder)
 
         # Then search for the embeddings in the database
         all_embedding_similarities = []
-        for query_embedding_and_text in zip(*qeury_embeddings_and_texts):
+        for query_embedding_and_text in zip(*query_embeddings_and_texts):
             query_embedding, query_text = query_embedding_and_text
             embedding_similarities = await self.embedding_repository.vector_search(
                 query_embedding,

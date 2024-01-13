@@ -1,7 +1,85 @@
 ---
-path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Flamewarden/HE-AR-FW-M201/Fulllength.png
-tags: ['HE (Human, Elf, Half-Elf)', 'HE_Archer, Ranger', Flamewarden, HE-AR-FW-M201]
 queries:
-    - an elf fighter with two blades
-    - a half elf ranger with melee weapon
-    - a male elf with two flaming curved blaes
+    - query: an elf fighter with two blades
+      match:
+          - elf
+          - fighter
+          - two blades
+      portraits:
+          - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Flamewarden/HE-AR-FW-M201/Fulllength.png
+            match:
+                - elf
+                - fighter
+                - two blades
+          - path: nexusmods-pathfinderkingmaker-92-974/Tiefling/Caster/TF-CA-MS-F204/Fulllength.png
+            match:
+                - elf
+                - fighter
+          - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-F305/Fulllength.png
+            match:
+                - elf
+                - fighter
+          - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Freebooter/HE-AR-FB-M202/Fulllength.png
+            match:
+                - fighter
+                - two blades
+          - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Paladin, Hospitaler, Divine Guardian, Crusader/HE-PC-PL-F107/Fulllength.png
+            match:
+                - fighter
+                - two blades
+          - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Magus, Kinetic Knight/Magus, Eldritch Scion, Sword Saint, Eldritch Knight,
+                Kinetic Knight/HE-FM-FM-F301/Fulllength.png
+            match:
+                - elf
+                - fighter
+                - two blades
+          - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Dual Wielding/HE-MF-DW-F203/Fulllength.png
+            match:
+                - two blades
+          - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Inquisitor/Inquisitor/MX-IN-IN-M209/Fulllength.png
+            match:
+                - two blades
+    - query: a half elf ranger with melee weapon
+      match:
+          - half elf
+          - ranger
+          - melee weapon
+      portraits:
+          - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Flamewarden/HE-AR-FW-M201/Fulllength.png
+            match:
+                - half elf
+                - ranger
+                - melee weapon
+          - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Eldritch Archer, Stormwalker/HE-AR-EA-F202/Fulllength.png
+            match:
+                - half elf
+                - ranger
+          - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-M210/Fulllength.png
+            match:
+                - ranger
+                - melee weapon
+    - query: a male elf with two flaming curved blaes
+      match:
+          - male
+          - elf
+          - flaming blades
+          - curved blades
+          - two blades
+      portraits:
+          - path: nexusmods-pathfinderkingmaker-92-974/Tiefling/Melee/TF-MF-MS-M101/Fulllength.png
+            match:
+                - male
+                - flaming blades
+                - curved blades
+          - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Flamewarden/HE-AR-FW-M201/Fulllength.png
+            match:
+                - male
+                - elf
+                - flaming blades
+                - curved blades
+                - two blades
+          - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-M104/Fulllength.png
+            match:
+                - male
+                - elf
+                - curved blades

@@ -15,6 +15,7 @@ from portrait_search.portraits.repository import PortraitRepository
 async def generate_embeddings(
     portrait_repository: PortraitRepository = Provide[Container.portrait_repository],
     embedding_repository: EmbeddingRepository = Provide[Container.embedding_repository],
+    experiment: str = Provide[Container.config.provided.experiment],
 ) -> None:
     all_splitters_and_providers = product(SPLITTERS.values(), EMBEDDERS.values())
     all_portraits = await portrait_repository.get_many()
@@ -33,6 +34,9 @@ async def generate_embeddings(
         portraits_without_embeddings = [p for p in all_portraits if p.id in portraits_without_embeddings_ids]
         embeddings = portraits2embeddings(portraits_without_embeddings, splitter, embedder)
         print("Generated: ", len(embeddings))
+        if experiment:
+            for embedding in embeddings:
+                embedding.experiment = experiment
         await embedding_repository.insert_many(embeddings)
         print("Done!")
         print("-----")

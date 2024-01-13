@@ -25,4 +25,6 @@ class Config(BaseSettings):
     )
     distance_type: DistanceType = Field(default=DistanceType.COSINE, alias="DISTANCE_TYPE")
 
+    experiment: str = Field(default=None, alias="EXPERIMENT")
+
     model_config = SettingsConfigDict(str_strip_whitespace=True)

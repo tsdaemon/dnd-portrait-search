@@ -53,6 +53,11 @@ async def generate_descriptions(
     local_portraits_folder = local_data_folder / "portraits"
     for data_source in data_sources:
         portraits.extend(await data_source.retrieve(local_portraits_folder))
+
+    # portraits_to_update = [
+    #     ""
+    # ]
+    # portraits = [p for p in portraits if p.fulllength_path in portraits_to_update]
     print(f"Extracted {len(portraits)} portraits from data sources.")
 
     # calculate hashes of local images

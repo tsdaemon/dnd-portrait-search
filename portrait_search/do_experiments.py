@@ -6,7 +6,7 @@ from tabulate import tabulate
 
 from portrait_search.dependencies import Container
 from portrait_search.quality.experiments import (
-    EXPERIMENTS_GENERATED,
+    all_possible_combinations_by_experiment,
     load_or_create_experiment_results,
     store_experiment_results,
 )
@@ -14,12 +14,17 @@ from portrait_search.quality.experiments import (
 
 @inject
 async def do_experiments(
-    container: Container, local_data_folder: Path = Provide[Container.config.provided.local_data_folder]
+    container: Container,
+    local_data_folder: Path = Provide[Container.config.provided.local_data_folder],
+    experiment: str = Provide[Container.config.provided.experiment],
 ) -> None:
+    if not experiment:
+        raise ValueError("No experiment specified")
+
     results_path = local_data_folder / "experiment_results/results.json"
 
     results = load_or_create_experiment_results(results_path)
-    for description, judge_factory in EXPERIMENTS_GENERATED.items():
+    for description, judge_factory in all_possible_combinations_by_experiment(experiment=experiment).items():
         if description in results:
             print(f"Skipping finished experiment: {description}")
             continue
