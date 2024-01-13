@@ -4,11 +4,23 @@ import yaml
 from pydantic import BaseModel
 
 
+class PortraitMatch(BaseModel):
+    path: str
+    match: set[str]
+
+
+class Query(BaseModel):
+    query: str
+    portraits: list[PortraitMatch]
+    match: set[str]
+
+
 class DatasetEntry(BaseModel):
     name: str
-    path: str
-    tags: list[str]
-    queries: list[str]
+    queries: list[Query]
+
+    def __repr__(self) -> str:
+        return self.name
 
 
 def load_dataset(experiment: str) -> list[DatasetEntry]:
@@ -24,3 +36,21 @@ def load_dataset(experiment: str) -> list[DatasetEntry]:
             dataset_entries.append(dataset_entry)
 
     return dataset_entries
+
+
+def validate_dataset(dataset_entries: list[DatasetEntry], path_to_portraits: Path) -> None:
+    for dataset_entry in dataset_entries:
+        _validate_dataset_entry(dataset_entry, path_to_portraits)
+
+
+def _validate_dataset_entry(dataset_entry: DatasetEntry, path_to_portraits: Path) -> None:
+    for query in dataset_entry.queries:
+        for portrait in query.portraits:
+            if not portrait.match.issubset(query.match):
+                local_portrait_path = path_to_portraits / portrait.path
+                if not local_portrait_path.exists():
+                    raise ValueError(f"Portrait {portrait.path} does not exist at path {local_portrait_path}")
+                raise ValueError(
+                    f"Portrait {portrait.path} has matches {portrait.match} that are not in "
+                    f"query {query.query} matches {query.match}, dataset entry {dataset_entry.name}"
+                )

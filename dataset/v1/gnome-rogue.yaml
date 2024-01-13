@@ -8,7 +8,7 @@ queries:
           - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Gnome, Halfling/GH-GH-MS-F105/Fulllength.png
             match:
                 - small height
-                - arcrobat
+                - acrobat
           - path: nexusmods-pathfinderkingmaker-92-974/Dwarf/Melee/DW-MF-MS-M206/Fulllength.png
             match:
                 - small height

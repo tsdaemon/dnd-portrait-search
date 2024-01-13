@@ -25,6 +25,16 @@ repos:
             entry: poetry run mypy
             language: system
             types: [python]
+          - id: validate-datasets
+            name: validate-datasets
+            entry: make validate-datasets
+            language: system
+            types: [yaml]
+    - repo: https://github.com/adrienverge/yamllint.git
+      rev: v1.21.0  # or higher tag
+      hooks:
+          - id: yamllint
+            args: [--format, parsable, --strict]
     - repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
       rev: 0.2.1
       hooks:
