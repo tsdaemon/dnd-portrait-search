@@ -45,7 +45,15 @@ def validate_dataset(dataset_entries: list[DatasetEntry], path_to_portraits: Pat
 
 def _validate_dataset_entry(dataset_entry: DatasetEntry, path_to_portraits: Path) -> None:
     for query in dataset_entry.queries:
+        if not query.match:
+            raise ValueError(f"Query {query.query} has no matches, dataset entry {dataset_entry.name}")
+        if not query.portraits:
+            raise ValueError(f"Query {query.query} has no portraits, dataset entry {dataset_entry.name}")
         for portrait in query.portraits:
+            if not portrait.match:
+                raise ValueError(
+                    f"Portrait {portrait.path} has no matches, query {query.query}, dataset entry {dataset_entry.name}"
+                )
             if not portrait.match.issubset(query.match):
                 local_portrait_path = path_to_portraits / portrait.path
                 if not local_portrait_path.exists():
