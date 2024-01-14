@@ -57,8 +57,11 @@ class Query(BaseEntity):
         d2: dict[str, Any] = OrderedDict()
         d2["query"] = self.query
         d2["match"] = list(sorted(self.match))
-        d2["portraits"] = self.portraits
+        d2["portraits"] = list(sorted(self.portraits, key=lambda portrait: portrait.path))
         return d2
+
+    def __repr__(self) -> str:
+        return f"Query: \"{self.query}\". Query matches: \"{', '.join(self.match)}\". Portraits: {len(self.portraits)}."
 
 
 class DatasetEntry(BaseEntity):
@@ -66,7 +69,10 @@ class DatasetEntry(BaseEntity):
     queries: list[Query] = Field(min_length=1)
 
     def __repr__(self) -> str:
-        return self.name
+        return (
+            f"Dataset entry: {self.name}. Queries: {len(self.queries)}. "
+            f"Portraits: {sum(len(query.portraits) for query in self.queries)}."
+        )
 
     @model_serializer
     def no_name(self) -> dict[str, Any]:
