@@ -85,7 +85,7 @@ register_embedder(
     EmbedderType.INSTRUCTOR_LARGE_PATHFINDER_CHARACTER_INSTRUCTIONS,
     InstructorEmbedder("Represents a description of a Pathfinder character:", "hkunlp/instructor-large"),
 )
-register_embedder(EmbedderType.ALL_MINI_LM_L6_V2, SentenceTransformerEmbedder("all-MiniLM-L6-v2"))
+# register_embedder(EmbedderType.ALL_MINI_LM_L6_V2, SentenceTransformerEmbedder("all-MiniLM-L6-v2"))
 # register_embedder(EmbedderType.MS_MARCO_DISTILBERT_BASE_V4, SentenceTransformerEmbedder("msmarco-distilbert-base-v4"))
 # register_embedder(
 #     EmbedderType.MS_MARCO_ROBERTA_BASE_ANCE_FIRSTP, SentenceTransformerEmbedder("msmarco-roberta-base-ance-firstp")

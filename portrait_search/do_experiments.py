@@ -3,6 +3,7 @@ from pathlib import Path
 
 from dependency_injector.wiring import Provide, inject
 from tabulate import tabulate
+from tqdm import tqdm
 
 from portrait_search.dependencies import Container
 from portrait_search.quality.experiments import (
@@ -24,7 +25,8 @@ async def do_experiments(
     results_path = local_data_folder / "experiment_results/results.json"
 
     results = load_or_create_experiment_results(results_path)
-    for description, judge_factory in all_possible_combinations_cosine_by_experiment(experiment=experiment).items():
+    experiments = all_possible_combinations_cosine_by_experiment(experiment=experiment)
+    for description, judge_factory in tqdm(experiments.items(), desc="Running experiments"):
         if description in results:
             print(f"Skipping finished experiment: {description}")
             continue

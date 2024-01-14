@@ -24,11 +24,12 @@ def prepare_expected_results(dataset: list[DatasetEntry]) -> dict[str, EXPECTED_
         for query in entry.queries:
             expected_results[query.query] = []
             relevances: list[float] = [1 / vocabulary[match] for match in query.match]
-            relevances = (np.array(relevances) / np.sum(relevances)).tolist()
-            mataches_relevances = dict(zip(query.match, relevances))
+            # Sotfmax to squeeze small relevances closer to zero and big relevances uplift closer to one
+            relevances = (np.exp(relevances) / np.sum(np.exp(relevances))).tolist()
+            matches_relevances = dict(zip(query.match, relevances))
 
             for portrait in query.portraits:
-                portrait_relevance: float = sum((mataches_relevances[match] for match in portrait.match), 0.0)
+                portrait_relevance: float = sum((matches_relevances[match] for match in portrait.match), 0.0)
                 expected_results[query.query].append((portrait.path, portrait_relevance))
 
     return expected_results
