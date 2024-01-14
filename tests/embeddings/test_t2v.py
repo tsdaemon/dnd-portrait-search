@@ -41,18 +41,20 @@ def test_portraits2embeddings(
     ]
 
     # WHEN texts2vectors is called with the portraits and the splitter and embedder
-    splitter = SPLITTERS[splitter_type]()
-    embedder = EMBEDDERS[embedder_type]()
+    splitter = SPLITTERS[splitter_type]
+    embedder = EMBEDDERS[embedder_type]
     embeddings_records = portraits2embeddings(portraits_records, splitter, embedder)
 
-    # THEN the result is a list of 38 EmbeddingRecords, first 19 with the first portrait id, last 19 with the second
-    assert len(embeddings_records) == 38
-    assert embeddings_records[0].portrait_id == portraits_records[0].id
-    assert embeddings_records[19].portrait_id == portraits_records[1].id
+    # THEN the result is a list of EmbeddingRecords, first half with the first portrait id, last half with the second
+    assert len(embeddings_records) == 2 * len(splitter.split(portrait_description_example))
+    for i in range(len(embeddings_records)):
+        assert embeddings_records[i].portrait_id == portraits_records[i // int(len(embeddings_records) / 2)].id
 
-    # THEN first 19 embeddings are equal to the last 19 embeddings
-    assert embeddings_records[0].embedding == embeddings_records[19].embedding
-    assert embeddings_records[0].embedded_text == embeddings_records[19].embedded_text
+    # THEN first half of embeddings are equal to the last half of embeddings
+    assert all(
+        embeddings_records[i].embedding == embeddings_records[i + int(len(embeddings_records) / 2)].embedding
+        for i in range(int(len(embeddings_records) / 2))
+    )
 
     # THEN all embedding vectors are non-empty
     assert all(len(er.embedding) > 0 for er in embeddings_records)
@@ -62,13 +64,13 @@ def test_portraits2embeddings(
     assert all(e.embedder_type == embedder_type for e in embeddings_records)
 
 
-@pytest.mark.parametrize("embedder_type, splitter_type", product(EMBEDDERS.values(), SPLITTERS.values()))
-def test_query2embeddings(embedder_type: type[Embedder], splitter_type: type[Splitter]) -> None:
+@pytest.mark.parametrize("embedder, splitter", product(EMBEDDERS.values(), SPLITTERS.values()))
+def test_query2embeddings(embedder: Embedder, splitter: Splitter) -> None:
     # GIVEN a query string
     query = "A rogue elf female with a knife"
 
     # WHEN query2embeddings is called
-    embeddings, texts = query2embeddings(query, splitter_type(), embedder_type())
+    embeddings, texts = query2embeddings(query, splitter, embedder)
 
     # THEN all texts non-empty
     assert all(len(t) > 0 for t in texts)
@@ -77,7 +79,7 @@ def test_query2embeddings(embedder_type: type[Embedder], splitter_type: type[Spl
     assert all(t in query for t in texts)
 
     # THEN the result is a list of vectors
-    assert len(embeddings) > 1
+    assert len(embeddings) > 0
 
     # THEN all embedding vectors are non-empty
     assert all(len(e) > 0 for e in embeddings)

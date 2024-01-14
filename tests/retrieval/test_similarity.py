@@ -145,16 +145,16 @@ async def test_get_portraits__several_results(
         [
             call(
                 [1, 2, 3],
-                splitter_mock.splitter_type(),
-                embedder_mock.embedder_type(),
+                splitter_mock.type,
+                embedder_mock.type,
                 DistanceType.EUCLIDEAN,
                 experiment=None,
                 limit=6,
             ),
             call(
                 [4, 5, 6],
-                splitter_mock.splitter_type(),
-                embedder_mock.embedder_type(),
+                splitter_mock.type,
+                embedder_mock.type,
                 DistanceType.EUCLIDEAN,
                 experiment=None,
                 limit=6,

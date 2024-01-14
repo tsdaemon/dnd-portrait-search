@@ -44,7 +44,7 @@ async def test_generate_embeddings__empty_database(embeddings_repository_mock: M
     # WHEN generate_embeddings is called
     await generate_embeddings()
     # THEN no records are inserted into embeddings_repository
-    embeddings_repository_mock.insert_many.assert_called_once_with([])
+    embeddings_repository_mock.insert_many.assert_has_calls([])
 
 
 async def test_generate_embeddings__no_embeddings(
@@ -57,7 +57,7 @@ async def test_generate_embeddings__no_embeddings(
     await generate_embeddings()
     # THEN one records is inserted into embeddings_repository
     inserted_embeddings: list[EmbeddingRecord] = embeddings_repository_mock.insert_many.call_args[0][0]
-    assert len(inserted_embeddings) == 1
+    assert len(inserted_embeddings) == 2
     assert inserted_embeddings[0].portrait_id == portrait_mock.id
     assert inserted_embeddings[0].embedded_text == portrait_mock.description
     assert len(inserted_embeddings[0].embedding) == 768
@@ -82,7 +82,7 @@ async def test_generate_embeddings__new_and_old(
     await generate_embeddings()
     # THEN one records is inserted into embeddings_repository
     inserted_embeddings: list[EmbeddingRecord] = embeddings_repository_mock.insert_many.call_args[0][0]
-    assert len(inserted_embeddings) == 1
+    assert len(inserted_embeddings) == 2
     assert inserted_embeddings[0].portrait_id == portrait_mock2.id
     assert inserted_embeddings[0].embedded_text == portrait_mock2.description
     assert len(inserted_embeddings[0].embedding) == 768

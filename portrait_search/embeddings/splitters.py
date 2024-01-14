@@ -6,10 +6,18 @@ from portrait_search.core.enums import SplitterType
 
 
 class Splitter(abc.ABC):
-    @classmethod
-    @abc.abstractmethod
-    def splitter_type(cls) -> SplitterType:
-        raise NotImplementedError()
+    def __init__(self) -> None:
+        self._type: SplitterType | None = None
+
+    @property
+    def type(self) -> SplitterType:
+        if self._type is None:
+            raise ValueError("Splitter type not set")
+        return self._type
+
+    @type.setter
+    def type(self, value: SplitterType) -> None:
+        self._type = value
 
     @abc.abstractmethod
     def split(self, text: str) -> list[str]:
@@ -20,9 +28,28 @@ class Splitter(abc.ABC):
         raise NotImplementedError()
 
 
+SPLITTERS: dict[SplitterType, Splitter] = {}
+
+
+def register_splitter(splitter_type: SplitterType, splitter: Splitter) -> None:
+    SPLITTERS[splitter_type] = splitter
+    splitter.type = splitter_type
+
+
 class DoNotSplitQueryMixin(Splitter, abc.ABC):
     def split_query(self, text: str) -> list[str]:
         return [text]
+
+
+class CombineSplitter(Splitter):
+    def __init__(self, splitters: list[Splitter]) -> None:
+        self.splitters = splitters
+
+    def split(self, text: str) -> list[str]:
+        return [chunk for splitter in self.splitters for chunk in splitter.split(text)]
+
+    def split_query(self, text: str) -> list[str]:
+        return [chunk for splitter in self.splitters for chunk in splitter.split_query(text)]
 
 
 class LangChainRecursiveSplitter(Splitter):
@@ -41,61 +68,32 @@ class LangChainRecursiveSplitter(Splitter):
         return self.splitter.split_text(text)
 
 
-class LangChainRecursiveTextSplitterChunk120Overlap40(LangChainRecursiveSplitter):
-    def __init__(self) -> None:
-        super().__init__(chunk_size=120, chunk_overlap=40)
-
-    @classmethod
-    def splitter_type(cls) -> SplitterType:
-        return SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_40
-
-
-class LangChainRecursiveTextSplitterChunk120Overlap60(LangChainRecursiveSplitter):
-    def __init__(self) -> None:
-        super().__init__(chunk_size=120, chunk_overlap=60)
-
-    @classmethod
-    def splitter_type(cls) -> SplitterType:
-        return SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_60
-
-
-class LangChainRecursiveTextSplitterChunk160Overlap40(LangChainRecursiveSplitter):
-    def __init__(self) -> None:
-        super().__init__(chunk_size=120, chunk_overlap=60)
-
-    @classmethod
-    def splitter_type(cls) -> SplitterType:
-        return SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_160_OVERLAP_40
-
-    def split_query(self, text: str) -> list[str]:
-        return self.splitter.split_text(text)
-
-
-class LangChainRecursiveTextSplitterChunk200Overlap80(LangChainRecursiveSplitter):
-    def __init__(self) -> None:
-        super().__init__(chunk_size=200, chunk_overlap=80)
-
-    @classmethod
-    def splitter_type(cls) -> SplitterType:
-        return SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_200_OVERLAP_80
-
-
-class LangChainRecursiveTextSplitterChunk300Overlap100(LangChainRecursiveSplitter):
-    def __init__(self) -> None:
-        super().__init__(chunk_size=300, chunk_overlap=100)
-
-    @classmethod
-    def splitter_type(cls) -> SplitterType:
-        return SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_300_OVERLAP_100
-
-
-SPLITTERS: dict[SplitterType, type[Splitter]] = {
-    t.splitter_type(): t  # type: ignore[type-abstract]
-    for t in [
-        LangChainRecursiveTextSplitterChunk120Overlap40,
-        LangChainRecursiveTextSplitterChunk120Overlap60,
-        LangChainRecursiveTextSplitterChunk160Overlap40,
-        LangChainRecursiveTextSplitterChunk200Overlap80,
-        LangChainRecursiveTextSplitterChunk300Overlap100,
-    ]
-}
+register_splitter(
+    SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_300_OVERLAP_100,
+    LangChainRecursiveSplitter(chunk_size=300, chunk_overlap=100),
+)
+register_splitter(
+    SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_200_OVERLAP_80,
+    LangChainRecursiveSplitter(chunk_size=200, chunk_overlap=80),
+)
+register_splitter(
+    SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_160_OVERLAP_40,
+    LangChainRecursiveSplitter(chunk_size=160, chunk_overlap=40),
+)
+register_splitter(
+    SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_60,
+    LangChainRecursiveSplitter(chunk_size=120, chunk_overlap=60),
+)
+register_splitter(
+    SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_40,
+    LangChainRecursiveSplitter(chunk_size=120, chunk_overlap=40),
+)
+register_splitter(
+    SplitterType.COMBINE_LCHUNK_160_O40_AND_LCHUNK_120_O60,
+    CombineSplitter(
+        [
+            LangChainRecursiveSplitter(chunk_size=160, chunk_overlap=40),
+            LangChainRecursiveSplitter(chunk_size=120, chunk_overlap=60),
+        ]
+    ),
+)

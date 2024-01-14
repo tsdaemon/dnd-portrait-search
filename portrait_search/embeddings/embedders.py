@@ -12,11 +12,17 @@ from portrait_search.core.enums import EmbedderType
 class Embedder(abc.ABC):
     def __init__(self, expected_dimensionality: int | None = None) -> None:
         self.expected_dimensionality = expected_dimensionality
+        self._type: EmbedderType | None = None
 
-    @classmethod
-    @abc.abstractmethod
-    def embedder_type(cls) -> EmbedderType:
-        raise NotImplementedError()
+    @property
+    def type(self) -> EmbedderType:
+        if self._type is None:
+            raise ValueError("Embedder type not set")
+        return self._type
+
+    @type.setter
+    def type(self, value: EmbedderType) -> None:
+        self._type = value
 
     def embed(self, texts: list[str]) -> list[list[float]]:
         vectors = self._embed(texts)
@@ -44,7 +50,15 @@ class Embedder(abc.ABC):
         return result
 
 
-class InstructorEmbeddings(Embedder):
+EMBEDDERS: dict[EmbedderType, Embedder] = {}
+
+
+def register_embedder(embedder_type: EmbedderType, embedder: Embedder) -> None:
+    EMBEDDERS[embedder_type] = embedder
+    embedder.type = embedder_type
+
+
+class InstructorEmbedder(Embedder):
     def __init__(self, instructions: str, model_name: str, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         self.instructions = instructions
@@ -55,18 +69,7 @@ class InstructorEmbeddings(Embedder):
         return np.array(self.model.encode(pairs))  # type: ignore
 
 
-class InstructorEmbeddingsLargePathfinderCharacterInstructions(InstructorEmbeddings):
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(
-            "Represents a description of a Pathfinder character:", "hkunlp/instructor-large", *args, **kwargs
-        )
-
-    @classmethod
-    def embedder_type(cls) -> EmbedderType:
-        return EmbedderType.INSTRUCTOR_LARGE_PATHFINDER_CHARACTER_INSTRUCTIONS
-
-
-class SentenceTransformerEmbeddings(Embedder):
+class SentenceTransformerEmbedder(Embedder):
     def __init__(self, model_name: str, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         self.model = SentenceTransformer(model_name)
@@ -75,39 +78,12 @@ class SentenceTransformerEmbeddings(Embedder):
         return np.array(self.model.encode(texts, convert_to_numpy=True))
 
 
-class AllMiniLML6v2(SentenceTransformerEmbeddings):
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__("all-MiniLM-L6-v2", *args, **kwargs)
-
-    @classmethod
-    def embedder_type(cls) -> EmbedderType:
-        return EmbedderType.ALL_MINI_LM_L6_V2
-
-
-class MSMarcoDistilbertBaseV4(SentenceTransformerEmbeddings):
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__("msmarco-distilbert-base-v4", *args, **kwargs)
-
-    @classmethod
-    def embedder_type(cls) -> EmbedderType:
-        return EmbedderType.MS_MARCO_DISTILBERT_BASE_V4
-
-
-class MSMarcoRobertaBaseAnceFirstp(SentenceTransformerEmbeddings):
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__("msmarco-roberta-base-ance-firstp", *args, **kwargs)
-
-    @classmethod
-    def embedder_type(cls) -> EmbedderType:
-        return EmbedderType.MS_MARCO_ROBERTA_BASE_ANCE_FIRSTP
-
-
-EMBEDDERS: dict[EmbedderType, type[Embedder]] = {
-    t.embedder_type(): t  # type: ignore[type-abstract]
-    for t in [
-        InstructorEmbeddingsLargePathfinderCharacterInstructions,
-        # AllMiniLML6v2,
-        # MSMarcoDistilbertBaseV4,
-        # MSMarcoRobertaBaseAnceFirstp,
-    ]
-}
+register_embedder(
+    EmbedderType.INSTRUCTOR_LARGE_PATHFINDER_CHARACTER_INSTRUCTIONS,
+    InstructorEmbedder("Represents a description of a Pathfinder character:", "hkunlp/instructor-large"),
+)
+# register_embedder(EmbedderType.ALL_MINI_LM_L6_V2, SentenceTransformerEmbedder("all-MiniLM-L6-v2"))
+# register_embedder(EmbedderType.MS_MARCO_DISTILBERT_BASE_V4, SentenceTransformerEmbedder("msmarco-distilbert-base-v4"))
+# register_embedder(
+#     EmbedderType.MS_MARCO_ROBERTA_BASE_ANCE_FIRSTP, SentenceTransformerEmbedder("msmarco-roberta-base-ance-firstp")
+# )

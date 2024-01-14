@@ -38,11 +38,11 @@ class Container(containers.DeclarativeContainer):
 
     # Data science config
     splitter = providers.Resource(
-        lambda config: SPLITTERS[config.splitter_type](),
+        lambda config: SPLITTERS[config.splitter_type],
         config=config,
     )
     embedder = providers.Resource(
-        lambda config: EMBEDDERS[config.embedder_type](),
+        lambda config: EMBEDDERS[config.embedder_type],
         config=config,
     )
     distance_type = providers.Resource(

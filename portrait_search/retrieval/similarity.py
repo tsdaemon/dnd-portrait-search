@@ -43,8 +43,8 @@ class SimilarityRetriever(Retriever):
             query_embedding, query_text = query_embedding_and_text
             embedding_similarities = await self.embedding_repository.vector_search(
                 query_embedding,
-                self.splitter.splitter_type(),
-                self.embedder.embedder_type(),
+                self.splitter.type,
+                self.embedder.type,
                 self.distance_type,
                 experiment=experiment,
                 # Get more candidates to widen search

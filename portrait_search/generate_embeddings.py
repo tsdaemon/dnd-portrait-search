@@ -19,13 +19,11 @@ async def generate_embeddings(
 ) -> None:
     all_splitters_and_providers = product(SPLITTERS.values(), EMBEDDERS.values())
     all_portraits = await portrait_repository.get_many()
-    for splitter_type, embedder_type in all_splitters_and_providers:
-        splitter = splitter_type()
-        embedder = embedder_type()
-        print(f"Generating embeddings for splitter {splitter.splitter_type()}, embedder {embedder.embedder_type()}")
+    for splitter, embedder in all_splitters_and_providers:
+        print(f"Generating embeddings for splitter {splitter.type}, embedder {embedder.type}")
         # find existing embeddings
         existing_embeddings = await embedding_repository.get_by_type(
-            embedder_type=embedder.embedder_type(), splitter_type=splitter.splitter_type()
+            embedder_type=embedder.type, splitter_type=splitter.type
         )
         print("Already generated: ", len(existing_embeddings))
         existing_portraits = {embedding.portrait_id for embedding in existing_embeddings}

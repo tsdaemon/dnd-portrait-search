@@ -25,8 +25,8 @@ def portraits2embeddings(
             portrait_id=portrait.id,
             embedding=embedding,
             embedded_text=text_chunk,
-            splitter_type=splitter.splitter_type(),
-            embedder_type=embedder.embedder_type(),
+            splitter_type=splitter.type,
+            embedder_type=embedder.type,
         )
         embeddings_records.append(embedding_record)
 

@@ -54,8 +54,8 @@ def multi_experiment(
             container: Container,
         ) -> Judge:
             with (
-                container.embedder.override(EMBEDDERS[embedder]()),
-                container.splitter.override(SPLITTERS[splitter]()),
+                container.embedder.override(EMBEDDERS[embedder]),
+                container.splitter.override(SPLITTERS[splitter]),
                 container.distance_type.override(distance),
             ):
                 retriever = container.retriever()
