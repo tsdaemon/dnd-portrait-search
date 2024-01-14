@@ -10,6 +10,7 @@ queries:
     match:
     - fullsize
     - heavy armor
+    - tank
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-M105/Fulllength.png
     match:
     - heavy armor
