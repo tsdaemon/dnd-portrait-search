@@ -5,12 +5,24 @@ queries:
   - acrobat
   - small height
   portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/Dwarf/Melee/DW-MF-MS-M102/Fulllength.png
+    match:
+    - small height
+  - path: nexusmods-pathfinderkingmaker-92-974/Dwarf/Melee/DW-MF-MS-M204/Fulllength.png
+    match:
+    - small height
   - path: nexusmods-pathfinderkingmaker-92-974/Dwarf/Melee/DW-MF-MS-M206/Fulllength.png
     match:
     - small height
   - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Gnome, Halfling/GH-GH-MS-F105/Fulllength.png
     match:
     - acrobat
+    - small height
+  - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Gnome, Halfling/GH-GH-MS-M104/Fulllength.png
+    match:
+    - small height
+  - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Gnome, Halfling/GH-GH-MS-M109/Fulllength.png
+    match:
     - small height
   - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Gnome, Halfling/GH-GH-MS-M205/Fulllength.png
     match:
@@ -31,7 +43,25 @@ queries:
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Freebooter/HE-AR-FB-F203/Fulllength.png
     match:
     - rogue
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Knife Master/HE-RO-KM-F209/Fulllength.png
+    match:
+    - rogue
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-F201/Fulllength.png
+    match:
+    - rogue
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-F302/Fulllength.png
+    match:
+    - rogue
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-F304/Fulllength.png
+    match:
+    - rogue
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-F305/Fulllength.png
+    match:
+    - rogue
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-M304/Fulllength.png
+    match:
+    - rogue
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Necromancer/HE-WS-NC-F205/Fulllength.png
     match:
     - rogue
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Bard/Bard, Thundercaller/MX-BD-BT-M114/Fulllength.png
@@ -53,9 +83,11 @@ queries:
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Freebooter/HE-AR-FB-F102/Fulllength.png
     match:
     - pirate
-    - rogue
     - ship
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Freebooter/HE-AR-FB-M303/Fulllength.png
+    match:
+    - pirate
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Duelist, Aldori Defender, Swordlord/HE-MF-DD-F102/Fulllength.png
     match:
     - pirate
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Duelist, Aldori Defender, Swordlord/HE-MF-DD-F107/Fulllength.png
@@ -66,10 +98,24 @@ queries:
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-M221/Fulllength.png
     match:
     - ship
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M113/Fulllength.png
+    match:
+    - pirate
+    - ship
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-M115/Fulllength.png
     match:
     - pirate
     - rogue
+    - ship
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-M116/Fulllength.png
+    match:
+    - pirate
+    - ship
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Bard/Archaeologist/MX-BD-AR-M102/Fulllength.png
+    match:
+    - ship
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Bard/Bard, Thundercaller/MX-BD-BT-M107/Fulllength.png
+    match:
     - ship
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Monk/Monk, Scaled Fist, Sensei, Traditional Monk/MX-MO-MS-M208/Fulllength.png
     match:
