@@ -9,26 +9,6 @@ queries:
   - rage
   - sword
   portraits:
-  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M208/Fulllength.png
-    match:
-    - axe
-    - barbarian
-    - blood
-    - male
-    - rage
-    - sword
-  - path: nexusmods-pathfinderkingmaker-92-974/Tiefling/Melee/TF-MF-MS-M105/Fulllength.png
-    match:
-    - axe
-    - barbarian
-    - male
-    - rage
-  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M117/Fulllength.png
-    match:
-    - axe
-    - barbarian
-    - male
-    - rage
   - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Goblin/GH-GO-MS-M106/Fulllength.png
     match:
     - barbarian
@@ -42,6 +22,20 @@ queries:
     - blood
     - male
     - rage
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M117/Fulllength.png
+    match:
+    - axe
+    - barbarian
+    - male
+    - rage
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M208/Fulllength.png
+    match:
+    - axe
+    - barbarian
+    - blood
+    - male
+    - rage
+    - sword
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M215/Fulllength.png
     match:
     - axe
@@ -54,6 +48,12 @@ queries:
     - axe
     - barbarian
     - blood
+    - male
+    - rage
+  - path: nexusmods-pathfinderkingmaker-92-974/Tiefling/Melee/TF-MF-MS-M105/Fulllength.png
+    match:
+    - axe
+    - barbarian
     - male
     - rage
 - query: Human demon slayer in natural armor with big scary weapon
@@ -74,16 +74,16 @@ queries:
     - big scary weapon
     - demon slayer
     - human
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-M312/Fulllength.png
+    match:
+    - demon slayer
+    - human
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Portraits/MX-MS-PO-M115/Fulllength.png
     match:
     - big scary weapon
     - demon slayer
     - human
     - natural armor
-  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-M312/Fulllength.png
-    match:
-    - demon slayer
-    - human
 - query: Half naked barbarian with weapon covered in bloeed yelling. Gray beard and hair
   match:
   - barbarian
@@ -99,6 +99,11 @@ queries:
     - half naked
     - weapon covered in blood
     - yelling
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M215/Fulllength.png
+    match:
+    - barbarian
+    - half naked
+    - weapon covered in blood
   - path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-M107/Fulllength.png
     match:
     - barbarian
@@ -108,11 +113,6 @@ queries:
     match:
     - barbarian
     - yelling
-  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M215/Fulllength.png
-    match:
-    - barbarian
-    - half naked
-    - weapon covered in blood
 - query: Like an old Conan-Barbarian with an axe and a flame sword
   match:
   - Conan
