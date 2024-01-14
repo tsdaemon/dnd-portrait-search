@@ -6,6 +6,9 @@ queries:
   - fighter
   - two blades
   portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/Dwarf/Melee/DW-MF-MS-M208/Fulllength.png
+    match:
+    - fighter
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Flamewarden/HE-AR-FW-M201/Fulllength.png
     match:
     - elf
@@ -27,13 +30,36 @@ queries:
     match:
     - elf
     - fighter
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Shield (Stalwart Defender, Tower Shield Specialist)/HE-MF-SH-F101/Fulllength.png
+    match:
+    - fighter
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Shield (Stalwart Defender, Tower Shield Specialist)/HE-MF-SH-M201/Fulllength.png
+    match:
+    - fighter
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M301/Fulllength.png
+    match:
+    - fighter
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M316/Fulllength.png
+    match:
+    - fighter
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Paladin, Hospitaler, Divine Guardian, Crusader/HE-PC-PL-F107/Fulllength.png
     match:
     - fighter
     - two blades
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Knife Master/HE-RO-KM-F205/Fulllength.png
+    match:
+    - elf
+    - two blades
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-F319/Fulllength.png
+    match:
+    - elf
+    - two blades
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Inquisitor/Inquisitor/MX-IN-IN-M209/Fulllength.png
     match:
     - two blades
+  - path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-M116/Fulllength.png
+    match:
+    - fighter
   - path: nexusmods-pathfinderkingmaker-92-974/Tiefling/Caster/TF-CA-MS-F204/Fulllength.png
     match:
     - elf
@@ -44,6 +70,13 @@ queries:
   - melee weapon
   - ranger
   portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-F315/Fulllength.png
+    match:
+    - half elf
+    - ranger
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-M113/Fulllength.png
+    match:
+    - ranger
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Eldritch Archer, Stormwalker/HE-AR-EA-F202/Fulllength.png
     match:
     - half elf
@@ -53,7 +86,37 @@ queries:
     - half elf
     - melee weapon
     - ranger
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M109/Fulllength.png
+    match:
+    - melee weapon
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M209/Fulllength.png
+    match:
+    - half elf
+    - melee weapon
+    - ranger
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Knife Master/HE-RO-KM-M206/Fulllength.png
+    match:
+    - melee weapon
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-F101/Fulllength.png
+    match:
+    - half elf
+    - melee weapon
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-M301/Fulllength.png
+    match:
+    - half elf
+    - ranger
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-M202/Fulllength.png
+    match:
+    - half elf
+    - ranger
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-M210/Fulllength.png
+    match:
+    - melee weapon
+    - ranger
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Portraits/MX-MS-PO-F140/Fulllength.png
+    match:
+    - ranger
+  - path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-M201/Fulllength.png
     match:
     - melee weapon
     - ranger
@@ -65,6 +128,9 @@ queries:
   - male
   - two blades
   portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Gnome, Halfling/GH-GH-MS-M104/Fulllength.png
+    match:
+    - male
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Flamewarden/HE-AR-FW-M201/Fulllength.png
     match:
     - curved blades
@@ -72,10 +138,39 @@ queries:
     - flaming blades
     - male
     - two blades
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Magus, Kinetic Knight/Magus, Eldritch Scion, Sword Saint, Eldritch Knight, Kinetic Knight/HE-FM-FM-M107/Fulllength.png
+    match:
+    - curved blades
+    - elf
+    - male
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Magus, Kinetic Knight/Magus, Eldritch Scion, Sword Saint, Eldritch Knight, Kinetic Knight/HE-FM-FM-M108/Fulllength.png
+    match:
+    - elf
+    - male
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-M224/Fulllength.png
+    match:
+    - male
+    - two blades
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-M104/Fulllength.png
     match:
     - curved blades
     - elf
+    - male
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-M153/Fulllength.png
+    match:
+    - male
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-M202/Fulllength.png
+    match:
+    - curved blades
+    - elf
+    - male
+    - two blades
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-M312/Fulllength.png
+    match:
+    - elf
+    - male
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Bard/Bard, Thundercaller/MX-BD-BT-F108/Fulllength.png
+    match:
     - male
   - path: nexusmods-pathfinderkingmaker-92-974/Tiefling/Melee/TF-MF-MS-M101/Fulllength.png
     match:
