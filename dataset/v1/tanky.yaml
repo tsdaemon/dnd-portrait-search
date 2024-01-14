@@ -10,10 +10,8 @@ queries:
     match:
     - fullsize
     - heavy armor
-    - tank
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-M105/Fulllength.png
     match:
-    - fullsize
     - heavy armor
     - tank
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-M133/Fulllength.png
@@ -21,6 +19,10 @@ queries:
     - heavy armor
     - tank
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Shield (Stalwart Defender, Tower Shield Specialist)/HE-MF-SH-M211/Fulllength.png
+    match:
+    - heavy armor
+    - tank
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M111/Fulllength.png
     match:
     - fullsize
     - heavy armor
@@ -30,7 +32,17 @@ queries:
     - fullsize
     - heavy armor
     - tank
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M214/Fulllength.png
+    match:
+    - fullsize
+    - heavy armor
+    - tank
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M217/Fulllength.png
+    match:
+    - fullsize
+    - heavy armor
+    - tank
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M316/Fulllength.png
     match:
     - fullsize
     - heavy armor
@@ -45,19 +57,40 @@ queries:
     - fullsize
     - heavy armor
     - tank
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Paladin, Hospitaler, Divine Guardian, Crusader/HE-PC-PL-M219/Fulllength.png
+    match:
+    - fullsize
+    - heavy armor
+    - tank
+  - path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-M116/Fulllength.png
+    match:
+    - fullsize
+    - heavy armor
+    - tank
 - query: paladin in heavy armor with a halberd
   match:
   - halberd
   - heavy armor
   - paladin
   portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/Aasimar/Wings/AA-WI-MS-F120/Fulllength.png
+    match:
+    - heavy armor
+    - paladin
   - path: nexusmods-pathfinderkingmaker-92-974/Dwarf/Melee/DW-MF-MS-M207/Fulllength.png
     match:
     - heavy armor
     - paladin
+  - path: nexusmods-pathfinderkingmaker-92-974/Dwarf/Melee/DW-MF-MS-M309/Fulllength.png
+    match:
+    - heavy armor
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M310/Fulllength.png
     match:
     - halberd
+    - heavy armor
+    - paladin
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Magus, Kinetic Knight/Magus, Eldritch Scion, Sword Saint, Eldritch Knight, Kinetic Knight/HE-FM-FM-M206/Fulllength.png
+    match:
     - heavy armor
     - paladin
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Shield (Stalwart Defender, Tower Shield Specialist)/HE-MF-SH-M109/Fulllength.png
@@ -73,9 +106,20 @@ queries:
     - halberd
     - heavy armor
     - paladin
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Cleric, Ecclesitheurge, Herald Caller/HE-PC-CE-F310/Fulllength.png
+    match:
+    - heavy armor
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-M207/Fulllength.png
     match:
     - heavy armor
+    - paladin
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-M221/Fulllength.png
+    match:
+    - halberd
+    - heavy armor
+    - paladin
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Headshots/MX-MS-HS-F117/Fulllength.png
+    match:
     - paladin
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Main Character/MC/MX-MS-MC-M105/Fulllength.png
     match:
@@ -96,6 +140,15 @@ queries:
     - heavy armor
     - knight
     - two handed weapon
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-M102/Fulllength.png
+    match:
+    - heavy armor
+    - knight
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-M144/Fulllength.png
+    match:
+    - heavy armor
+    - knight
+    - two handed weapon
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Shield (Stalwart Defender, Tower Shield Specialist)/HE-MF-SH-F101/Fulllength.png
     match:
     - heavy armor
@@ -110,6 +163,11 @@ queries:
     - heavy armor
     - knight
     - two handed weapon
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M306/Fulllength.png
+    match:
+    - heavy armor
+    - knight
+    - two handed weapon
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Paladin, Hospitaler, Divine Guardian, Crusader/HE-PC-PL-F302/Fulllength.png
     match:
     - heavy armor
@@ -119,7 +177,19 @@ queries:
     - heavy armor
     - knight
     - two handed weapon
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-F206/Fulllength.png
+    match:
+    - heavy armor
+    - two handed weapon
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-M202/Fulllength.png
+    match:
+    - heavy armor
+    - knight
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-M204/Fulllength.png
+    match:
+    - heavy armor
+    - knight
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Main Character/MC/MX-MS-MC-M105/Fulllength.png
     match:
     - heavy armor
     - knight
@@ -129,9 +199,22 @@ queries:
   - halberd
   - knight
   portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/Dwarf/Melee/DW-MF-MS-M116/Fulllength.png
+    match:
+    - knight
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Magus, Kinetic Knight/Magus, Eldritch Scion, Sword Saint, Eldritch Knight, Kinetic Knight/HE-FM-FM-M217/Fulllength.png
     match:
     - closed helmet
+    - knight
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-M102/Fulllength.png
+    match:
+    - knight
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-M203/Fulllength.png
+    match:
+    - closed helmet
+    - knight
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Shield (Stalwart Defender, Tower Shield Specialist)/HE-MF-SH-M202/Fulllength.png
+    match:
     - knight
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Shield (Stalwart Defender, Tower Shield Specialist)/HE-MF-SH-M211/Fulllength.png
     match:
@@ -142,8 +225,18 @@ queries:
     - closed helmet
     - halberd
     - knight
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-F112/Fulllength.png
+    match:
+    - knight
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M108/Fulllength.png
+    match:
+    - closed helmet
+    - knight
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M208/Fulllength.png
     match:
     - closed helmet
     - halberd
+    - knight
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Cleric, Ecclesitheurge, Herald Caller/HE-PC-CE-M305/Fulllength.png
+    match:
     - knight
