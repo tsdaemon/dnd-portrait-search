@@ -106,8 +106,8 @@ EMBEDDERS: dict[EmbedderType, type[Embedder]] = {
     t.embedder_type(): t  # type: ignore[type-abstract]
     for t in [
         InstructorEmbeddingsLargePathfinderCharacterInstructions,
-        AllMiniLML6v2,
-        MSMarcoDistilbertBaseV4,
-        MSMarcoRobertaBaseAnceFirstp,
+        # AllMiniLML6v2,
+        # MSMarcoDistilbertBaseV4,
+        # MSMarcoRobertaBaseAnceFirstp,
     ]
 }

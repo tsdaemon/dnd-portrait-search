@@ -43,8 +43,11 @@ class ChromaEmbeddingRepository(EmbeddingRepository):
         EmbedderType.MS_MARCO_ROBERTA_BASE_ANCE_FIRSTP: "msmarcoRBAFp",
     }
     SPLITTER_TYPE_MAPPING = {
+        SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_40: "langchainRec120o40",
         SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_60: "langchainRec120o60",
-        SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_160_OVERLAP_40_SAME_QUERY: "langchainRec160o40",
+        SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_160_OVERLAP_40: "langchainRec160o40",
+        SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_200_OVERLAP_80: "langchainRec200o80",
+        SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_300_OVERLAP_100: "langchainRec300o100",
     }
     DISTANCE_TYPE_MAPPING = {
         DistanceType.EUCLIDEAN: "l2",
