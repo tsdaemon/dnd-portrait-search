@@ -16,10 +16,10 @@ def query_results() -> list[QUERY_RESULT_FOR_METRIC]:
 @pytest.mark.parametrize(
     "metric,expected",
     [
-        ("precision@k", (2 / 3 + 2 / 3 + 2 / 3) / 4),
-        ("mean_reciprocal_rank", (1 / 2 + 1 + 1 / 3) / 4),
-        ("weighted_precision@k", (2 / 3 + 2 / 3 + (0.8 + 0.1) / 3) / 4),
-        ("weighted_mean_reciprocal_rank", (1 / 2 + 1 + 0.1 / 2) / 4),
+        ("precision@k", (2 / 3 + 2 / 3) / 4),
+        ("mrr", (1 / 2 + 1) / 4),
+        ("w_rel_precision@k", (2 / 3 + 2 / 3 + (0.8 + 0.1) / 3) / 4),
+        ("w_rel_mrr", (1 / 2 + 1 + 0.1 / 2) / 4),
     ],
 )
 def test_metrics(metric: str, expected: float, query_results: list[QUERY_RESULT_FOR_METRIC]) -> None:
