@@ -21,7 +21,7 @@ class Config(BaseSettings):
         default=EmbedderType.INSTRUCTOR_LARGE_PATHFINDER_CHARACTER_INSTRUCTIONS, alias="EMBEDDER_TYPE"
     )
     splitter_type: SplitterType = Field(
-        default=SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_160_OVERLAP_40, alias="SPLITTER_TYPE"
+        default=SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_60, alias="SPLITTER_TYPE"
     )
     distance_type: DistanceType = Field(default=DistanceType.COSINE, alias="DISTANCE_TYPE")
 

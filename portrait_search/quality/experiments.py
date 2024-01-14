@@ -71,6 +71,3 @@ def all_possible_combinations_by_experiment(experiment: str) -> EXPERIMENTS_COLL
 
 def all_possible_combinations_cosine_by_experiment(experiment: str) -> EXPERIMENTS_COLLECTION_TYPE:
     return dict(multi_experiment(all_possible_combinations_cosine_generator, experiment))
-
-
-CURRENT_EXPERIMENT: EXPERIMENTS_COLLECTION_TYPE = all_possible_combinations_cosine_by_experiment("v1")

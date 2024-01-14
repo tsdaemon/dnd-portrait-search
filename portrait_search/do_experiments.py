@@ -6,7 +6,7 @@ from tabulate import tabulate
 
 from portrait_search.dependencies import Container
 from portrait_search.quality.experiments import (
-    all_possible_combinations_by_experiment,
+    all_possible_combinations_cosine_by_experiment,
     load_or_create_experiment_results,
     store_experiment_results,
 )
@@ -24,7 +24,7 @@ async def do_experiments(
     results_path = local_data_folder / "experiment_results/results.json"
 
     results = load_or_create_experiment_results(results_path)
-    for description, judge_factory in all_possible_combinations_by_experiment(experiment=experiment).items():
+    for description, judge_factory in all_possible_combinations_cosine_by_experiment(experiment=experiment).items():
         if description in results:
             print(f"Skipping finished experiment: {description}")
             continue

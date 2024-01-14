@@ -9,6 +9,7 @@ class EmbedderType(StrEnum):
 
 
 class SplitterType(StrEnum):
+    LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_100_OVERLAP_60 = "langchain-recursive-text-splitter-chunk-100-overlap-60"
     LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_40 = "langchain-recursive-text-splitter-chunk-120-overlap-40"
     LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_60 = "langchain-recursive-text-splitter-chunk-120-overlap-60"
     LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_160_OVERLAP_40 = "langchain-recursive-text-splitter-chunk-160-overlap-40"

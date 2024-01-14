@@ -68,32 +68,36 @@ class LangChainRecursiveSplitter(Splitter):
         return self.splitter.split_text(text)
 
 
-register_splitter(
-    SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_300_OVERLAP_100,
-    LangChainRecursiveSplitter(chunk_size=300, chunk_overlap=100),
-)
-register_splitter(
-    SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_200_OVERLAP_80,
-    LangChainRecursiveSplitter(chunk_size=200, chunk_overlap=80),
-)
-register_splitter(
-    SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_160_OVERLAP_40,
-    LangChainRecursiveSplitter(chunk_size=160, chunk_overlap=40),
-)
+# register_splitter(
+#     SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_300_OVERLAP_100,
+#     LangChainRecursiveSplitter(chunk_size=300, chunk_overlap=100),
+# )
+# register_splitter(
+#     SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_200_OVERLAP_80,
+#     LangChainRecursiveSplitter(chunk_size=200, chunk_overlap=80),
+# )
+# register_splitter(
+#     SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_160_OVERLAP_40,
+#     LangChainRecursiveSplitter(chunk_size=160, chunk_overlap=40),
+# )
 register_splitter(
     SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_60,
     LangChainRecursiveSplitter(chunk_size=120, chunk_overlap=60),
 )
 register_splitter(
-    SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_40,
-    LangChainRecursiveSplitter(chunk_size=120, chunk_overlap=40),
+    SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_100_OVERLAP_60,
+    LangChainRecursiveSplitter(chunk_size=100, chunk_overlap=60),
 )
-register_splitter(
-    SplitterType.COMBINE_LCHUNK_160_O40_AND_LCHUNK_120_O60,
-    CombineSplitter(
-        [
-            LangChainRecursiveSplitter(chunk_size=160, chunk_overlap=40),
-            LangChainRecursiveSplitter(chunk_size=120, chunk_overlap=60),
-        ]
-    ),
-)
+# register_splitter(
+#     SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_40,
+#     LangChainRecursiveSplitter(chunk_size=120, chunk_overlap=40),
+# )
+# register_splitter(
+#     SplitterType.COMBINE_LCHUNK_160_O40_AND_LCHUNK_120_O60,
+#     CombineSplitter(
+#         [
+#             LangChainRecursiveSplitter(chunk_size=160, chunk_overlap=40),
+#             LangChainRecursiveSplitter(chunk_size=120, chunk_overlap=60),
+#         ]
+#     ),
+# )
