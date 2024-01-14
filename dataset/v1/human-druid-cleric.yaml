@@ -1,132 +1,127 @@
 ---
 queries:
-    - match:
-          - human
-          - white skin
-          - cleric
-          - female
-      portraits:
-          - match:
-                - human
-                - white skin
-                - cleric
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic
-                Theurge, Dragon Disciple/HE-WS-MS-F109/Fulllength.png
-          - match:
-                - human
-                - white skin
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic
-                Theurge, Dragon Disciple/HE-WS-MS-F112/Fulllength.png
-          - match:
-                - human
-                - white skin
-                - cleric
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Necromancer/HE-WS-NC-F221/Fulllength.png
-          - match:
-                - human
-                - white skin
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Inquisitor/Sacred Huntsmaster/MX-IN-SH-F203/Fulllength.png
-          - match:
-                - human
-                - white skin
-                - cleric
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/Misc/MX-MS-MS-F106/Fulllength.png
-          - match:
-                - human
-                - white skin
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Knife Master/HE-RO-KM-F202/Fulllength.png
-      query: Female human cleric with white skin
-    - match:
-          - long plaited hair
-          - cleric
-          - female
-      portraits:
-          - match:
-                - long plaited hair
-                - cleric
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic
-                Theurge, Dragon Disciple/HE-WS-MS-F109/Fulllength.png
-          - match:
-                - long plaited hair
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Shield (Stalwart Defender, Tower Shield Specialist)/HE-MF-SH-F201/Fulllength.png
-          - match:
-                - long plaited hair
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Divine Hunter/HE-PC-DH-F301/Fulllength.png
-      query: Female cleric with long plaited hair
-    - match:
-          - half elf
-          - long plaited hair
-          - healer
-          - druid
-      portraits:
-          - match:
-                - half elf
-                - long plaited hair
-                - healer
-                - druid
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic
-                Theurge, Dragon Disciple/HE-WS-MS-F109/Fulllength.png
-          - match:
-                - druid
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Druid/Druid, Defender of the True World/HE-DR-DD-F119/Fulllength.png
-          - match:
-                - druid
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Mad Dog/HE-BA-MD-F104/Fulllength.png
-      query: Half-elf druid healer with long plaited hair
-    - match:
-          - human
-          - forest
-          - druid
-          - female
-      portraits:
-          - match:
-                - human
-                - forest
-                - druid
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic
-                Theurge, Dragon Disciple/HE-WS-MS-F109/Fulllength.png
-          - match:
-                - forest
-                - druid
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/Tiefling/Caster/TF-CA-MS-F101/Fulllength.png
-          - match:
-                - forest
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-F307/Fulllength.png
-          - match:
-                - forest
-                - druid
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Gnome, Halfling/GH-GH-MS-F306/Fulllength.png
-          - match:
-                - forest
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Necromancer/HE-WS-NC-F210/Fulllength.png
-          - match:
-                - forest
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-F125/Fulllength.png
-          - match:
-                - forest
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Cleric, Ecclesitheurge, Herald Caller/HE-PC-CE-F108/Fulllength.png
-          - match:
-                - forest
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Druid/Feyspeaker/HE-DR-FS-F302/Fulllength.png
-          - match:
-                - forest
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Druid/Feyspeaker/HE-DR-FS-F107/Fulllength.png
-      query: Human female druid in a forest
+- query: Female human cleric with white skin
+  match:
+  - cleric
+  - female
+  - human
+  - white skin
+  portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-F109/Fulllength.png
+    match:
+    - cleric
+    - female
+    - human
+    - white skin
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-F112/Fulllength.png
+    match:
+    - female
+    - human
+    - white skin
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Necromancer/HE-WS-NC-F221/Fulllength.png
+    match:
+    - cleric
+    - female
+    - human
+    - white skin
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Inquisitor/Sacred Huntsmaster/MX-IN-SH-F203/Fulllength.png
+    match:
+    - female
+    - human
+    - white skin
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/Misc/MX-MS-MS-F106/Fulllength.png
+    match:
+    - cleric
+    - female
+    - human
+    - white skin
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Knife Master/HE-RO-KM-F202/Fulllength.png
+    match:
+    - female
+    - human
+    - white skin
+- query: Female cleric with long plaited hair
+  match:
+  - cleric
+  - female
+  - long plaited hair
+  portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-F109/Fulllength.png
+    match:
+    - cleric
+    - female
+    - long plaited hair
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Shield (Stalwart Defender, Tower Shield Specialist)/HE-MF-SH-F201/Fulllength.png
+    match:
+    - female
+    - long plaited hair
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Divine Hunter/HE-PC-DH-F301/Fulllength.png
+    match:
+    - female
+    - long plaited hair
+- query: Half-elf druid healer with long plaited hair
+  match:
+  - druid
+  - half elf
+  - healer
+  - long plaited hair
+  portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-F109/Fulllength.png
+    match:
+    - druid
+    - half elf
+    - healer
+    - long plaited hair
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Druid/Druid, Defender of the True World/HE-DR-DD-F119/Fulllength.png
+    match:
+    - druid
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Mad Dog/HE-BA-MD-F104/Fulllength.png
+    match:
+    - druid
+- query: Human female druid in a forest
+  match:
+  - druid
+  - female
+  - forest
+  - human
+  portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-F109/Fulllength.png
+    match:
+    - druid
+    - female
+    - forest
+    - human
+  - path: nexusmods-pathfinderkingmaker-92-974/Tiefling/Caster/TF-CA-MS-F101/Fulllength.png
+    match:
+    - druid
+    - female
+    - forest
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-F307/Fulllength.png
+    match:
+    - female
+    - forest
+  - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Gnome, Halfling/GH-GH-MS-F306/Fulllength.png
+    match:
+    - druid
+    - female
+    - forest
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Necromancer/HE-WS-NC-F210/Fulllength.png
+    match:
+    - female
+    - forest
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-F125/Fulllength.png
+    match:
+    - female
+    - forest
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Cleric, Ecclesitheurge, Herald Caller/HE-PC-CE-F108/Fulllength.png
+    match:
+    - female
+    - forest
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Druid/Feyspeaker/HE-DR-FS-F302/Fulllength.png
+    match:
+    - female
+    - forest
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Druid/Feyspeaker/HE-DR-FS-F107/Fulllength.png
+    match:
+    - female
+    - forest

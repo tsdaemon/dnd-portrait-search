@@ -1,83 +1,83 @@
 ---
 queries:
-    - match:
-          - man
-          - blue eyes
-          - long dark hair
-      portraits:
-          - match:
-                - man
-                - blue eyes
-                - long dark hair
-            path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Headshots/MX-MS-HS-M101/Fulllength.png
-          - match:
-                - man
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M314/Fulllength.png
-          - match:
-                - man
-                - long dark hair
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-M229/Fulllength.png
-          - match:
-                - man
-                - long dark hair
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M213/Fulllength.png
-      query: headshot of a man with a long dark hair and blue eyes
-    - match:
-          - blue eyes
-          - mage
-      portraits:
-          - match:
-                - blue eyes
-                - mage
-            path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Headshots/MX-MS-HS-M101/Fulllength.png
-          - match:
-                - mage
-            path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Portraits/MX-MS-PO-F151/Fulllength.png
-      query: portrait of a mage with blue eyes
-    - match:
-          - handsome
-          - long black hair
-          - man
-      portraits:
-          - match:
-                - handsome
-                - long black hair
-                - man
-            path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Headshots/MX-MS-HS-M101/Fulllength.png
-          - match:
-                - handsome
-                - long black hair
-                - man
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M313/Fulllength.png
-          - match:
-                - handsome
-                - long black hair
-                - man
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M213/Fulllength.png
-      query: handsome man with a long black hair
-    - match:
-          - elf
-          - wizzard robe
-          - long dark hair
-      portraits:
-          - match:
-                - elf
-                - wizzard robe
-                - long dark hair
-            path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Headshots/MX-MS-HS-M101/Fulllength.png
-          - match:
-                - elf
-                - wizzard robe
-                - long dark hair
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Druid/Feyspeaker/HE-DR-FS-F105/Fulllength.png
-          - match:
-                - long dark hair
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-F313/Fulllength.png
-          - match:
-                - elf
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Eldritch Archer, Stormwalker/HE-AR-EA-M101/Fulllength.png
-          - match:
-                - elf
-                - long dark hair
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M209/Fulllength.png
-      query: an elf in a wizzard robe, long dark hair, portrait
+- query: headshot of a man with a long dark hair and blue eyes
+  match:
+  - blue eyes
+  - long dark hair
+  - man
+  portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Headshots/MX-MS-HS-M101/Fulllength.png
+    match:
+    - blue eyes
+    - long dark hair
+    - man
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M314/Fulllength.png
+    match:
+    - man
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-M229/Fulllength.png
+    match:
+    - long dark hair
+    - man
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M213/Fulllength.png
+    match:
+    - long dark hair
+    - man
+- query: portrait of a mage with blue eyes
+  match:
+  - blue eyes
+  - mage
+  portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Headshots/MX-MS-HS-M101/Fulllength.png
+    match:
+    - blue eyes
+    - mage
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Portraits/MX-MS-PO-F151/Fulllength.png
+    match:
+    - mage
+- query: handsome man with a long black hair
+  match:
+  - handsome
+  - long black hair
+  - man
+  portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Headshots/MX-MS-HS-M101/Fulllength.png
+    match:
+    - handsome
+    - long black hair
+    - man
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M313/Fulllength.png
+    match:
+    - handsome
+    - long black hair
+    - man
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M213/Fulllength.png
+    match:
+    - handsome
+    - long black hair
+    - man
+- query: an elf in a wizzard robe, long dark hair, portrait
+  match:
+  - elf
+  - long dark hair
+  - wizzard robe
+  portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Headshots/MX-MS-HS-M101/Fulllength.png
+    match:
+    - elf
+    - long dark hair
+    - wizzard robe
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Druid/Feyspeaker/HE-DR-FS-F105/Fulllength.png
+    match:
+    - elf
+    - long dark hair
+    - wizzard robe
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-F313/Fulllength.png
+    match:
+    - long dark hair
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Eldritch Archer, Stormwalker/HE-AR-EA-M101/Fulllength.png
+    match:
+    - elf
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M209/Fulllength.png
+    match:
+    - elf
+    - long dark hair

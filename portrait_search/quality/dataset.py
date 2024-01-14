@@ -2,14 +2,15 @@ from collections import OrderedDict
 from pathlib import Path
 from typing import Any
 
+# from ruyaml import YAML
+import yaml
 from pydantic import Field, model_serializer, model_validator
-from ruyaml import YAML
 
 from portrait_search.core.entity import BaseEntity
 
-yaml = YAML(typ="safe")
-yaml.default_flow_style = False
-yaml.indent(mapping=4, sequence=6, offset=4)
+# yaml = YAML(typ="safe")
+# yaml.default_flow_style = False
+# yaml.indent(mapping=4, sequence=6, offset=4)
 
 
 class PortraitMatch(BaseEntity):
@@ -20,7 +21,7 @@ class PortraitMatch(BaseEntity):
     def sort_model(self) -> dict[str, Any]:
         d2: dict[str, Any] = OrderedDict()
         d2["path"] = self.path
-        d2["match"] = list(self.match)
+        d2["match"] = list(sorted(self.match))
         return d2
 
 
@@ -55,7 +56,7 @@ class Query(BaseEntity):
     def sort_model(self) -> dict[str, Any]:
         d2: dict[str, Any] = OrderedDict()
         d2["query"] = self.query
-        d2["match"] = list(self.match)
+        d2["match"] = list(sorted(self.match))
         d2["portraits"] = self.portraits
         return d2
 
@@ -80,7 +81,7 @@ def load_dataset(experiment: str) -> list[DatasetEntry]:
     dataset_entries = []
     for yaml_file in path_to_dataset.glob("*.yaml"):
         with open(yaml_file) as file:
-            yaml_data = yaml.load(file)
+            yaml_data = yaml.safe_load(file)
             dataset_entry = DatasetEntry(name=yaml_file.stem, **yaml_data)
             dataset_entries.append(dataset_entry)
 
@@ -94,7 +95,8 @@ def store_dataset(dataset_entries: list[DatasetEntry], experiment: str) -> None:
     for dataset_entry in dataset_entries:
         path_to_yaml = path_to_dataset / f"{dataset_entry.name}.yaml"
         with open(path_to_yaml, "w") as file:
-            yaml.dump(dataset_entry.model_dump(), file)
+            file.write("---\n")
+            yaml.safe_dump(dataset_entry.model_dump(), file, sort_keys=False, width=1000)
 
 
 def validate_dataset(dataset_entries: list[DatasetEntry], path_to_portraits: Path) -> None:

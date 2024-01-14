@@ -1,46 +1,42 @@
 ---
 repos:
-    - repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v3.2.0
-      hooks:
-          - id: trailing-whitespace
-          - id: end-of-file-fixer
-          - id: check-yaml
-          - id: check-added-large-files
-            args: [--maxkb=30000]
-    - repo: https://github.com/astral-sh/ruff-pre-commit
-      rev: v0.1.7
-      hooks:
-          - id: ruff
-            args: [--fix]
-          - id: ruff-format
-    - repo: https://github.com/antonbabenko/pre-commit-terraform
-      rev: v1.86.0
-      hooks:
-          - id: terraform_fmt
-    - repo: local
-      hooks:
-          - id: mypy
-            name: mypy
-            entry: poetry run mypy
-            language: system
-            types: [python]
-          - id: validate-datasets
-            name: validate-datasets
-            entry: make validate-datasets
-            language: system
-            types: [yaml]
-    - repo: https://github.com/adrienverge/yamllint.git
-      rev: v1.21.0  # or higher tag
-      hooks:
-          - id: yamllint
-            args: [--format, parsable, --strict]
-    - repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
-      rev: 0.2.1
-      hooks:
-          - id: yamlfmt
-    - repo: https://github.com/lk16/detect-missing-init
-      rev: v0.1.6
-      hooks:
-          - id: detect-missing-init
-            args: [--create, --track, --python-folders, 'tests,portreit_search']
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v3.2.0
+  hooks:
+  - id: trailing-whitespace
+  - id: end-of-file-fixer
+  - id: check-yaml
+  - id: check-added-large-files
+    args: [--maxkb=30000]
+- repo: https://github.com/astral-sh/ruff-pre-commit
+  rev: v0.1.7
+  hooks:
+  - id: ruff
+    args: [--fix]
+  - id: ruff-format
+- repo: https://github.com/antonbabenko/pre-commit-terraform
+  rev: v1.86.0
+  hooks:
+  - id: terraform_fmt
+- repo: local
+  hooks:
+  - id: mypy
+    name: mypy
+    entry: poetry run mypy
+    language: system
+    types: [python]
+  - id: validate-datasets
+    name: validate-datasets
+    entry: make validate-datasets
+    language: system
+    types: [yaml]
+- repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
+  rev: 0.2.1
+  hooks:
+  - id: yamlfmt
+    args: [--mapping, '2', --sequence, '2', --offset, '0', --colons, --width, '1000']
+- repo: https://github.com/lk16/detect-missing-init
+  rev: v0.1.6
+  hooks:
+  - id: detect-missing-init
+    args: [--create, --track, --python-folders, 'tests,portreit_search']

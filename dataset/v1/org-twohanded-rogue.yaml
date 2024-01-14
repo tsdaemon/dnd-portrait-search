@@ -1,97 +1,97 @@
 ---
 queries:
-    - match:
-          - male
-          - rogue
-          - two weapons
-          - medium armor
-          - half-orc
-      portraits:
-          - match:
-                - male
-                - rogue
-                - two weapons
-                - medium armor
-                - half-orc
-            path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-M110/Fulllength.png
-          - match:
-                - male
-                - two weapons
-                - rogue
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Misc/HE-AR-MS-M301/Fulllength.png
-          - match:
-                - male
-                - two weapons
-                - rogue
-            path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-F226/Fulllength.png
-          - match:
-                - male
-                - two weapons
-                - rogue
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-M304/Fulllength.png
-      query: Male rogue half-orc in medium armor with two weapons
-    - match:
-          - orc
-          - leather armor
-          - male
-      portraits:
-          - match:
-                - orc
-                - leather armor
-                - male
-            path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-M110/Fulllength.png
-          - match:
-                - leather armor
-                - male
-            path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Goblin/GH-GO-MS-M106/Fulllength.png
-          - match:
-                - leather armor
-                - male
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-M312/Fulllength.png
-          - match:
-                - leather armor
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-F211/Fulllength.png
-          - match:
-                - leather armor
-                - orc
-            path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-F102/Fulllength.png
-      query: Male orc in hardened leather armor
-    - match:
-          - two blades
-          - warrior
-          - orc
-          - male
-      portraits:
-          - match:
-                - two blades
-                - warrior
-                - orc
-                - male
-            path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-M110/Fulllength.png
-          - match:
-                - orc
-                - male
-            path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Caster/OR-CA-MS-M101/Fulllength.png
-          - match:
-                - warrior
-                - orc
-                - male
-            path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-M107/Fulllength.png
-      query: Male orc warrior with two blades
-    - match:
-          - two blades
-          - half-orc
-          - dungeon
-      portraits:
-          - match:
-                - two blades
-                - half-orc
-                - dungeon
-            path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-M110/Fulllength.png
-          - match:
-                - half-orc
-            path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Monk/Monk, Scaled Fist, Sensei, Traditional Monk/MX-MO-MS-M101/Fulllength.png
-          - match:
-                - half-orc
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M211/Fulllength.png
-      query: Half-orc with two blades in a dungeon
+- query: Male rogue half-orc in medium armor with two weapons
+  match:
+  - half-orc
+  - male
+  - medium armor
+  - rogue
+  - two weapons
+  portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-M110/Fulllength.png
+    match:
+    - half-orc
+    - male
+    - medium armor
+    - rogue
+    - two weapons
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Misc/HE-AR-MS-M301/Fulllength.png
+    match:
+    - male
+    - rogue
+    - two weapons
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-F226/Fulllength.png
+    match:
+    - male
+    - rogue
+    - two weapons
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-M304/Fulllength.png
+    match:
+    - male
+    - rogue
+    - two weapons
+- query: Male orc in hardened leather armor
+  match:
+  - leather armor
+  - male
+  - orc
+  portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-M110/Fulllength.png
+    match:
+    - leather armor
+    - male
+    - orc
+  - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Goblin/GH-GO-MS-M106/Fulllength.png
+    match:
+    - leather armor
+    - male
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-M312/Fulllength.png
+    match:
+    - leather armor
+    - male
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-F211/Fulllength.png
+    match:
+    - leather armor
+  - path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-F102/Fulllength.png
+    match:
+    - leather armor
+    - orc
+- query: Male orc warrior with two blades
+  match:
+  - male
+  - orc
+  - two blades
+  - warrior
+  portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-M110/Fulllength.png
+    match:
+    - male
+    - orc
+    - two blades
+    - warrior
+  - path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Caster/OR-CA-MS-M101/Fulllength.png
+    match:
+    - male
+    - orc
+  - path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-M107/Fulllength.png
+    match:
+    - male
+    - orc
+    - warrior
+- query: Half-orc with two blades in a dungeon
+  match:
+  - dungeon
+  - half-orc
+  - two blades
+  portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-M110/Fulllength.png
+    match:
+    - dungeon
+    - half-orc
+    - two blades
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Monk/Monk, Scaled Fist, Sensei, Traditional Monk/MX-MO-MS-M101/Fulllength.png
+    match:
+    - half-orc
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M211/Fulllength.png
+    match:
+    - half-orc

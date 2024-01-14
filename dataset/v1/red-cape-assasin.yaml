@@ -1,122 +1,121 @@
 ---
 queries:
-    - match:
-          - assasin
-          - woman
-          - long red cape
-      portraits:
-          - match:
-                - assasin
-                - woman
-                - long red cape
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-F205/Fulllength.png
-      query: Woman assasin with long red cape
-    - match:
-          - assasin
-          - dagger
-          - woman
-      portraits:
-          - match:
-                - assasin
-                - dagger
-                - woman
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-F205/Fulllength.png
-          - match:
-                - dagger
-                - woman
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-F104/Fulllength.png
-          - match:
-                - assasin
-                - dagger
-                - woman
-            path: nexusmods-pathfinderkingmaker-92-974/Tiefling/Caster/TF-CA-MS-F108/Fulllength.png
-          - match:
-                - assasin
-                - dagger
-                - woman
-            path: nexusmods-pathfinderkingmaker-92-974/Tiefling/Melee/TF-MF-MS-F110/Fulllength.png
-          - match:
-                - assasin
-                - dagger
-                - woman
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Necromancer/HE-WS-NC-F304/Fulllength.png
-          - match:
-                - assasin
-                - dagger
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Eldritch Scoundrel/HE-RO-ES-M201/Fulllength.png
-      query: Woman assasin with a dagger
-    - match:
-          - elf
-          - rogue
-          - knife
-          - female
-      portraits:
-          - match:
-                - elf
-                - rogue
-                - knife
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-F205/Fulllength.png
-          - match:
-                - rogue
-                - knife
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Necromancer/HE-WS-NC-F304/Fulllength.png
-          - match:
-                - rogue
-                - knife
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic
-                Theurge, Dragon Disciple/HE-WS-MS-F312/Fulllength.png
-          - match:
-                - rogue
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Knife Master/HE-RO-KM-F202/Fulllength.png
-          - match:
-                - elf
-                - rogue
-                - knife
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Knife Master/HE-RO-KM-M109/Fulllength.png
-          - match:
-                - elf
-                - rogue
-                - knife
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/Tiefling/Caster/TF-CA-MS-F108/Fulllength.png
-      query: Female elf rogue with a knife
-    - match:
-          - assasin
-          - seductive
-          - blood
-          - female
-      portraits:
-          - match:
-                - assasin
-                - seductive
-                - blood
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-F205/Fulllength.png
-          - match:
-                - assasin
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Knife Master/HE-RO-KM-F304/Fulllength.png
-          - match:
-                - assasin
-                - seductive
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Portraits/MX-MS-PO-F136/Fulllength.png
-          - match:
-                - blood
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Portraits/MX-MS-PO-F139/Fulllength.png
-          - match:
-                - blood
-                - seductive
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Inquisitor/Inquisitor/MX-IN-IN-M211/Fulllength.png
-          - match:
-                - seductive
-                - female
-            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Necromancer/HE-WS-NC-F305/Fulllength.png
-      query: Seductive female assasin covered in blood
+- query: Woman assasin with long red cape
+  match:
+  - assasin
+  - long red cape
+  - woman
+  portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-F205/Fulllength.png
+    match:
+    - assasin
+    - long red cape
+    - woman
+- query: Woman assasin with a dagger
+  match:
+  - assasin
+  - dagger
+  - woman
+  portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-F205/Fulllength.png
+    match:
+    - assasin
+    - dagger
+    - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-F104/Fulllength.png
+    match:
+    - dagger
+    - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/Tiefling/Caster/TF-CA-MS-F108/Fulllength.png
+    match:
+    - assasin
+    - dagger
+    - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/Tiefling/Melee/TF-MF-MS-F110/Fulllength.png
+    match:
+    - assasin
+    - dagger
+    - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Necromancer/HE-WS-NC-F304/Fulllength.png
+    match:
+    - assasin
+    - dagger
+    - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Eldritch Scoundrel/HE-RO-ES-M201/Fulllength.png
+    match:
+    - assasin
+    - dagger
+- query: Female elf rogue with a knife
+  match:
+  - elf
+  - female
+  - knife
+  - rogue
+  portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-F205/Fulllength.png
+    match:
+    - elf
+    - female
+    - knife
+    - rogue
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Necromancer/HE-WS-NC-F304/Fulllength.png
+    match:
+    - female
+    - knife
+    - rogue
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-F312/Fulllength.png
+    match:
+    - female
+    - knife
+    - rogue
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Knife Master/HE-RO-KM-F202/Fulllength.png
+    match:
+    - female
+    - rogue
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Knife Master/HE-RO-KM-M109/Fulllength.png
+    match:
+    - elf
+    - female
+    - knife
+    - rogue
+  - path: nexusmods-pathfinderkingmaker-92-974/Tiefling/Caster/TF-CA-MS-F108/Fulllength.png
+    match:
+    - elf
+    - female
+    - knife
+    - rogue
+- query: Seductive female assasin covered in blood
+  match:
+  - assasin
+  - blood
+  - female
+  - seductive
+  portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-F205/Fulllength.png
+    match:
+    - assasin
+    - blood
+    - female
+    - seductive
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Knife Master/HE-RO-KM-F304/Fulllength.png
+    match:
+    - assasin
+    - female
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Portraits/MX-MS-PO-F136/Fulllength.png
+    match:
+    - assasin
+    - female
+    - seductive
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Portraits/MX-MS-PO-F139/Fulllength.png
+    match:
+    - blood
+    - female
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Inquisitor/Inquisitor/MX-IN-IN-M211/Fulllength.png
+    match:
+    - blood
+    - female
+    - seductive
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Necromancer/HE-WS-NC-F305/Fulllength.png
+    match:
+    - female
+    - seductive
