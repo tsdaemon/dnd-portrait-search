@@ -1,76 +1,76 @@
 ---
 queries:
-    - query: a small height arcrobat
-      match:
-          - small height
+    - match:
           - acrobat
+          - small height
       portraits:
-          - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Gnome, Halfling/GH-GH-MS-F105/Fulllength.png
-            match:
-                - small height
+          - match:
                 - acrobat
-          - path: nexusmods-pathfinderkingmaker-92-974/Dwarf/Melee/DW-MF-MS-M206/Fulllength.png
-            match:
                 - small height
-          - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Inquisitor/Inquisitor/MX-IN-IN-M108/Fulllength.png
-            match:
+            path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Gnome, Halfling/GH-GH-MS-F105/Fulllength.png
+          - match:
                 - small height
-          - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Gnome, Halfling/GH-GH-MS-M205/Fulllength.png
-            match:
+            path: nexusmods-pathfinderkingmaker-92-974/Dwarf/Melee/DW-MF-MS-M206/Fulllength.png
+          - match:
                 - small height
+            path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Inquisitor/Inquisitor/MX-IN-IN-M108/Fulllength.png
+          - match:
                 - acrobat
-    - query: skilled gnome rogue
-      match:
+                - small height
+            path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Gnome, Halfling/GH-GH-MS-M205/Fulllength.png
+      query: a small height arcrobat
+    - match:
           - gnome
           - rogue
       portraits:
-          - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Gnome, Halfling/GH-GH-MS-F105/Fulllength.png
-            match:
+          - match:
                 - gnome
                 - rogue
-          - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-F304/Fulllength.png
-            match:
+            path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Gnome, Halfling/GH-GH-MS-F105/Fulllength.png
+          - match:
                 - rogue
-          - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Freebooter/HE-AR-FB-F203/Fulllength.png
-            match:
+            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-F304/Fulllength.png
+          - match:
                 - rogue
-          - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Bard/Bard, Thundercaller/MX-BD-BT-M114/Fulllength.png
-            match:
+            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Freebooter/HE-AR-FB-F203/Fulllength.png
+          - match:
                 - gnome
-    - query: deft halfling rogue on a pirate ship
-      match:
+            path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Bard/Bard, Thundercaller/MX-BD-BT-M114/Fulllength.png
+      query: skilled gnome rogue
+    - match:
           - halfling
-          - rogue
           - pirate
           - ship
+          - rogue
       portraits:
-          - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Gnome, Halfling/GH-GH-MS-F105/Fulllength.png
-            match:
+          - match:
                 - halfling
+                - pirate
+                - ship
                 - rogue
+            path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Gnome, Halfling/GH-GH-MS-F105/Fulllength.png
+          - match:
+                - pirate
+            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Freebooter/HE-AR-FB-M303/Fulllength.png
+          - match:
                 - pirate
                 - ship
-          - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Freebooter/HE-AR-FB-M303/Fulllength.png
-            match:
-                - pirate
-          - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Duelist, Aldori Defender, Swordlord/HE-MF-DD-F107/Fulllength.png
-            match:
                 - rogue
+            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Duelist, Aldori Defender, Swordlord/HE-MF-DD-F107/Fulllength.png
+          - match:
                 - pirate
                 - ship
-          - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-M115/Fulllength.png
-            match:
                 - rogue
+            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-M115/Fulllength.png
+          - match:
                 - pirate
                 - ship
-          - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Freebooter/HE-AR-FB-F102/Fulllength.png
-            match:
                 - rogue
-                - pirate
+            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Freebooter/HE-AR-FB-F102/Fulllength.png
+          - match:
                 - ship
-          - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-M221/Fulllength.png
-            match:
+            path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-M221/Fulllength.png
+          - match:
                 - ship
-          - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Monk/Monk, Scaled Fist, Sensei, Traditional Monk/MX-MO-MS-M208/Fulllength.png
-            match:
-                - ship
+            path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Monk/Monk, Scaled Fist, Sensei, Traditional Monk/MX-MO-MS-M208/Fulllength.png
+      query: deft halfling rogue on a pirate ship

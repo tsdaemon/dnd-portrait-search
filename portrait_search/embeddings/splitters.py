@@ -9,6 +9,9 @@ class Splitter(abc.ABC):
     def __init__(self) -> None:
         self._type: SplitterType | None = None
 
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}({self.__dict__!r})"
+
     @property
     def type(self) -> SplitterType:
         if self._type is None:
@@ -76,10 +79,10 @@ class LangChainRecursiveSplitter(Splitter):
 #     SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_200_OVERLAP_80,
 #     LangChainRecursiveSplitter(chunk_size=200, chunk_overlap=80),
 # )
-# register_splitter(
-#     SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_160_OVERLAP_40,
-#     LangChainRecursiveSplitter(chunk_size=160, chunk_overlap=40),
-# )
+register_splitter(
+    SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_160_OVERLAP_40,
+    LangChainRecursiveSplitter(chunk_size=160, chunk_overlap=40),
+)
 register_splitter(
     SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_60,
     LangChainRecursiveSplitter(chunk_size=120, chunk_overlap=60),

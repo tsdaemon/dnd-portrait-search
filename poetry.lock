@@ -1758,6 +1758,21 @@ docs = ["furo", "jaraco.packaging (>=9.3)", "jaraco.tidelift (>=1.4)", "rst.link
 testing = ["pytest (>=6)", "pytest-black (>=0.3.7)", "pytest-checkdocs (>=2.4)", "pytest-cov", "pytest-enabler (>=2.2)", "pytest-mypy (>=0.9.1)", "pytest-ruff", "zipp (>=3.17)"]
 
 [[package]]
+name = "incremental"
+version = "22.10.0"
+description = "\"A small library that versions your Python projects.\""
+optional = false
+python-versions = "*"
+files = [
+    {file = "incremental-22.10.0-py2.py3-none-any.whl", hash = "sha256:b864a1f30885ee72c5ac2835a761b8fe8aa9c28b9395cacf27286602688d3e51"},
+    {file = "incremental-22.10.0.tar.gz", hash = "sha256:912feeb5e0f7e0188e6f42241d2f450002e11bbc0937c65865045854c24c0bd0"},
+]
+
+[package.extras]
+mypy = ["click (>=6.0)", "mypy (==0.812)", "twisted (>=16.4.0)"]
+scripts = ["click (>=6.0)", "twisted (>=16.4.0)"]
+
+[[package]]
 name = "inflate64"
 version = "1.0.0"
 description = "deflate64 compression/decompression library"
@@ -2914,6 +2929,27 @@ files = [
     {file = "mypy_extensions-1.0.0-py3-none-any.whl", hash = "sha256:4392f6c0eb8a5668a69e23d168ffa70f0be9ccfd32b5cc2d26a34ae5b844552d"},
     {file = "mypy_extensions-1.0.0.tar.gz", hash = "sha256:75dbf8955dc00442a438fc4d0666508a9a97b6bd41aa2f0ffe9d2f2725af0782"},
 ]
+
+[[package]]
+name = "mypy-ipython"
+version = "20.8.0"
+description = ""
+optional = false
+python-versions = "*"
+files = [
+    {file = "mypy_ipython-20.8.0.tar.gz", hash = "sha256:38387f2071d3941538eec9e47c675031e42237ad0882699bcf7d669650d80742"},
+]
+
+[package.dependencies]
+attrs = "*"
+incremental = "*"
+IPython = "*"
+mypy = "*"
+
+[package.extras]
+doc = ["nbsphinx", "sphinx"]
+lint = ["black", "flake8", "mypy"]
+test = ["coverage", "pytest"]
 
 [[package]]
 name = "nbclient"
@@ -5268,6 +5304,24 @@ files = [
 ]
 
 [[package]]
+name = "ruyaml"
+version = "0.91.0"
+description = "ruyaml is a fork of ruamel.yaml"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "ruyaml-0.91.0-py3-none-any.whl", hash = "sha256:50e0ee3389c77ad340e209472e0effd41ae0275246df00cdad0a067532171755"},
+    {file = "ruyaml-0.91.0.tar.gz", hash = "sha256:6ce9de9f4d082d696d3bde264664d1bcdca8f5a9dff9d1a1f1a127969ab871ab"},
+]
+
+[package.dependencies]
+distro = ">=1.3.0"
+setuptools = ">=39.0"
+
+[package.extras]
+docs = ["Sphinx"]
+
+[[package]]
 name = "safetensors"
 version = "0.4.1"
 description = ""
@@ -6865,4 +6919,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "~3.11"
-content-hash = "85a5b4bfcc45266bf343304f7eb7d8510d86eabb6694e0bb97fb4dd7202074c1"
+content-hash = "17273aea232e0617406dda233ea56980eef96ac62b2c0ab17c7240270077aaf1"
