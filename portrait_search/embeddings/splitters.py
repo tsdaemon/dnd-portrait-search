@@ -10,7 +10,7 @@ class Splitter(abc.ABC):
         self._type: SplitterType | None = None
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}({self.__dict__!r})"
+        return f"Splitter {self._type}"
 
     @property
     def type(self) -> SplitterType:
