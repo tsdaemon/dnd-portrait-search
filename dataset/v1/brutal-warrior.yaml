@@ -9,7 +9,21 @@ queries:
   - rage
   - sword
   portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/Dwarf/Melee/DW-MF-MS-M305/Fulllength.png
+    match:
+    - male
+    - sword
   - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Goblin/GH-GO-MS-M106/Fulllength.png
+    match:
+    - barbarian
+    - male
+    - rage
+    - sword
+  - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Goblin/GH-GO-MS-M110/Fulllength.png
+    match:
+    - barbarian
+    - male
+  - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Goblin/GH-GO-MS-M204/Fulllength.png
     match:
     - barbarian
     - male
@@ -32,6 +46,11 @@ queries:
     - barbarian
     - male
     - rage
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M203/Fulllength.png
+    match:
+    - axe
+    - barbarian
+    - male
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M208/Fulllength.png
     match:
     - axe
@@ -40,6 +59,11 @@ queries:
     - male
     - rage
     - sword
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M213/Fulllength.png
+    match:
+    - axe
+    - barbarian
+    - male
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M215/Fulllength.png
     match:
     - axe
@@ -58,11 +82,17 @@ queries:
     - blood
     - male
     - rage
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Bard/Bard, Thundercaller/MX-BD-BT-M102/Fulllength.png
+    match:
+    - male
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Monk/Monk, Scaled Fist, Sensei, Traditional Monk/MX-MO-MS-M101/Fulllength.png
     match:
     - barbarian
     - male
     - rage
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Monk/Monk, Scaled Fist, Sensei, Traditional Monk/MX-MO-MS-M208/Fulllength.png
+    match:
+    - male
   - path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-M106/Fulllength.png
     match:
     - axe
@@ -81,6 +111,10 @@ queries:
     - barbarian
     - male
     - rage
+  - path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-M303/Fulllength.png
+    match:
+    - barbarian
+    - male
   - path: nexusmods-pathfinderkingmaker-92-974/Tiefling/Melee/TF-MF-MS-M105/Fulllength.png
     match:
     - axe
@@ -94,8 +128,26 @@ queries:
   - human
   - natural armor
   portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/Aasimar/Wings/AA-WI-MS-F120/Fulllength.png
+    match:
+    - demon slayer
   - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Goblin/GH-GO-MS-M104/Fulllength.png
     match:
+    - natural armor
+  - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Goblin/GH-GO-MS-M106/Fulllength.png
+    match:
+    - big scary weapon
+    - demon slayer
+    - natural armor
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Armored Hulk/HE-BA-AH-M102/Fulllength.png
+    match:
+    - big scary weapon
+    - demon slayer
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M117/Fulllength.png
+    match:
+    - big scary weapon
+    - demon slayer
+    - human
     - natural armor
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M208/Fulllength.png
     match:
@@ -111,9 +163,17 @@ queries:
     match:
     - demon slayer
     - human
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-M139/Fulllength.png
+    match:
+    - demon slayer
+    - human
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M306/Fulllength.png
     match:
     - big scary weapon
+    - demon slayer
+    - human
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Cleric, Ecclesitheurge, Herald Caller/HE-PC-CE-F310/Fulllength.png
+    match:
     - demon slayer
     - human
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Cleric, Ecclesitheurge, Herald Caller/HE-PC-CE-M305/Fulllength.png
@@ -125,6 +185,20 @@ queries:
     match:
     - demon slayer
     - human
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Necromancer/HE-WS-NC-F206/Fulllength.png
+    match:
+    - demon slayer
+    - human
+    - natural armor
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Necromancer/HE-WS-NC-M206/Fulllength.png
+    match:
+    - big scary weapon
+    - demon slayer
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-M210/Fulllength.png
+    match:
+    - demon slayer
+    - human
+    - natural armor
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-M312/Fulllength.png
     match:
     - demon slayer
@@ -157,9 +231,25 @@ queries:
   - weapon covered in blood
   - yelling
   portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/Dwarf/Melee/DW-MF-MS-M116/Fulllength.png
+    match:
+    - yelling
   - path: nexusmods-pathfinderkingmaker-92-974/Dwarf/Melee/DW-MF-MS-M207/Fulllength.png
     match:
     - gray beard and hair
+  - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Goblin/GH-GO-MS-M204/Fulllength.png
+    match:
+    - barbarian
+    - yelling
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-F123/Fulllength.png
+    match:
+    - barbarian
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M106/Fulllength.png
+    match:
+    - barbarian
+    - half naked
+    - weapon covered in blood
+    - yelling
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M108/Fulllength.png
     match:
     - barbarian
@@ -176,9 +266,27 @@ queries:
     - barbarian
     - half naked
     - weapon covered in blood
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M221/Fulllength.png
+    match:
+    - barbarian
+    - gray beard and hair
+    - half naked
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Dual Wielding/HE-MF-DW-F103/Fulllength.png
+    match:
+    - barbarian
+    - weapon covered in blood
+    - yelling
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M222/Fulllength.png
     match:
     - gray beard and hair
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-M302/Fulllength.png
+    match:
+    - gray beard and hair
+    - yelling
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-M231/Fulllength.png
+    match:
+    - barbarian
+    - half naked
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Portraits/MX-MS-PO-M106/Fulllength.png
     match:
     - gray beard and hair
@@ -188,6 +296,9 @@ queries:
     - half naked
     - weapon covered in blood
     - yelling
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Inquisitor/Inquisitor/MX-IN-IN-M214/Fulllength.png
+    match:
+    - weapon covered in blood
   - path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-M107/Fulllength.png
     match:
     - barbarian
@@ -203,6 +314,12 @@ queries:
   - axe
   - flame sword
   portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M106/Fulllength.png
+    match:
+    - axe
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M108/Fulllength.png
+    match:
+    - Conan
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M208/Fulllength.png
     match:
     - Conan
@@ -210,6 +327,10 @@ queries:
     - flame sword
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Cleric, Ecclesitheurge, Herald Caller/HE-PC-CE-M305/Fulllength.png
     match:
+    - axe
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Portraits/MX-MS-PO-M115/Fulllength.png
+    match:
+    - Conan
     - axe
   - path: nexusmods-pathfinderkingmaker-92-974/Orc, Half-Orc/Melee/OR-MF-MS-M116/Fulllength.png
     match:
