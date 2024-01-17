@@ -9,12 +9,27 @@ queries:
   - path: nexusmods-pathfinderkingmaker-92-974/Aasimar/Wings/AA-WI-MS-M102/Fulllength.png
     match:
     - man
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-M207/Fulllength.png
+    match:
+    - man
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-M210/Fulllength.png
+    match:
+    - long dark hair
+    - man
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M213/Fulllength.png
     match:
     - long dark hair
     - man
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Barbarian, Invulnerable Rager/HE-BA-BR-M314/Fulllength.png
     match:
+    - man
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Druid/Druid, Defender of the True World/HE-DR-DD-F212/Fulllength.png
+    match:
+    - long dark hair
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Magus, Kinetic Knight/Magus, Eldritch Scion, Sword Saint, Eldritch Knight, Kinetic Knight/HE-FM-FM-M107/Fulllength.png
+    match:
+    - blue eyes
+    - long dark hair
     - man
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Duelist, Aldori Defender, Swordlord/HE-MF-DD-M304/Fulllength.png
     match:
@@ -31,10 +46,19 @@ queries:
     match:
     - long dark hair
     - man
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Cleric, Ecclesitheurge, Herald Caller/HE-PC-CE-M101/Fulllength.png
+    match:
+    - man
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-M104/Fulllength.png
     match:
     - man
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-M120/Fulllength.png
+    match:
+    - man
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-M117/Fulllength.png
+    match:
+    - man
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-M310/Fulllength.png
     match:
     - man
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-M316/Fulllength.png
@@ -45,12 +69,18 @@ queries:
     - blue eyes
     - long dark hair
     - man
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Headshots/MX-MS-HS-M113/Fulllength.png
+    match:
+    - man
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Portraits/MX-MS-PO-M119/Fulllength.png
     match:
     - man
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Bard/Bard, Thundercaller/MX-BD-BT-F110/Fulllength.png
     match:
     - blue eyes
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Monk/Monk, Scaled Fist, Sensei, Traditional Monk/MX-MO-MS-M208/Fulllength.png
+    match:
+    - man
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Monk/Monk, Scaled Fist, Sensei, Traditional Monk/MX-MO-MS-M215/Fulllength.png
     match:
     - blue eyes
@@ -67,7 +97,16 @@ queries:
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Magus, Kinetic Knight/Magus, Eldritch Scion, Sword Saint, Eldritch Knight, Kinetic Knight/HE-FM-FM-M213/Fulllength.png
     match:
     - mage
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Cleric, Ecclesitheurge, Herald Caller/HE-PC-CE-M202/Fulllength.png
+    match:
+    - mage
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-F313/Fulllength.png
+    match:
+    - mage
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-M132/Fulllength.png
+    match:
+    - mage
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-M307/Fulllength.png
     match:
     - mage
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Headshots/MX-MS-HS-F117/Fulllength.png
@@ -89,6 +128,10 @@ queries:
     match:
     - blue eyes
     - mage
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Headshots/MX-MS-HS-F139/Fulllength.png
+    match:
+    - blue eyes
+    - mage
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Headshots/MX-MS-HS-M101/Fulllength.png
     match:
     - blue eyes
@@ -106,6 +149,13 @@ queries:
   - long black hair
   - man
   portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/Aasimar/Wings/AA-WI-MS-M202/Fulllength.png
+    match:
+    - handsome
+    - man
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-M209/Fulllength.png
+    match:
+    - man
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Freebooter/HE-AR-FB-M103/Fulllength.png
     match:
     - long black hair
@@ -129,6 +179,14 @@ queries:
     - handsome
     - long black hair
     - man
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-M210/Fulllength.png
+    match:
+    - handsome
+    - long black hair
+    - man
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M222/Fulllength.png
+    match:
+    - man
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M313/Fulllength.png
     match:
     - handsome
@@ -138,6 +196,13 @@ queries:
     match:
     - man
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-M113/Fulllength.png
+    match:
+    - man
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-M114/Fulllength.png
+    match:
+    - handsome
+    - man
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-M314/Fulllength.png
     match:
     - man
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-M316/Fulllength.png
@@ -159,6 +224,14 @@ queries:
     match:
     - handsome
     - man
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Monk/Monk, Scaled Fist, Sensei, Traditional Monk/MX-MO-MS-M208/Fulllength.png
+    match:
+    - handsome
+    - long black hair
+    - man
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Monk/Monk, Scaled Fist, Sensei, Traditional Monk/MX-MO-MS-M215/Fulllength.png
+    match:
+    - man
 - query: an elf in a wizzard robe, long dark hair, portrait
   match:
   - elf
@@ -174,14 +247,27 @@ queries:
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Eldritch Archer, Stormwalker/HE-AR-EA-M101/Fulllength.png
     match:
     - elf
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Misc/HE-AR-MS-M102/Fulllength.png
+    match:
+    - elf
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Misc/HE-AR-MS-M202/Fulllength.png
+    match:
+    - elf
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Druid/Blight Druid/HE-DR-BD-F203/Fulllength.png
     match:
     - wizzard robe
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Druid/Druid, Defender of the True World/HE-DR-DD-F211/Fulllength.png
+    match:
+    - elf
+    - long dark hair
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Druid/Feyspeaker/HE-DR-FS-F105/Fulllength.png
     match:
     - elf
     - long dark hair
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-M145/Fulllength.png
+    match:
+    - elf
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-F107/Fulllength.png
     match:
     - elf
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-F112/Fulllength.png
@@ -191,6 +277,11 @@ queries:
     match:
     - elf
     - long dark hair
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M218/Fulllength.png
+    match:
+    - elf
+    - long dark hair
+    - wizzard robe
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Cleric, Ecclesitheurge, Herald Caller/HE-PC-CE-F207/Fulllength.png
     match:
     - elf
@@ -201,6 +292,13 @@ queries:
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-M307/Fulllength.png
     match:
     - wizzard robe
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-F101/Fulllength.png
+    match:
+    - long dark hair
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-F316/Fulllength.png
+    match:
+    - elf
+    - wizzard robe
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Headshots/MX-MS-HS-M101/Fulllength.png
     match:
     - elf
@@ -208,4 +306,8 @@ queries:
     - wizzard robe
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Portraits/MX-MS-PO-M107/Fulllength.png
     match:
+    - wizzard robe
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Bard/Bard, Thundercaller/MX-BD-BT-F303/Fulllength.png
+    match:
+    - elf
     - wizzard robe

@@ -6,6 +6,10 @@ queries:
   - halo
   - woman
   portraits:
+  - path: nexusmods-pathfinderkingmaker-92-974/Aasimar/Wings/AA-WI-MS-F119/Fulllength.png
+    match:
+    - halo
+    - woman
   - path: nexusmods-pathfinderkingmaker-92-974/Aasimar/Wings/AA-WI-MS-F307/Fulllength.png
     match:
     - woman
@@ -19,7 +23,14 @@ queries:
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Druid/Druid, Defender of the True World/HE-DR-DD-F313/Fulllength.png
     match:
     - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Cleric, Ecclesitheurge, Herald Caller/HE-PC-CE-F101/Fulllength.png
+    match:
+    - dreamy
+    - woman
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Cleric, Ecclesitheurge, Herald Caller/HE-PC-CE-F309/Fulllength.png
+    match:
+    - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Knife Master/HE-RO-KM-F205/Fulllength.png
     match:
     - woman
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Kineticist, Dark Elementalist,Psychokineticist/HE-WS-KN-F114/Fulllength.png
@@ -29,9 +40,23 @@ queries:
     match:
     - halo
     - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Necromancer/HE-WS-NC-F213/Fulllength.png
+    match:
+    - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Necromancer/HE-WS-NC-F219/Fulllength.png
+    match:
+    - dreamy
+    - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Necromancer/HE-WS-NC-F309/Fulllength.png
+    match:
+    - dreamy
+    - woman
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-F112/Fulllength.png
     match:
     - dreamy
+    - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-F113/Fulllength.png
+    match:
     - woman
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-F119/Fulllength.png
     match:
@@ -50,7 +75,18 @@ queries:
     match:
     - dreamy
     - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Bard/Bard, Thundercaller/MX-BD-BT-F110/Fulllength.png
+    match:
+    - dreamy
+    - woman
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Inquisitor/Inquisitor/MX-IN-IN-F101/Fulllength.png
+    match:
+    - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Inquisitor/Inquisitor/MX-IN-IN-M213/Fulllength.png
+    match:
+    - dreamy
+    - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/Tiefling/Caster/TF-CA-MS-F205/Fulllength.png
     match:
     - woman
 - query: an wlf woman with a tiara and face paint
@@ -68,10 +104,19 @@ queries:
     - elf
     - face paint
     - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Misc/HE-AR-MS-F103/Fulllength.png
+    match:
+    - elf
+    - face paint
+    - tiara
+    - woman
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Druid/Druid, Defender of the True World/HE-DR-DD-F304/Fulllength.png
     match:
     - woman
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Duelist, Aldori Defender, Swordlord/HE-MF-DD-F207/Fulllength.png
+    match:
+    - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-F301/Fulllength.png
     match:
     - woman
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-F101/Fulllength.png
@@ -80,10 +125,35 @@ queries:
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-F305/Fulllength.png
     match:
     - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Two-handed, Reach (Two-handed Fighter)/HE-MF-2H-M218/Fulllength.png
+    match:
+    - elf
+    - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Knife Master/HE-RO-KM-F202/Fulllength.png
+    match:
+    - elf
+    - woman
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Rogue/Rogue, Thug/HE-RO-RT-F202/Fulllength.png
     match:
     - elf
     - face paint
+    - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Kineticist, Dark Elementalist,Psychokineticist/HE-WS-KN-M106/Fulllength.png
+    match:
+    - elf
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Necromancer/HE-WS-NC-F103/Fulllength.png
+    match:
+    - elf
+    - face paint
+    - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Necromancer/HE-WS-NC-F219/Fulllength.png
+    match:
+    - elf
+    - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-F105/Fulllength.png
+    match:
+    - elf
+    - tiara
     - woman
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-F204/Fulllength.png
     match:
@@ -97,6 +167,10 @@ queries:
     - elf
     - face paint
     - tiara
+    - woman
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Portraits/MX-MS-PO-F105/Fulllength.png
+    match:
+    - face paint
     - woman
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Portraits/MX-MS-PO-F116/Fulllength.png
     match:
@@ -124,7 +198,18 @@ queries:
     - elf
     - female
     - halo
+  - path: nexusmods-pathfinderkingmaker-92-974/Gnome, Goblin, Halfling/Gnome, Halfling/GH-GH-MS-F308/Fulllength.png
+    match:
+    - female
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-F116/Fulllength.png
+    match:
+    - elf
+    - female
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-F120/Fulllength.png
+    match:
+    - elf
+    - female
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-F125/Fulllength.png
     match:
     - elf
     - female
@@ -134,6 +219,14 @@ queries:
     - female
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Archer, Ranger/Archer, Ranger/HE-AR-AR-F313/Fulllength.png
     match:
+    - female
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Barbarian/Mad Dog/HE-BA-MD-F104/Fulllength.png
+    match:
+    - elf
+    - female
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Druid/Druid, Defender of the True World/HE-DR-DD-F211/Fulllength.png
+    match:
+    - elf
     - female
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-F119/Fulllength.png
     match:
@@ -151,8 +244,16 @@ queries:
     match:
     - elf
     - female
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Wizard, Sorcerer, Arcane Trickster, Mystic Theurge, Dragon Disciple/HE-WS-MS-F138/Fulllength.png
+    match:
+    - elf
+    - female
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/Misc/MX-MS-MS-F106/Fulllength.png
     match:
+    - female
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Crafter, Misc, No Background/No Background/MX-MS-NB-F226/Fulllength.png
+    match:
+    - elf
     - female
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Headshots/MX-MS-HS-F123/Fulllength.png
     match:
@@ -167,6 +268,13 @@ queries:
   - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed) Misc/MX_Misc_Headshots, Portraits/Portraits/MX-MS-PO-F127/Fulllength.png
     match:
     - female
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Bard/Bard, Thundercaller/MX-BD-BT-F303/Fulllength.png
+    match:
+    - elf
+    - female
+  - path: nexusmods-pathfinderkingmaker-92-974/MX (Mixed)/MX_Bard/Bard, Thundercaller/MX-BD-BT-M112/Fulllength.png
+    match:
+    - elf
   - path: nexusmods-pathfinderkingmaker-92-974/Tiefling/Melee/TF-MF-MS-F204/Fulllength.png
     match:
     - elf
@@ -189,6 +297,10 @@ queries:
     - female
     - halo
     - tiara
+  - path: nexusmods-pathfinderkingmaker-92-974/Aasimar/Wings/AA-WI-MS-F126/Fulllength.png
+    match:
+    - cleric
+    - female
   - path: nexusmods-pathfinderkingmaker-92-974/Aasimar/Wings/AA-WI-MS-F302/Fulllength.png
     match:
     - female
@@ -200,8 +312,41 @@ queries:
     match:
     - cleric
     - female
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Dual Wielding/HE-MF-DW-F204/Fulllength.png
+    match:
+    - cleric
+    - female
+    - tiara
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Melee, Fighter/Misc/HE-MF-MS-F115/Fulllength.png
+    match:
+    - female
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Cleric, Ecclesitheurge, Herald Caller/HE-PC-CE-F101/Fulllength.png
+    match:
+    - cleric
+    - female
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Cleric, Ecclesitheurge, Herald Caller/HE-PC-CE-F205/Fulllength.png
+    match:
+    - cleric
+    - female
+    - tiara
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Cleric, Ecclesitheurge, Herald Caller/HE-PC-CE-M109/Fulllength.png
+    match:
+    - cleric
+    - tiara
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Paladin, Hospitaler, Divine Guardian, Crusader/HE-PC-PL-F108/Fulllength.png
+    match:
+    - cleric
+    - female
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Paladin, Hospitaler, Divine Guardian, Crusader/HE-PC-PL-F111/Fulllength.png
     match:
+    - female
+    - tiara
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Paladin, Cleric/Paladin, Hospitaler, Divine Guardian, Crusader/HE-PC-PL-F301/Fulllength.png
+    match:
+    - female
+  - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Kineticist, Dark Elementalist,Psychokineticist/HE-WS-KN-F112/Fulllength.png
+    match:
+    - cleric
     - female
     - tiara
   - path: nexusmods-pathfinderkingmaker-92-974/HE (Human, Elf, Half-Elf)/HE_Wizard, Sorcerer, Kineticist/Kineticist, Dark Elementalist,Psychokineticist/HE-WS-KN-F115/Fulllength.png
