@@ -83,14 +83,14 @@ register_splitter(
     SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_160_OVERLAP_40,
     LangChainRecursiveSplitter(chunk_size=160, chunk_overlap=40),
 )
-register_splitter(
-    SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_60,
-    LangChainRecursiveSplitter(chunk_size=120, chunk_overlap=60),
-)
-register_splitter(
-    SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_100_OVERLAP_60,
-    LangChainRecursiveSplitter(chunk_size=100, chunk_overlap=60),
-)
+# register_splitter(
+#     SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_60,
+#     LangChainRecursiveSplitter(chunk_size=120, chunk_overlap=60),
+# )
+# register_splitter(
+#     SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_100_OVERLAP_60,
+#     LangChainRecursiveSplitter(chunk_size=100, chunk_overlap=60),
+# )
 # register_splitter(
 #     SplitterType.LANGCHAIN_RECURSIVE_TEXT_SPLITTER_CHUNK_120_OVERLAP_40,
 #     LangChainRecursiveSplitter(chunk_size=120, chunk_overlap=40),
